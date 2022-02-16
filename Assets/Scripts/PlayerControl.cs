@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -20,34 +19,32 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        var current = Keyboard.current;
-        if (current == null) return;
 
-        if (current.dKey.isPressed)
+        if (Input.GetKey(KeyCode.D))
         {
             rb2D.AddForce(transform.right * moveSpeed); 
         }
         //アクセル
         
-        if (current.aKey.isPressed)
+        if (Input.GetKey(KeyCode.A))
         {
             rb2D.AddForce(-transform.right * moveSpeed * 0.3f); 
         }
         //ブレーキ
         
-        if (current.wKey.isPressed)
+        if (Input.GetKey(KeyCode.W))
         {
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, upRot, Time.deltaTime * handleSpeed);
         }
         //上向き
         
-        if (current.sKey.isPressed)
+        if (Input.GetKey(KeyCode.S))
         {
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, downRot, Time.deltaTime * handleSpeed);
         }
         //下向き
         
-        if (!current.upArrowKey.isPressed && !current.downArrowKey.isPressed)
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
         {
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, forwardRot, Time.deltaTime * handleSpeed);
         }
