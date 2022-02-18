@@ -7,7 +7,7 @@ public class CPUplayerControl : MonoBehaviour
 {
     public Transform target;
 
-    public float speed;
+    public float moveSpeed;
     public float nextWaypointDistance;
 
     private Path path;
@@ -16,17 +16,23 @@ public class CPUplayerControl : MonoBehaviour
     private bool reachedEndOfPath;
 
     private Seeker seeker;
-    private Rigidbody2D rb;
+    private Rigidbody2D rb2D;
     
     private float scX, scY;
     public float scatterFac = 0.1f;
+
+	private Vector3 forwardVec = new Vector3(1.0f, 0f, 0f);
+
+	public void WindEnter(float multiplier){
+		rb2D.AddForce(forwardVec * moveSpeed * multiplier); 
+	}
     
     void Start()
     {
         seeker = GetComponent<Seeker>();
-        rb = GetComponent<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
 
-        seeker.StartPath(rb.position, target.position, OnPathComplete);
+        seeker.StartPath(rb2D.position, target.position, OnPathComplete);
         
         scX = Random.value - 0.5f;
         scY = Random.value - 0.5f;
@@ -57,14 +63,14 @@ public class CPUplayerControl : MonoBehaviour
 
         Vector2 scatterVec = new Vector2(scX, scY);
         
-        Vector2 direction = ((Vector2) path.vectorPath[currentWaypoint] - rb.position + scatterVec * scatterFac).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+        Vector2 direction = ((Vector2) path.vectorPath[currentWaypoint] - rb2D.position + scatterVec * scatterFac).normalized;
+        Vector2 force = direction * moveSpeed * Time.deltaTime;
 
-        rb.AddForce(force);
+        rb2D.AddForce(force);
 
         //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(0, 0, Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg - 90), Time.deltaTime);
         
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+        float distance = Vector2.Distance(rb2D.position, path.vectorPath[currentWaypoint]);
 
         if (distance < nextWaypointDistance)
         {
