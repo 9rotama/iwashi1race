@@ -14,6 +14,7 @@ public class ItemControlScript : MonoBehaviour
 {
     [SerializeField] GameObject[] itemObjs;
 
+
     // Update is called once per frame
     void Update()
     {
@@ -29,7 +30,9 @@ public class ItemControlScript : MonoBehaviour
         int len =  System.Enum.GetNames(typeof(Items)).Length;
         Items value = (Items)(Random.Range(0,len));
 
-        return value;
+
+        return Items.Thunder; //デバッグ
+        //return value;
     }
 
     void CreatePrefab(Items num){

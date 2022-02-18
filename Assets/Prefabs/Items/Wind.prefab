@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 892579711012184959}
   - component: {fileID: 7561708161564952075}
   - component: {fileID: 3440539599427808558}
+  - component: {fileID: 8842548911387668818}
   m_Layer: 0
   m_Name: Wind
   m_TagString: Item
@@ -283,3 +284,15 @@ MonoBehaviour:
   - 3
   - 6
   - 10
+--- !u!114 &8842548911387668818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3778199659502264424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737b8a041af39411094e5973e99d5838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

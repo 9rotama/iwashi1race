@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -7156226916170306048}
   - component: {fileID: 2145900910368443768}
   - component: {fileID: -5321729711711012283}
+  - component: {fileID: -6329572742588407844}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Item
@@ -134,3 +135,15 @@ CircleCollider2D:
   m_Offset: {x: -0.005, y: 0.005}
   serializedVersion: 2
   m_Radius: 0.11
+--- !u!114 &-6329572742588407844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753379702369276071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737b8a041af39411094e5973e99d5838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
