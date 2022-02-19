@@ -26,6 +26,21 @@ public class CPUplayerControl : MonoBehaviour
 	public void WindEnter(float multiplier){
 		rb2D.AddForce(forwardVec * moveSpeed * multiplier); 
 	}
+	//追い風,向かい風に接触したとき風側から呼び出される
+
+	private int magicOrbNum;
+
+	public void MagicOrbEnter(){
+		magicOrbNum += 10; 
+		if(magicOrbNum > 50) magicOrbNum = 50;
+	}
+	//魔法オーブ(大)
+
+	public void SmallMagicOrbEnter(){
+		magicOrbNum++; 
+		if(magicOrbNum > 50) magicOrbNum = 50;
+	}
+	//魔法オーブの取得数を返す
     
     void Start()
     {
@@ -64,7 +79,7 @@ public class CPUplayerControl : MonoBehaviour
         Vector2 scatterVec = new Vector2(scX, scY);
         
         Vector2 direction = ((Vector2) path.vectorPath[currentWaypoint] - rb2D.position + scatterVec * scatterFac).normalized;
-        Vector2 force = direction * moveSpeed * Time.deltaTime;
+        Vector2 force = direction * (moveSpeed + magicOrbNum / 50 * moveSpeed / 10) / 1.7f;
 
         rb2D.AddForce(force);
 

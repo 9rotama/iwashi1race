@@ -95,9 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a489f981a465f4db9b309e66ca7c1cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSpeed0: {fileID: 0}
-  spriteSpeed1: {fileID: 0}
-  spriteSpeed2: {fileID: 0}
+  hue: 0
+  spriteSpeed0: {fileID: 21300000, guid: f4682c5e9023a47a6b330ed8146cf796, type: 3}
+  spriteSpeed1: {fileID: 21300000, guid: 954bb1062ac3f4724a14d436e73d7ce5, type: 3}
+  spriteSpeed2: {fileID: 21300000, guid: 0e073de43854e4dd492441af4f31aaec, type: 3}
 --- !u!1 &3653764230750094364
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,9 +276,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a489f981a465f4db9b309e66ca7c1cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSpeed0: {fileID: 0}
-  spriteSpeed1: {fileID: 0}
-  spriteSpeed2: {fileID: 0}
+  hue: 0
+  spriteSpeed0: {fileID: 21300000, guid: e346d21e5ecc240c884c3abb1ca045ee, type: 3}
+  spriteSpeed1: {fileID: 21300000, guid: a38fae37863d04892b69ab5d9bab1eb3, type: 3}
+  spriteSpeed2: {fileID: 21300000, guid: decb1a6a8174e444a8611b03eb8f7eb1, type: 3}
 --- !u!1 &3653764231064802360
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +296,7 @@ GameObject:
   - component: {fileID: 3653764231064802361}
   m_Layer: 7
   m_Name: CPUPlayer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 5000
+  moveSpeed: 400
   nextWaypointDistance: 10
   scatterFac: 10
 --- !u!1 &3653764231190195906
@@ -508,9 +510,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a489f981a465f4db9b309e66ca7c1cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSpeed0: {fileID: 0}
-  spriteSpeed1: {fileID: 0}
-  spriteSpeed2: {fileID: 0}
+  hue: 0
+  spriteSpeed0: {fileID: 21300000, guid: 43aa1c8ed5a0c45598ed94bff4620a52, type: 3}
+  spriteSpeed1: {fileID: 21300000, guid: eb65d924b004e4467b3eb61008fbc807, type: 3}
+  spriteSpeed2: {fileID: 21300000, guid: 3d9840ae105044f8bba57f822f949162, type: 3}
 --- !u!1 &3653764231554895106
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a489f981a465f4db9b309e66ca7c1cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSpeed0: {fileID: 0}
-  spriteSpeed1: {fileID: 0}
-  spriteSpeed2: {fileID: 0}
+  hue: 0
+  spriteSpeed0: {fileID: 21300000, guid: 9a6290d8ddbfb4b5d8f26c5137c61587, type: 3}
+  spriteSpeed1: {fileID: 21300000, guid: 30c28db8da98d45e3be2ef10ab70d7d4, type: 3}
+  spriteSpeed2: {fileID: 21300000, guid: 9a5c9dd69e4864810b3b582b8447ce92, type: 3}

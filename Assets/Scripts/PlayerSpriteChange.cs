@@ -1,10 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSpriteChange : MonoBehaviour
 {
+    [Range(0, 1.0f)] public float hue;
     private SpriteRenderer spriteRenderer;
     public Sprite spriteSpeed0;
     public Sprite spriteSpeed1;
@@ -16,6 +16,7 @@ public class PlayerSpriteChange : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.material.SetFloat("_Hue", hue);
     }
 
     void Update()

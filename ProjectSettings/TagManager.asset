@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tailwind
   - Headwind
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: Object
     uniqueID: 4026417857
+    locked: 0
+  - name: UI
+    uniqueID: 3233221193
     locked: 0
