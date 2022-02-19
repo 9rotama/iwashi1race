@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
 
 
 public class WindScript : MonoBehaviour
 {
     Rigidbody2D parentRb;
     float time;
-    [SerializeField] float maxV = 10f;
-    [SerializeField] float addSp = 10f;
-    [SerializeField] float addForceTime = 2.0f;
+    [SerializeField] float maxV;
+    [SerializeField] float addSp;
+    [SerializeField] float addForceTime;
 
     [SerializeField] Sprite[] windImage;
-    [SerializeField] Image image;
+    SpriteRenderer MainSpriteRenderer;
+    
     [SerializeField] float[] imageSp = new float[2];
     
     
@@ -21,6 +21,9 @@ public class WindScript : MonoBehaviour
     void Start()
     {
        parentRb = transform.parent.GetComponent<Rigidbody2D>();
+       MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+       transform.position += new Vector3(-1.3f, 0.3f, 0);
+       transform.rotation = transform.parent.rotation;
        time = 0;
        ImageSwitch();
     }
@@ -46,13 +49,13 @@ public class WindScript : MonoBehaviour
     {
         //速度に応じて画像の切り替え
         if(imageSp[0] > parentRb.velocity.x){
-            image.sprite = windImage[0];
+            MainSpriteRenderer.sprite = windImage[0];
         }
         else if(imageSp[1] > parentRb.velocity.x){
-            image.sprite = windImage[1];
+            MainSpriteRenderer.sprite = windImage[1];
         }
         else {
-            image.sprite = windImage[2];
+            MainSpriteRenderer.sprite = windImage[2];
         }
     }
 

@@ -6,6 +6,7 @@ public class ThunderBulletScript : MonoBehaviour
 {
 
     GameObject itemControl;
+    GameObject creatorObj;
     ItemControlScript itemScript;
 
     bool onceDefence = false;
@@ -20,6 +21,7 @@ public class ThunderBulletScript : MonoBehaviour
     {
         itemControl = GameObject.Find("ItemController");
         itemScript = itemControl.GetComponent<ItemControlScript>();
+        creatorObj = transform.parent.gameObject;
     }
 
     void FixedUpdate()
@@ -58,11 +60,11 @@ public class ThunderBulletScript : MonoBehaviour
 
     void ShockedPlayer()
     {
+        Rigidbody2D rb = transform.parent.GetComponent<ThunderSpriteScript>().targetObj.GetComponent<Rigidbody2D>();
         const float targetVelocity = 0;
-        const float power =  10;
-        Rigidbody2D rb = transform.parent.parent.GetComponent<Rigidbody2D>();
+        const float power =  50;
+        //Rigidbody2D rb = transform.parent.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector3.right * ((targetVelocity - rb.velocity.x) * power), ForceMode2D.Force);
         rb.AddForce(Vector3.up * ((targetVelocity - rb.velocity.y) * power), ForceMode2D.Force);
-        Debug.Log(rb.velocity);
     }
 }

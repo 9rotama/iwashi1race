@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be80cdc5083754a44a0ce17b7f746be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixPosition: 1
+  fixPosition: 0
   fixRotation: 1

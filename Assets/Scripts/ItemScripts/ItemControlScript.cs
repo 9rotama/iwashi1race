@@ -29,7 +29,7 @@ public class ItemControlScript : MonoBehaviour
             CreatePrefab(decidedItem);
         }
         if(Input.GetMouseButtonDown(1)){
-            CreatePrefab(Items.Thunder);
+            CreatePrefab(Items.Fire);
         }
     }
 

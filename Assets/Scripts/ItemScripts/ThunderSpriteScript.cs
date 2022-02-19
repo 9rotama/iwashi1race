@@ -8,6 +8,7 @@ public class ThunderSpriteScript : MonoBehaviour
     [SerializeField] Sprite[] sprites;
     [SerializeField] GameObject[] shockPlayer;
     SpriteRenderer renderer;
+    public GameObject targetObj;
     [SerializeField] GameObject bullet;
     int spriteNum = 0;
     bool once = false;
@@ -18,6 +19,8 @@ public class ThunderSpriteScript : MonoBehaviour
         renderer = gameObject.GetComponent<SpriteRenderer>();
         renderer.color -= new Color(0, 0, 0, 1);
         MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        targetObj = transform.parent.gameObject;
+        transform.parent = null;
         // for(int i=0; i< sprites.Length; i++){
         //     Invoke("SpriteChange",0.1f*i);
         // }
@@ -26,6 +29,7 @@ public class ThunderSpriteScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        transform.position = new Vector3(targetObj.transform.position.x, targetObj.transform.position.y + 25f, 0);
         renderer.color += new Color(0,0,0,0.01f);
         if(renderer.color.a >= 1f && !once){
             for(int i=0; i< sprites.Length; i++){
@@ -48,7 +52,7 @@ public class ThunderSpriteScript : MonoBehaviour
     {
         GameObject obj = (GameObject)Instantiate(
             bullet, 
-            transform.parent.position,  
+            targetObj.transform.position,  
             Quaternion.identity
         );
         obj.transform.parent = gameObject.transform;
@@ -59,7 +63,7 @@ public class ThunderSpriteScript : MonoBehaviour
         for(int i=0; i<shockPlayer.Length; i++){
             GameObject obj = (GameObject)Instantiate(
                 shockPlayer[i], 
-                transform.parent.position,  
+                targetObj.transform.position,  
                 Quaternion.identity
             );
             obj.transform.parent = gameObject.transform;
