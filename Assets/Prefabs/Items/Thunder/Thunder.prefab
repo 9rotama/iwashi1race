@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5009645894534291083}
   - component: {fileID: 1998998987415356175}
-  - component: {fileID: 8410584694085735548}
   m_Layer: 0
   m_Name: Thunder
   m_TagString: Untagged
@@ -45,15 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 4612821161560662042, guid: fed29527b7bc448d0a2fdac74af7d59f, type: 3}
---- !u!114 &8410584694085735548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4452525371124441956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 737b8a041af39411094e5973e99d5838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  thunderSprite: {fileID: 4942095038786317448, guid: 5e377468e7629481f8a90b379f5f203c, type: 3}

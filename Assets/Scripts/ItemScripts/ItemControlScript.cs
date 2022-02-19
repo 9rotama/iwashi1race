@@ -14,6 +14,12 @@ public class ItemControlScript : MonoBehaviour
 {
     [SerializeField] GameObject[] itemObjs;
 
+    public bool isDefence;
+
+    void Start()
+    {
+        isDefence = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,7 +28,9 @@ public class ItemControlScript : MonoBehaviour
             Items decidedItem = DecideItem(); 
             CreatePrefab(decidedItem);
         }
-        
+        if(Input.GetMouseButtonDown(1)){
+            CreatePrefab(Items.Thunder);
+        }
     }
 
     Items DecideItem()
@@ -30,9 +38,9 @@ public class ItemControlScript : MonoBehaviour
         int len =  System.Enum.GetNames(typeof(Items)).Length;
         Items value = (Items)(Random.Range(0,len));
 
+        value = Items.Bubble;
 
-        return Items.Thunder; //デバッグ
-        //return value;
+        return value;
     }
 
     void CreatePrefab(Items num){

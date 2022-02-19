@@ -25,6 +25,5 @@ public class PlayerSpriteChange : MonoBehaviour
         prevPosition = transform.position;
         // 移動速度計算
 
-        Debug.Log(velocity);
     }
 }
