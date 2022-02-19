@@ -7,7 +7,7 @@ public class ThunderSpriteScript : MonoBehaviour
     SpriteRenderer MainSpriteRenderer;
     [SerializeField] Sprite[] sprites;
     [SerializeField] GameObject[] shockPlayer;
-    SpriteRenderer renderer;
+    SpriteRenderer render;
     public GameObject targetObj;
     [SerializeField] GameObject bullet;
     int spriteNum = 0;
@@ -16,8 +16,8 @@ public class ThunderSpriteScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer = gameObject.GetComponent<SpriteRenderer>();
-        renderer.color -= new Color(0, 0, 0, 1);
+        render = gameObject.GetComponent<SpriteRenderer>();
+        render.color -= new Color(0, 0, 0, 1);
         MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         targetObj = transform.parent.gameObject;
         transform.parent = null;
@@ -30,8 +30,8 @@ public class ThunderSpriteScript : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = new Vector3(targetObj.transform.position.x, targetObj.transform.position.y + 25f, 0);
-        renderer.color += new Color(0,0,0,0.01f);
-        if(renderer.color.a >= 1f && !once){
+        render.color += new Color(0,0,0,0.01f);
+        if(render.color.a >= 1f && !once){
             for(int i=0; i< sprites.Length; i++){
                 Invoke("ChangeSprite",0.05f*i);
             }
@@ -55,7 +55,8 @@ public class ThunderSpriteScript : MonoBehaviour
             targetObj.transform.position,  
             Quaternion.identity
         );
-        obj.transform.parent = gameObject.transform;
+        obj.transform.parent = targetObj.gameObject.transform;
+        obj.GetComponent<ThunderBulletScript>().spreiteObj = gameObject;
     }
 
     public void CreateShockPlayer()
@@ -66,6 +67,9 @@ public class ThunderSpriteScript : MonoBehaviour
                 targetObj.transform.position,  
                 Quaternion.identity
             );
+            if(i==2){
+                obj.transform.position -= Vector3.left*1.35f;
+            }
             obj.transform.parent = gameObject.transform;
         }
 

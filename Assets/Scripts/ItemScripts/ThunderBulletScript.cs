@@ -6,29 +6,39 @@ public class ThunderBulletScript : MonoBehaviour
 {
 
     GameObject itemControl;
-    GameObject creatorObj;
+    GameObject targetObj;
     ItemControlScript itemScript;
-
+    public GameObject spreiteObj;
     bool onceDefence = false;
 
     bool isShocked = true;
 
     float time;
+    
+    AudioClip audioClip;
 
+    AudioSource audioSource;
 
 
     void Start()
     {
-        itemControl = GameObject.Find("ItemController");
+
+        targetObj = transform.parent.gameObject;
+        itemControl = targetObj.transform.Find("ItemController").gameObject;
         itemScript = itemControl.GetComponent<ItemControlScript>();
-        creatorObj = transform.parent.gameObject;
+        Debug.Log(targetObj);
+        transform.parent = spreiteObj.transform;
+
+        audioSource = GetComponent<AudioSource>();
+        audioClip = audioSource.clip;
     }
 
     void FixedUpdate()
     {
+        Debug.Log(time);
+        time += Time.deltaTime;
         if(!isShocked){
-            time += Time.deltaTime;
-            if(time < 2f){
+            if(time < 3f){
                 ShockedPlayer();
             }
             else{
@@ -36,10 +46,13 @@ public class ThunderBulletScript : MonoBehaviour
             }
 
         }
+        if(time > 2.0f) Destroy(transform.parent.gameObject);
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+    
         if(itemScript.isDefence) onceDefence = true;
         if(other.tag == "Player" || other.tag == "Enemy"){
             if(onceDefence){
@@ -49,9 +62,10 @@ public class ThunderBulletScript : MonoBehaviour
             else{
                 //Destroy(this.gameObject);
                 Debug.Log("まもれなかった");
+                if(other.tag == "Player") audioSource.PlayOneShot(audioClip);
                 isShocked = false;
                 time = 0;
-                transform.parent.GetComponent<ThunderSpriteScript>().CreateShockPlayer();
+                spreiteObj.GetComponent<ThunderSpriteScript>().CreateShockPlayer();
             }
         }
 
@@ -60,7 +74,7 @@ public class ThunderBulletScript : MonoBehaviour
 
     void ShockedPlayer()
     {
-        Rigidbody2D rb = transform.parent.GetComponent<ThunderSpriteScript>().targetObj.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = targetObj.GetComponent<Rigidbody2D>();
         const float targetVelocity = 0;
         const float power =  50;
         //Rigidbody2D rb = transform.parent.GetComponent<Rigidbody2D>();

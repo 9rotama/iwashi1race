@@ -16,6 +16,8 @@ public class ItemControlScript : MonoBehaviour
 
     public bool isDefence;
 
+    float time;
+
     void Start()
     {
         isDefence = false;
@@ -24,12 +26,16 @@ public class ItemControlScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)){
+        time += Time.deltaTime;
+        if(Input.GetMouseButtonDown(0) && transform.parent.tag == "Player"){
             Items decidedItem = DecideItem(); 
             CreatePrefab(decidedItem);
         }
-        if(Input.GetMouseButtonDown(1)){
-            CreatePrefab(Items.Fire);
+
+        if(transform.parent.tag == "Enemy" && time > 5.0f){
+            time = 0;
+            Items decidedItem = DecideItem(); 
+            CreatePrefab(decidedItem);
         }
     }
 
@@ -38,8 +44,6 @@ public class ItemControlScript : MonoBehaviour
         int len =  System.Enum.GetNames(typeof(Items)).Length;
         Items value = (Items)(Random.Range(0,len));
 
-        value = Items.Bubble;
-
         return value;
     }
 
@@ -47,4 +51,6 @@ public class ItemControlScript : MonoBehaviour
         GameObject obj = (GameObject)Instantiate(itemObjs[(int)num], transform.parent.position, Quaternion.identity);
         obj.transform.parent = transform.parent;
     }
+
+
 }
