@@ -10,16 +10,19 @@ public class CrowControl : MonoBehaviour
     private PlayerControl playerControl;
     private CPUplayerControl cpuPlayerControl;
     
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player" )
         {
             playerControl = other.GetComponent<PlayerControl>();
+            playerControl.CrowEnter();
             Destroy(this.gameObject);
         }
         else if (other.gameObject.tag == "Enemy")
         { 
             cpuPlayerControl = other.GetComponent<CPUplayerControl>();
+            cpuPlayerControl.CrowEnter();
             Destroy(this.gameObject);
         }
     }
