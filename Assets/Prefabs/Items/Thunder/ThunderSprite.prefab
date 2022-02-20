@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -268549439
+  m_SortingLayer: 5
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 03b28352b60ec41548808dce3d211ae3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -105,7 +105,9 @@ MonoBehaviour:
   shockPlayer:
   - {fileID: 7768042116452636183, guid: 725985211f5bb4bb4b640dad8f7f9a66, type: 3}
   - {fileID: 1611113679340425973, guid: 0638783b1476e4d539b3612aca07a221, type: 3}
+  targetObj: {fileID: 0}
   bullet: {fileID: 4612821161560662042, guid: fed29527b7bc448d0a2fdac74af7d59f, type: 3}
+  rank: 0
 --- !u!114 &-6542673848902018761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,5 +120,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be80cdc5083754a44a0ce17b7f746be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixPosition: 0
-  fixRotation: 1
