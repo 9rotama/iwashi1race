@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,10 +24,30 @@ public class CPUplayerControl : MonoBehaviour
 
 	private Vector3 forwardVec = new Vector3(1.0f, 0f, 0f);
 
+	private Vector3 prevPosition;
+    private Vector2 velocityVec2;
+    private float velocity = 0f;
+
+
+
+	public float GetVelocity()
+    {
+        return velocity; 
+    }
+	//速度(float)を返す
+
+	public Vector2 GetVelocityVec2()
+    {
+        return velocityVec2; 
+    }
+	//速度x成分,y成分(Vector2)を返す
+
 	public void WindEnter(float multiplier){
 		rb2D.AddForce(forwardVec * moveSpeed * multiplier); 
 	}
 	//追い風,向かい風に接触したとき風側から呼び出される
+
+
 
 	private int magicOrbNum;
 
@@ -42,6 +63,8 @@ public class CPUplayerControl : MonoBehaviour
 	}
 	//魔法オーブの取得数を返す
     
+
+
     void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -49,8 +72,10 @@ public class CPUplayerControl : MonoBehaviour
 
         seeker.StartPath(rb2D.position, target.position, OnPathComplete);
         
-        scX = Random.value - 0.5f;
-        scY = Random.value - 0.5f;
+        scX = UnityEngine.Random.value - 0.5f;
+        scY = UnityEngine.Random.value - 0.5f;
+
+		prevPosition = transform.position;
     }
 
     void OnPathComplete(Path p)
@@ -64,6 +89,11 @@ public class CPUplayerControl : MonoBehaviour
 
     void Update()
     {
+		velocityVec2 = (transform.position - prevPosition) / Time.deltaTime;
+        velocity = (float)Math.Sqrt(Math.Pow(velocityVec2.x,2)+Math.Pow(velocityVec2.y,2));
+        prevPosition = transform.position;		
+
+
         if (path == null) return;
 
         if (currentWaypoint >= path.vectorPath.Count)
@@ -90,9 +120,8 @@ public class CPUplayerControl : MonoBehaviour
         if (distance < nextWaypointDistance)
         {
             currentWaypoint++;
-            scX = Random.value - 0.5f;
-            scY = Random.value - 0.5f;
-            Debug.Log(scX);
+            scX = UnityEngine.Random.value - 0.5f;
+            scY = UnityEngine.Random.value - 0.5f;
         }
     }
 }
