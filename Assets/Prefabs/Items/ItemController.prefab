@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 4452525371124441956, guid: 37c53e0620ab246beaab324438c16d48, type: 3}
   - {fileID: 1278507702049012106, guid: fef787a525d5a41bfb6a3628d5a48562, type: 3}
   - {fileID: 945896956906585613, guid: d6bbc49f7c6e04b90aa8104522c8d5cd, type: 3}
+  rankObj: {fileID: 7588740865915844228, guid: 180cb248a74bc40598e4d4aef0cdf5f1, type: 3}
   isDefence: 0
 --- !u!114 &-1589319205290908078
 MonoBehaviour:

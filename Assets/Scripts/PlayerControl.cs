@@ -84,9 +84,7 @@ public class PlayerControl : MonoBehaviour
 		velocityVec2 = (transform.position - prevPosition) / Time.deltaTime;
         velocity = (float)Math.Sqrt(Math.Pow(velocityVec2.x,2)+Math.Pow(velocityVec2.y,2));
         prevPosition = transform.position;
-        // 移動速度計算	
-
-		Debug.Log(velocity);	
+        // 移動速度計算		
 
         if (Input.GetKey(KeyCode.D))
         {

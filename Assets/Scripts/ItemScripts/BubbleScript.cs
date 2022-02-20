@@ -9,9 +9,11 @@ public class BubbleScript : MonoBehaviour
 
     void Start()
     {
-        itemControl = GameObject.Find("ItemController");
+        itemControl = transform.parent.gameObject;
         itemScript = itemControl.GetComponent<ItemControlScript>();
         itemScript.isDefence = true;
+        int bubblesCnt = transform.parent.childCount;
+        if(bubblesCnt >= 2) Destroy(gameObject);
     }
 
     void Update()
@@ -21,16 +23,15 @@ public class BubbleScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
         if(other.gameObject.name.Contains("Fire")){
-            if(other.GetComponent<FireScript>().creatorObj != transform.parent.gameObject){
+            if(other.GetComponent<FireScript>().creatorObj != transform.parent.parent.gameObject){
                 Destroy(this.gameObject);
                 Destroy(other.gameObject);
                 itemScript.isDefence = false;
             }
         }
         else if((other.tag == "Obstacle" || other.tag == "Item")
-            && other.gameObject.transform.parent != transform.parent 
+            && other.gameObject.transform.parent != transform.parent.parent 
             && other.gameObject.name != this.gameObject.name){
             Destroy(this.gameObject);
             Destroy(other.gameObject);

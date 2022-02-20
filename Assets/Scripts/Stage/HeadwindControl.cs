@@ -12,12 +12,12 @@ public class HeadwindControl : MonoBehaviour
         if (other.gameObject.tag == "Player" )
         {
             playerControl = other.GetComponent<PlayerControl>();
-            playerControl.WindEnter(-0.7f);
+            playerControl.WindEnter(-0.3f);
         }
         else if (other.gameObject.tag == "Enemy")
         { 
             cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            cpuPlayerControl.WindEnter(-0.7f);
+            cpuPlayerControl.WindEnter(-0.3f);
         }
     }
     // Start is called before the first frame update
