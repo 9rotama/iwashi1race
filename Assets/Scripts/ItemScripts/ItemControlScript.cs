@@ -15,6 +15,8 @@ public class ItemControlScript : MonoBehaviour
 {
     [SerializeField] GameObject[] itemObjs;
     [SerializeField] GameObject rankObj;
+    [SerializeField] GameObject itemUI;
+    GameObject UI_Item;
 
     public bool isDefence;
 
@@ -22,6 +24,12 @@ public class ItemControlScript : MonoBehaviour
 
     float randNum;
 
+    int determinItem = -1;
+
+    public int GetdeterminItem()
+    {
+        return determinItem;
+    }
 
 
 
@@ -30,26 +38,47 @@ public class ItemControlScript : MonoBehaviour
         isDefence = false;
         randNum = Random.Range(5f,10f);
         rankObj = GameObject.Find("Rank");
-
     }
 
-    // Update is called once per frame
+    public void DeterminItem()
+    {
+        determinItem = (int)DecideItem();
+        GameObject UI = GameObject.Find("UI");
+        GameObject outside = UI.transform.Find("UI_Item_Oustside").gameObject;
+        UI_Item = (GameObject)Instantiate(itemUI, outside.transform.position, Quaternion.identity);
+        UI_Item.transform.parent = UI.transform;
+        UI_Item.GetComponent<UI_ItemControl>().determinItem = (int)determinItem;      
+    }
+
     void Update()
     {
-
-//        Debug.Log(isDefence);
         time += Time.deltaTime;
-        if(Input.GetMouseButtonDown(0) && transform.parent.tag == "Player"){
-            Items decidedItem = DecideItem(); 
-            CreatePrefab(decidedItem);
+        if(determinItem != -1){
+            if(Input.GetMouseButtonDown(0) && transform.parent.tag == "Player"){
+                CreatePrefab((Items)determinItem);
+                determinItem = -1;
+                Destroy(UI_Item);
+            }
+            if(transform.parent.tag == "Enemy" && time > randNum){
+                randNum = Random.Range(5f,10f);
+                time = 0;
+                CreatePrefab((Items)determinItem);
+                determinItem = -1;
+            }
         }
 
-        if(transform.parent.tag == "Enemy" && time > randNum){
-            randNum = Random.Range(5f,10f);
-            time = 0;
-            Items decidedItem = DecideItem(); 
-            CreatePrefab(decidedItem);
-        }
+        // time += Time.deltaTime;
+        // if(Input.GetMouseButtonDown(0) && transform.parent.tag == "Player"){
+        //     Items decidedItem = DecideItem(); 
+        //     CreatePrefab(decidedItem);
+        // }
+
+        // if(transform.parent.tag == "Enemy" && time > randNum){
+        //     randNum = Random.Range(5f,10f);
+        //     time = 0;
+        //     Items decidedItem = DecideItem(); 
+        //     CreatePrefab(decidedItem);
+        // }
     }
 
     Items DecideItem()
