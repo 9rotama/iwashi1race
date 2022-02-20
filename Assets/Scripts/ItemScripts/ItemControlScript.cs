@@ -119,6 +119,8 @@ public class ItemControlScript : MonoBehaviour
 
         int randValue = Random.Range(0,sum);
         int tmp=0;
+
+
         for(int i=0; i<probItem.Length; i++){
             tmp += probItem[i];
             if(randValue < tmp){
