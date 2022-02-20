@@ -5,19 +5,13 @@ using UnityEngine.UI;
 
 public class RankingControl : MonoBehaviour
 {
-    [SerializeField] private Sprite one, two, three, four, five, six, seven, eight, st, nd, rd, th;
+    [SerializeField] private Sprite one,two,three,four,five,six,seven,eight,st,nd,rd,th;
     private Image rankImage;
     private Image thImage;
     private GameObject player;
     private GameObject[] cpuPlayer;
     private int ranking;
-
-
-    public int GetRanking()
-    {
-        return ranking+1;
-    }
-
+    
     void Awake()
     {
         rankImage = this.GetComponent<Image>();
