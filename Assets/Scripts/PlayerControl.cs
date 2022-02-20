@@ -17,6 +17,12 @@ public class PlayerControl : MonoBehaviour
     private Vector2 velocityVec2;
     private float velocity = 0f;
 
+	private AudioSource audioSource;
+
+	/*-----------*/
+	private GameObject gameManager;
+	private GameManagerControl gameManagerCtrl;
+	/*-----------*/
 	
 	public float GetVelocity()
     {
@@ -61,13 +67,20 @@ public class PlayerControl : MonoBehaviour
 		SetMagicOrbNum();
 	}
 	//魔法オーブの取得数を返す
-   
+   	
+	public void CrowEnter(){
+		magicOrbNum -= 10;
+		if(magicOrbNum < 0) magicOrbNum = 0;
+		SetMagicOrbNum();
+		audioSource.Play();
+	}
 
 
 
     void Start()
     {
         rb2D = this.GetComponent<Rigidbody2D>();
+		audioSource = GetComponent<AudioSource>();
         
         forwardRot = Quaternion.Euler(0f, 0f, 0f);
         upRot = Quaternion.Euler(0f, 0f, 60.0f);
@@ -77,10 +90,19 @@ public class PlayerControl : MonoBehaviour
         upVec = new Vector3(0f, 1.0f, 0f);
 
 		prevPosition = transform.position;
+
+		/*-----------*/
+		gameManager = GameObject.FindGameObjectWithTag("GameManager");
+		gameManagerCtrl = gameManager.GetComponent<GameManagerControl>();
+		/*-----------*/
     }
 
     void Update()
     {
+		/*-----------*/
+		if(gameManagerCtrl.GetGameState() == 0) return;
+		/*-----------*/
+		
 		velocityVec2 = (transform.position - prevPosition) / Time.deltaTime;
         velocity = (float)Math.Sqrt(Math.Pow(velocityVec2.x,2)+Math.Pow(velocityVec2.y,2));
         prevPosition = transform.position;

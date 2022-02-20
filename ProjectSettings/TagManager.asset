@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - CPU
   - Item
+  - GameManager
   layers:
   - Default
   - TransparentFX
