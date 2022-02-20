@@ -6,6 +6,8 @@ public class DarkAlpha : MonoBehaviour
 {
     float time;
     Image render;
+
+    float alphaTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,12 +40,16 @@ public class DarkAlpha : MonoBehaviour
         else if(time < 5f){
             proColor.a += sp;
         }
-        else{
+        else if(time < 6f){
             proColor.a -= sp;
-            if(render.color.a <= 0){
-                Destroy(transform.parent.parent.gameObject);
-            }
         }
+        else if(time < 7f){
+            proColor.a += sp;
+        }
+        else if(time < 8f){
+            proColor.a -= sp;
+        }
+
         render.color = proColor;
 
     }

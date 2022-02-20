@@ -8,6 +8,7 @@ enum Items {
     Thunder,
     Fire,
     Bubble,
+    Orb,
 };
 
 public class ItemControlScript : MonoBehaviour
@@ -58,59 +59,67 @@ public class ItemControlScript : MonoBehaviour
         switch(rankObj.GetComponent<RankSort>().GetRank(transform.parent.gameObject)){
             case 1:
                 probItem[(int)Items.Wind]    = 1;
-                probItem[(int)Items.Dark]    = 2;
+                probItem[(int)Items.Dark]    = 0;
                 probItem[(int)Items.Thunder] = 0;
-                probItem[(int)Items.Fire]    = 5;
+                probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 2;
+                probItem[(int)Items.Orb]     = 6;
                 break;
             case 2:
                 probItem[(int)Items.Wind]    = 1;
-                probItem[(int)Items.Dark]    = 2;
+                probItem[(int)Items.Dark]    = 0;
                 probItem[(int)Items.Thunder] = 0;
-                probItem[(int)Items.Fire]    = 5;
+                probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 2;
+                probItem[(int)Items.Orb]     = 5;
                 break;
             case 3:
                 probItem[(int)Items.Wind]    = 1;
-                probItem[(int)Items.Dark]    = 2;
+                probItem[(int)Items.Dark]    = 0;
                 probItem[(int)Items.Thunder] = 0;
-                probItem[(int)Items.Fire]    = 5;
+                probItem[(int)Items.Fire]    = 3;
                 probItem[(int)Items.Bubble]  = 2;
+                probItem[(int)Items.Orb]     = 4;
                 break;
             case 4:
                 probItem[(int)Items.Wind]    = 2;
-                probItem[(int)Items.Dark]    = 2;
-                probItem[(int)Items.Thunder] = 2;
-                probItem[(int)Items.Fire]    = 2;
+                probItem[(int)Items.Dark]    = 0;
+                probItem[(int)Items.Thunder] = 0;
+                probItem[(int)Items.Fire]    = 3;
                 probItem[(int)Items.Bubble]  = 2;
+                probItem[(int)Items.Orb]     = 3;
                 break;
             case 5:
                 probItem[(int)Items.Wind]    = 2;
                 probItem[(int)Items.Dark]    = 2;
-                probItem[(int)Items.Thunder] = 2;
+                probItem[(int)Items.Thunder] = 1;
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 2;
+                probItem[(int)Items.Orb]     = 2;
                 break;
             case 6:
-                probItem[(int)Items.Wind]    = 2;
-                probItem[(int)Items.Dark]    = 3;
-                probItem[(int)Items.Thunder] = 5;
+                probItem[(int)Items.Wind]    = 3;
+                probItem[(int)Items.Dark]    = 2;
+                probItem[(int)Items.Thunder] = 1;
                 probItem[(int)Items.Fire]    = 2;
-                probItem[(int)Items.Bubble]  = 3;
+                probItem[(int)Items.Bubble]  = 2;
+                probItem[(int)Items.Orb]     = 1;
                 break;
             case 7:
                 probItem[(int)Items.Wind]    = 5;
                 probItem[(int)Items.Dark]    = 1;
-                probItem[(int)Items.Thunder] = 5;
+                probItem[(int)Items.Thunder] = 1;
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 1;
+                probItem[(int)Items.Orb]     = 0;
                 break;    
             default:
                 probItem[(int)Items.Wind]    = 5;
                 probItem[(int)Items.Dark]    = 1;
-                probItem[(int)Items.Thunder] = 5;
+                probItem[(int)Items.Thunder] = 1;
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 1;
+                probItem[(int)Items.Orb]     = 0;
                 break;                                                                                           
         }
 
@@ -119,7 +128,6 @@ public class ItemControlScript : MonoBehaviour
 
         int randValue = Random.Range(0,sum);
         int tmp=0;
-
 
         for(int i=0; i<probItem.Length; i++){
             tmp += probItem[i];
