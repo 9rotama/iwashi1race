@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tailwind
+  - Headwind
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -41,9 +44,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2271787651
+    locked: 0
   - name: Enemy
     uniqueID: 34137419
     locked: 0
   - name: Player
     uniqueID: 3616269701
+    locked: 0
+  - name: Object
+    uniqueID: 4026417857
+    locked: 0
+  - name: UI
+    uniqueID: 3233221193
     locked: 0
