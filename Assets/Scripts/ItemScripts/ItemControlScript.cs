@@ -18,6 +18,7 @@ public class ItemControlScript : MonoBehaviour
 
     float time;
 
+
     void Start()
     {
         isDefence = false;
@@ -43,6 +44,8 @@ public class ItemControlScript : MonoBehaviour
     {
         int len =  System.Enum.GetNames(typeof(Items)).Length;
         Items value = (Items)(Random.Range(0,len));
+
+        if(value == Items.Thunder) value = Items.Bubble;
 
         return value;
     }
