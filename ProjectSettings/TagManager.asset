@@ -10,6 +10,7 @@ TagManager:
   - CPU
   - Item
   - GameManager
+  - Goal
   layers:
   - Default
   - TransparentFX
