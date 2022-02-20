@@ -7,6 +7,8 @@ TagManager:
   - Tailwind
   - Headwind
   - Enemy
+  - CPU
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -46,6 +48,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2271787651
+    locked: 0
+  - name: Line
+    uniqueID: 2553998141
     locked: 0
   - name: Enemy
     uniqueID: 34137419
