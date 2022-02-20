@@ -10,7 +10,7 @@ public class FireScript : MonoBehaviour
     public GameObject creatorObj;
     bool isCollision;
     float time;
-    const float sp = 400.0f;
+    const float sp = 500.0f;
 
     GameObject itemControl;
     ItemControlScript itemScript;

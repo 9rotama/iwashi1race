@@ -16,9 +16,12 @@ public class ThunderSpriteScript : MonoBehaviour
     float time;
     public int rank;
 
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         render = gameObject.GetComponent<SpriteRenderer>();
         render.color -= new Color(0, 0, 0, 1);
         MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -75,8 +78,9 @@ public class ThunderSpriteScript : MonoBehaviour
             Destroy(itemCon.transform.GetChild(0).gameObject);
             itemScript.isDefence = false;
             Destroy(this.gameObject);
-        }
+        } 
         else{
+            if(targetObj.tag == "Player") { audioSource.Play();}
             isShocked = true;
             CreateShockPlayer();
         }
