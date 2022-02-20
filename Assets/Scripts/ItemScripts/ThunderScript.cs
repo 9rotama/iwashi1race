@@ -5,7 +5,6 @@ using System;
 
 public class ThunderScript : MonoBehaviour
 {
-    [SerializeField] GameObject bullet;
     [SerializeField] GameObject thunderSprite;
 
     // Start is called before the first frame update
