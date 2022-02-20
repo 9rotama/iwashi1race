@@ -142,7 +142,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 286614292501002350, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 286614292501002384, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: itemObjs.Array.data[1]
@@ -469,7 +469,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 286614292501002350, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 286614292501002384, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: itemObjs.Array.data[1]
@@ -725,7 +725,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 286614292501002350, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 286614292501002384, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: itemObjs.Array.data[1]
