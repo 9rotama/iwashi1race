@@ -14,7 +14,6 @@ public class ButtonScript : MonoBehaviour
 
         if (gameObject.name == "StartButton")
         {
-            SceneManager.LoadScene ("Meadow");
             Debug.Log("StartButton");
         }
         else if (gameObject.name == "SkinButton")
@@ -48,19 +47,23 @@ public class ButtonScript : MonoBehaviour
     {
         if (gameObject.name == "StartButton")
         {
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("Meadow");
         }
         else if (gameObject.name == "SkinButton")
         {
-            SceneManager.LoadScene("SkinScene");
+            
         }
         else if (gameObject.name == "RuleButton")
         {
-            SceneManager.LoadScene("RuleScene");
+            SceneManager.LoadScene("Rule");
         }
         else if (gameObject.name == "SettingButton")
         {
-            SceneManager.LoadScene("SettingScene");
+            
+        }
+        else if (gameObject.name == "RuleReturnButton")
+        {
+            SceneManager.LoadScene("TitleScene");
         }
     }
 }

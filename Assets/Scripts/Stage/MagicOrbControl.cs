@@ -29,7 +29,7 @@ public class MagicOrbControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        orbSpawner = transform.parent.GetComponent<OrbSpawner>();
     }
 
     // Update is called once per frame
