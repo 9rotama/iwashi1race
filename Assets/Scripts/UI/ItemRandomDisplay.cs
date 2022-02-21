@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_ItemControl : MonoBehaviour
+public class ItemRandomDisplay : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites; 
     Image image;
@@ -18,7 +18,6 @@ public class UI_ItemControl : MonoBehaviour
         image = GetComponent<Image>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         time += Time.deltaTime;
@@ -30,6 +29,7 @@ public class UI_ItemControl : MonoBehaviour
             }
         }
         else{
+            if(determinItem == -1) time = 0;
             image.sprite = sprites[determinItem];
         }
 

@@ -43,11 +43,14 @@ public class ItemControlScript : MonoBehaviour
     public void DeterminItem()
     {
         determinItem = (int)DecideItem();
-        GameObject UI = GameObject.Find("UI");
-        GameObject outside = UI.transform.Find("UI_Item_Oustside").gameObject;
-        UI_Item = (GameObject)Instantiate(itemUI, outside.transform.position, Quaternion.identity);
-        UI_Item.transform.parent = UI.transform;
-        UI_Item.GetComponent<UI_ItemControl>().determinItem = (int)determinItem;      
+        if(transform.parent.tag == "Player"){
+            GameObject UI = GameObject.Find("UI");
+            GameObject outside = UI.transform.Find("ItemPlate").gameObject;
+            UI_Item = (GameObject)Instantiate(itemUI, outside.transform.position, Quaternion.identity);
+            UI_Item.transform.SetParent(UI.transform);
+            UI_Item.GetComponent<ItemRandomDisplay>().determinItem = (int)determinItem; 
+        }
+     
     }
 
     void Update()
@@ -157,8 +160,6 @@ public class ItemControlScript : MonoBehaviour
 
         int randValue = Random.Range(0,sum);
         int tmp=0;
-
-        return Items.Thunder;
 
         for(int i=0; i<probItem.Length; i++){
             tmp += probItem[i];
