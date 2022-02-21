@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Tailwind
+  - Headwind
+  - Enemy
+  - CPU
+  - Item
+  - GameManager
+  - Goal
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Obstacle
+  - Enemy
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2271787651
+    locked: 0
+  - name: Line
+    uniqueID: 2553998141
+    locked: 0
+  - name: Enemy
+    uniqueID: 34137419
+    locked: 0
+  - name: Player
+    uniqueID: 3616269701
+    locked: 0
+  - name: Object
+    uniqueID: 4026417857
+    locked: 0
+  - name: UI
+    uniqueID: 3233221193
+    locked: 0
