@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class CountdownControl : MonoBehaviour
 {
     private Image renderer;
-    public Sprite three;
-    public Sprite two;
-    public Sprite one;
+    [SerializeField] private Sprite three, two, one, go;
+
     // Start is called before the first frame update
 
     public void setSprite(int n)
@@ -31,6 +30,11 @@ public class CountdownControl : MonoBehaviour
         {
             this.gameObject.SetActive(true);
             renderer.sprite = three;
+        }
+        else if (n == 4)
+        {
+            this.gameObject.SetActive(true);
+            renderer.sprite = go;
         }
     }
 

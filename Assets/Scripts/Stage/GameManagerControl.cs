@@ -88,12 +88,14 @@ public class GameManagerControl : MonoBehaviour
             
             countdownControl.setSprite(0);
             gameState = 1;
+            countdownControl.setSprite(4);
             
             yield return new WaitForSeconds(0.5f);
             
             audioSource.clip = BGM;
             audioSource.Play();
-            
+            countdownControl.setSprite(0);
+
             yield break;
         }
     }

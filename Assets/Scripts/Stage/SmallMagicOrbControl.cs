@@ -7,6 +7,8 @@ public class SmallMagicOrbControl : MonoBehaviour
     
     private PlayerControl playerControl;
     private CPUplayerControl cpuPlayerControl;
+    private OrbSpawner orbSpawner;
+
     
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,12 +16,14 @@ public class SmallMagicOrbControl : MonoBehaviour
         {
             playerControl = other.GetComponent<PlayerControl>();
             playerControl.SmallMagicOrbEnter();
+            orbSpawner.OrbDestroyed();
             Destroy(this.gameObject);
         }
         else if (other.gameObject.tag == "Enemy")
         { 
             cpuPlayerControl = other.GetComponent<CPUplayerControl>();
             cpuPlayerControl.SmallMagicOrbEnter();
+            orbSpawner.OrbDestroyed();
             Destroy(this.gameObject);
         }
     }
@@ -27,7 +31,7 @@ public class SmallMagicOrbControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        orbSpawner = transform.parent.GetComponent<OrbSpawner>();
     }
 
     // Update is called once per frame
