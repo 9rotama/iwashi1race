@@ -7,9 +7,6 @@ public class PlayerControl : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float handleSpeed;
-	
-	private GameObject goal; 
-	private bool isInGoal;
     
     private Rigidbody2D rb2D;
     private Quaternion forwardRot, upRot, downRot;
@@ -94,9 +91,6 @@ public class PlayerControl : MonoBehaviour
 
 		prevPosition = transform.position;
 
-		goal = GameObject.FindGameObjectWithTag("Goal");
-		isInGoal = false;
-
 		/*-----------*/
 		gameManager = GameObject.FindGameObjectWithTag("GameManager");
 		gameManagerCtrl = gameManager.GetComponent<GameManagerControl>();
@@ -144,10 +138,6 @@ public class PlayerControl : MonoBehaviour
         {
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, forwardRot, Time.deltaTime * handleSpeed);
         }
-
-		if(this.transform.position.x >= goal.transform.position.x && isInGoal == false){
-			gameManagerCtrl.PlayerGoal();
-		}
 
     }
 }
