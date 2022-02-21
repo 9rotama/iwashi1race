@@ -6,6 +6,7 @@ public class MagicOrbControl : MonoBehaviour
 {
     private PlayerControl playerControl;
     private CPUplayerControl cpuPlayerControl;
+    private OrbSpawner orbSpawner;
     
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -13,12 +14,14 @@ public class MagicOrbControl : MonoBehaviour
         {
             playerControl = other.GetComponent<PlayerControl>();
             playerControl.MagicOrbEnter();
+            orbSpawner.OrbDestroyed();
             Destroy(this.gameObject);
         }
         else if (other.gameObject.tag == "Enemy")
         { 
             cpuPlayerControl = other.GetComponent<CPUplayerControl>();
             cpuPlayerControl.MagicOrbEnter();
+            orbSpawner.OrbDestroyed();
             Destroy(this.gameObject);
         }
     }
