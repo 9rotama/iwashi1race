@@ -2,7 +2,7 @@
 
 2D横スクロールレースゲーム
 
-タイトル名: sky Witches
+タイトル名: Sky Witches
 
 ## 環境
 
