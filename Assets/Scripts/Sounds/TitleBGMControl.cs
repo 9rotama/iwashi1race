@@ -5,7 +5,7 @@ using UnityEngine;
 public class TitleBGMControl : MonoBehaviour
 {
 	void Awake() {
-		int numMusicPlayers = FindObjectsOfType<AudioSource>().Length;
+		int numMusicPlayers = GameObject.FindGameObjectsWithTag("BGM").Length;
    	 	if (numMusicPlayers > 1)
    		{
   	 		Destroy(gameObject);
