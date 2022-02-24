@@ -9,11 +9,11 @@ public class GameManagerControl : MonoBehaviour
     
     private int gameState = 0; //0...カウントダウン中 1...プレイ中 2...ゴール
 
-    public AudioClip countdownSE,BGM;
+    public AudioClip countdownSE,goalSE,bgm;
 
-    public GameObject CountdownUI;
-    public GameObject ResultUI;
-    public GameObject RankingUI;
+    public GameObject countdownUI;
+    public GameObject resultUI;
+    public GameObject rankingUI;
 
     private Text rText;
     private CountdownControl countdownControl;
@@ -30,21 +30,29 @@ public class GameManagerControl : MonoBehaviour
 
     public void PlayerGoal()
     {
-        ResultUI.SetActive(true);
+        resultUI.SetActive(true); 
         var ranking = rankingControl.GetRanking();
         rText.text = "position: " + ranking.ToString()
                                   + "\ntime: "+ totalTime.ToString();
+
+        audioSource.clip = goalSE;
+        audioSource.loop = false;
+        audioSource.Play();
+        
         gameState = 2;
     }
 
     void Start()
     {
-        totalTime = 0;
+        
         audioSource = gameObject.GetComponent<AudioSource>();
-        countdownControl = CountdownUI.GetComponent<CountdownControl>();
-        rankingControl = RankingUI.GetComponent<RankingControl>();
-        rText = ResultUI.transform.GetChild(0).GetComponent<Text>();
-        ResultUI.SetActive(false);
+
+        countdownControl = countdownUI.GetComponent<CountdownControl>();
+        rankingControl = rankingUI.GetComponent<RankingControl>();
+        rText = resultUI.transform.GetChild(0).GetComponent<Text>();
+
+        totalTime = 0;
+        resultUI.SetActive(false);
         StartCoroutine ("BeforeStart");
     }
 
@@ -54,12 +62,11 @@ public class GameManagerControl : MonoBehaviour
         if (gameState == 1)
         {
             totalTime += Time.deltaTime;
-            Debug.Log("計測中： " + (totalTime).ToString());
         }
 
         if (gameState == 2 && Input.GetMouseButtonDown (0))
         {
-            SceneManager.LoadScene ("TitleScene");
+            SceneManager.LoadScene ("Title");
         }
     }
 
@@ -86,14 +93,15 @@ public class GameManagerControl : MonoBehaviour
             
             yield return new WaitForSeconds(1);
             
-            countdownControl.setSprite(0);
             gameState = 1;
             countdownControl.setSprite(4);
             
             yield return new WaitForSeconds(0.5f);
             
-            audioSource.clip = BGM;
+            audioSource.clip = bgm;
             audioSource.Play();
+            audioSource.loop = true;
+            
             countdownControl.setSprite(0);
 
             yield break;

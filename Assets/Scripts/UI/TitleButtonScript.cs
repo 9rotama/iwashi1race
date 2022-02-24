@@ -29,6 +29,9 @@ public class TitleButtonScript : MonoBehaviour
             Debug.Log("SettingButton");
         }
 
+		var audioSource = GetComponent<AudioSource>();
+		audioSource.Play();
+
         Invoke("ChangeScene",0.5f);
     }
 
@@ -46,7 +49,10 @@ public class TitleButtonScript : MonoBehaviour
     {
         if (gameObject.name == "StartButton")
         {
-            SceneManager.LoadScene("Meadow");
+            var bgm = GameObject.FindGameObjectWithTag("BGM");
+			Destroy(bgm);
+
+			SceneManager.LoadScene("Meadow");
         }
         else if (gameObject.name == "SkinButton")
         {

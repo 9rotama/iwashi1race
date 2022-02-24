@@ -22,6 +22,8 @@ public class PlayerControl : MonoBehaviour
 
 	private AudioSource audioSource;
 
+	[SerializeField] private GameObject itemOrbSEPrefab, magicOrbSEPrefab;
+
 	/*-----------*/
 	private GameObject gameManager;
 	private GameManagerControl gameManagerCtrl;
@@ -47,7 +49,7 @@ public class PlayerControl : MonoBehaviour
 
 
 
-	[SerializeField] private GameObject magicOrbMeter;
+	private GameObject magicOrbMeter;
 	private MagicOrbMeterControl magicOrbMeterControl;
 	private int magicOrbNum;
 	
@@ -61,6 +63,10 @@ public class PlayerControl : MonoBehaviour
 		magicOrbNum += 10; 
 		if(magicOrbNum > 50) magicOrbNum = 50;
 		SetMagicOrbNum();
+		
+		GameObject sound = Instantiate(magicOrbSEPrefab);
+		float endTime = sound.GetComponent<AudioSource>().clip.length;
+		Destroy(sound, endTime);	//音のプレハブを作成して再生後削除する
 	}
 	//魔法オーブ(大)
 
@@ -68,6 +74,10 @@ public class PlayerControl : MonoBehaviour
 		magicOrbNum++; 
 		if(magicOrbNum > 50) magicOrbNum = 50;
 		SetMagicOrbNum();
+		
+		GameObject sound = Instantiate(magicOrbSEPrefab);
+		float endTime = sound.GetComponent<AudioSource>().clip.length;
+		Destroy(sound, endTime);	//音のプレハブを作成して再生後削除する
 	}
 	//魔法オーブの取得数を返す
    	
@@ -101,6 +111,7 @@ public class PlayerControl : MonoBehaviour
 		gameManager = GameObject.FindGameObjectWithTag("GameManager");
 		gameManagerCtrl = gameManager.GetComponent<GameManagerControl>();
 		/*-----------*/
+		magicOrbMeter = GameObject.Find("MagicOrbMeter");
     }
 
     void Update()
@@ -147,6 +158,7 @@ public class PlayerControl : MonoBehaviour
 
 		if(this.transform.position.x >= goal.transform.position.x && isInGoal == false){
 			gameManagerCtrl.PlayerGoal();
+			isInGoal = true;
 		}
 
     }
