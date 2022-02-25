@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_ItemControl : MonoBehaviour
+public class ItemRandomDisplay : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites; 
     Image image;
@@ -16,20 +16,21 @@ public class UI_ItemControl : MonoBehaviour
     void Start()
     {
         image = GetComponent<Image>();
+        GetComponent<ItemRandomAudio>().PlayItemSound();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         time += Time.deltaTime;
         changeTime += Time.deltaTime;
-        if(time < 0.95f){
+        if(time < 2.07f){
             if(changeTime > 0.08f ){
             changeTime = 0;
             image.sprite = sprites[spriteNum++%sprites.Length];
             }
         }
         else{
+            if(determinItem == -1) time = 0;
             image.sprite = sprites[determinItem];
         }
 
