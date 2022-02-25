@@ -17,6 +17,8 @@ public class ItemControlScript : MonoBehaviour
     [SerializeField] GameObject rankObj;
     [SerializeField] GameObject itemUI;
     GameObject UI_Item;
+    GameObject UI;
+    GameObject itemPlate;
 
     public bool isDefence;
 
@@ -38,15 +40,17 @@ public class ItemControlScript : MonoBehaviour
         isDefence = false;
         randNum = Random.Range(5f,10f);
         rankObj = GameObject.Find("Rank");
+
+        UI = GameObject.Find("UI");
+        itemPlate = UI.transform.Find("ItemPlate").gameObject;
+
     }
 
     public void DeterminItem()
     {
         determinItem = (int)DecideItem();
         if(transform.parent.tag == "Player"){
-            GameObject UI = GameObject.Find("UI");
-            GameObject outside = UI.transform.Find("ItemPlate").gameObject;
-            UI_Item = (GameObject)Instantiate(itemUI, outside.transform.position, Quaternion.identity);
+            UI_Item = (GameObject)Instantiate(itemUI, itemPlate.transform.position, Quaternion.identity);
             UI_Item.transform.SetParent(UI.transform);
             UI_Item.GetComponent<ItemRandomDisplay>().determinItem = (int)determinItem; 
         }

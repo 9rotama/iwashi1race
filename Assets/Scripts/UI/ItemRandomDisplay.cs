@@ -16,13 +16,14 @@ public class ItemRandomDisplay : MonoBehaviour
     void Start()
     {
         image = GetComponent<Image>();
+        GetComponent<ItemRandomAudio>().PlayItemSound();
     }
 
     void FixedUpdate()
     {
         time += Time.deltaTime;
         changeTime += Time.deltaTime;
-        if(time < 0.95f){
+        if(time < 2.07f){
             if(changeTime > 0.08f ){
             changeTime = 0;
             image.sprite = sprites[spriteNum++%sprites.Length];
