@@ -1,5 +1,6 @@
 .DS_Store
 *.sln
+*.app
 *.app.zip
 *.exe
 /[Uu]serSettings/
