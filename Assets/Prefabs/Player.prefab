@@ -487,7 +487,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 500
   handleSpeed: 3
-  magicOrbMeter: {fileID: 0}
+  itemOrbSEPrefab: {fileID: 482917955309039379, guid: 2662230eaad3b4ec392fef1a3e439252, type: 3}
+  magicOrbSEPrefab: {fileID: 2562034221193356283, guid: 5434597eba19442c48a839e493eb76e9, type: 3}
 --- !u!82 &8384296521885338943
 AudioSource:
   m_ObjectHideFlags: 0
