@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class RuleButtonScript : MonoBehaviour
+public class ReturnButtonScript : MonoBehaviour
 {
     [SerializeField] Sprite[] image;
 
@@ -12,17 +12,15 @@ public class RuleButtonScript : MonoBehaviour
     {
         GetComponent<Image>().sprite = image[2];
 
-        if (gameObject.name == "ReturnButton")
+        switch (gameObject.name)
         {
-            Invoke("ChangeScene", 0.5f);
-        }
-        else if (gameObject.name == "BackButton")
-        {
-            Invoke("ChangePage", 0.5f);
-        }
-        else if (gameObject.name == "NextButton")
-        {
-            Invoke("ChangePage", 0.5f);
+            case "ReturnButton":
+                Invoke("ChangeScene", 0.5f);
+                break;
+            case "BackButton":
+            case "NextButton":
+                Invoke("ChangePage", 0.5f);
+                break;
         }
     }
 
