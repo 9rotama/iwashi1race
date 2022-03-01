@@ -53,7 +53,7 @@ public class GameManagerControl : MonoBehaviour
 
         totalTime = 0;
         resultUI.SetActive(false);
-        StartCoroutine ("BeforeStart");
+        StartCoroutine (nameof(BeforeStart));
     }
 
     // Update is called once per frame

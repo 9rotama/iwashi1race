@@ -17,22 +17,28 @@ public class PlayerSpriteChange : MonoBehaviour
     private PlayerControl playerControl;
     private CPUplayerControl cpuPlayerControl;
 
-    
+	    
+	public void SetMaterialHue(float h){
+		spriteRenderer.material.SetFloat("_Hue", h);
+        Debug.Log(gameObject.transform.parent.name + gameObject.name + h.ToString());
+	}
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.material.SetFloat("_Hue", hue);
+        SetMaterialHue(hue);
         parentObj = transform.parent.gameObject;
 
-        if (parentObj.tag == "Player")
+        switch (parentObj.tag)
         {
-            playerControl = parentObj.GetComponent<PlayerControl>();
-            StartCoroutine ("ChangeByPlayerSpeed");
-        }
-        else if(parentObj.tag == "Enemy")
-        {
-            cpuPlayerControl = parentObj.GetComponent<CPUplayerControl>();
-            StartCoroutine ("ChangeByCPUSpeed");
+            case "Player":
+                playerControl = parentObj.GetComponent<PlayerControl>();
+                StartCoroutine ("ChangeByPlayerSpeed");
+                break;
+            case "Enemy":
+                cpuPlayerControl = parentObj.GetComponent<CPUplayerControl>();
+                StartCoroutine ("ChangeByCPUSpeed");
+                break;
         }
 
         
