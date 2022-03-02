@@ -4,31 +4,34 @@ using UnityEngine;
 
 public class OrbScript : MonoBehaviour
 {
-    GameObject parant;
-    float theta;
+    private GameObject _parant;
+    private float _theta;
+
+    private int orbGainNum = 10;
+    
     
     // Start is called before the first frame update
     void Start()
     {
-        parant = transform.parent.gameObject;
+        _parant = transform.parent.gameObject;
         transform.parent = null;
 
-        if(parant.tag == "Player"){
-            parant.GetComponent<PlayerControl>().MagicOrbEnter();
+        if(_parant.CompareTag("Player")){
+            _parant.GetComponent<PlayerControl>().MagicOrbEnter(orbGainNum);
         }
         else {
-            parant.GetComponent<CPUplayerControl>().MagicOrbEnter();
+            _parant.GetComponent<CPUplayerControl>().MagicOrbEnter(orbGainNum);
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        theta += 0.1f; 
-        Vector3 tmp =  parant.transform.position;
-        tmp.y += Mathf.Sin(theta)*15f;
+        _theta += 0.1f; 
+        Vector3 tmp =  _parant.transform.position;
+        tmp.y += Mathf.Sin(_theta)*15f;
         transform.position = tmp;
-        if(theta > Mathf.PI){
+        if(_theta > Mathf.PI){
             Destroy(gameObject);
         }
 

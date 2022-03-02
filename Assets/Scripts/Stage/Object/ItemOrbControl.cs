@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemOrbControl : MonoBehaviour
-{     
-    void OnTriggerEnter2D(Collider2D other)
+{
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if ((other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy"))
+        if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy")))
         {
-            GameObject itemCon = other.transform.Find("ItemController").gameObject;
+            var itemCon = other.transform.Find("ItemController").gameObject;
             if(itemCon.GetComponent<ItemControlScript>().GetdeterminItem() == -1){
                 itemCon.GetComponent<ItemControlScript>().DeterminItem();
             }

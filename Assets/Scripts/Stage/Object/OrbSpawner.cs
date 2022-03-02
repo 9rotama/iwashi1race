@@ -10,7 +10,7 @@ public class OrbSpawner : MonoBehaviour
 
     public void OrbDestroyed()
     {
-        StartCoroutine ("OrbSpawn");
+        StartCoroutine (nameof(OrbSpawn));
     }
 
     IEnumerator OrbSpawn()
@@ -24,7 +24,8 @@ public class OrbSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(prefabOrb, this.transform.position, Quaternion.identity, this.transform);
+        var transform1 = transform;
+        Instantiate(prefabOrb, transform1.position, Quaternion.identity, transform1);
     }
 
     // Update is called once per frame

@@ -15,11 +15,11 @@ public class ReturnButtonScript : MonoBehaviour
         switch (gameObject.name)
         {
             case "ReturnButton":
-                Invoke("ChangeScene", 0.5f);
+                Invoke(nameof(ChangeScene), 0.5f);
                 break;
             case "BackButton":
             case "NextButton":
-                Invoke("ChangePage", 0.5f);
+                Invoke(nameof(ChangePage), 0.5f);
                 break;
         }
     }

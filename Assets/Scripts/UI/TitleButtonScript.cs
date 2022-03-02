@@ -31,7 +31,7 @@ public class TitleButtonScript : MonoBehaviour
 		var audioSource = GetComponent<AudioSource>();
 		audioSource.Play();
 
-        Invoke("ChangeScene",0.5f);
+        Invoke(nameof(ChangeScene),0.5f);
     }
 
     public void MouseOver()
@@ -50,10 +50,7 @@ public class TitleButtonScript : MonoBehaviour
         {
             case "StartButton":
             {
-                var bgm = GameObject.FindGameObjectWithTag("BGM");
-                Destroy(bgm);
-
-                SceneManager.LoadScene("Meadow");
+                SceneManager.LoadScene("Stage");
                 break;
             }
             case "SkinButton":

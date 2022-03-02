@@ -13,6 +13,7 @@ TagManager:
   - Goal
   - BGM
   - SkinValueHolder
+  - Start
   layers:
   - Default
   - TransparentFX

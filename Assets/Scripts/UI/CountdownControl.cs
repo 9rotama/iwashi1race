@@ -5,47 +5,45 @@ using UnityEngine.UI;
 
 public class CountdownControl : MonoBehaviour
 {
-    private Image renderer;
+    private Image _renderer;
     [SerializeField] private Sprite three, two, one, go;
 
     // Start is called before the first frame update
 
-    public void setSprite(int n)
+    public void SetSprite(int n)
     {
-        if (n == 0)
+        switch (n)
         {
-            this.gameObject.SetActive(false);
-        }
-        else if (n == 1)
-        {
-            this.gameObject.SetActive(true);
-            renderer.sprite = one;
-        }
-        else if (n == 2)
-        {
-            this.gameObject.SetActive(true);
-            renderer.sprite = two;
-        }
-        else if (n == 3)
-        {
-            this.gameObject.SetActive(true);
-            renderer.sprite = three;
-        }
-        else if (n == 4)
-        {
-            this.gameObject.SetActive(true);
-            renderer.sprite = go;
+            case 0:
+                this.gameObject.SetActive(false);
+                break;
+            case 1:
+                this.gameObject.SetActive(true);
+                _renderer.sprite = one;
+                break;
+            case 2:
+                this.gameObject.SetActive(true);
+                _renderer.sprite = two;
+                break;
+            case 3:
+                this.gameObject.SetActive(true);
+                _renderer.sprite = three;
+                break;
+            case 4:
+                this.gameObject.SetActive(true);
+                _renderer.sprite = go;
+                break;
         }
     }
 
-    void Awake()
+    private void Awake()
     {
-        renderer = GetComponent<Image>();
+        _renderer = GetComponent<Image>();
         this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }

@@ -76,25 +76,25 @@ public class GameManagerControl : MonoBehaviour
         {
             gameState = 0;
             
-            countdownControl.setSprite(0);
-            yield return new WaitForSeconds(1);
+            countdownControl.SetSprite(0);
+            yield return new WaitForSeconds(3);
             
-            countdownControl.setSprite(3);
+            countdownControl.SetSprite(3);
             audioSource.clip = countdownSE;
             audioSource.Play();
             
             yield return new WaitForSeconds(1);
             
-            countdownControl.setSprite(2);
+            countdownControl.SetSprite(2);
             
             yield return new WaitForSeconds(1);
             
-            countdownControl.setSprite(1);
+            countdownControl.SetSprite(1);
             
             yield return new WaitForSeconds(1);
             
             gameState = 1;
-            countdownControl.setSprite(4);
+            countdownControl.SetSprite(4);
             
             yield return new WaitForSeconds(0.5f);
             
@@ -102,7 +102,7 @@ public class GameManagerControl : MonoBehaviour
             audioSource.Play();
             audioSource.loop = true;
             
-            countdownControl.setSprite(0);
+            countdownControl.SetSprite(0);
 
             yield break;
         }
