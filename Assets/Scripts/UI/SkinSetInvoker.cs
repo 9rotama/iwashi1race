@@ -9,7 +9,7 @@ public class SkinSetInvoker : MonoBehaviour
     private PlayerSkinValue _playerSkinValue;
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         switch (SceneManager.GetActiveScene().name)
         {
@@ -18,6 +18,7 @@ public class SkinSetInvoker : MonoBehaviour
                 _playerSkinValue = _skinValueHolder.GetComponent<PlayerSkinValue>();
                 
                 _playerSkinValue.SetValueToSlider();
+                _playerSkinValue.SetValueToPlayer();
                 break;
             case "Title":
                 break;
@@ -37,7 +38,7 @@ public class SkinSetInvoker : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }

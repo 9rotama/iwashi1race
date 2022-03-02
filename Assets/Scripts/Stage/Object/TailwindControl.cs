@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class TailwindControl : MonoBehaviour
 {
-    private PlayerControl playerControl;
-    private CPUplayerControl cpuPlayerControl;
+    private PlayerControl _playerControl;
+    private CPUplayerControl _cpuPlayerControl;
     
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" )
+        if (other.gameObject.CompareTag("Player") )
         {
-            playerControl = other.GetComponent<PlayerControl>();
-            playerControl.WindEnter(2f);
+            _playerControl = other.GetComponent<PlayerControl>();
+            _playerControl.WindEnter(2f);
         }
-        else if (other.gameObject.tag == "Enemy")
+        else if (other.gameObject.CompareTag("Enemy"))
         { 
-            cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            cpuPlayerControl.WindEnter(2f);
+            _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
+            _cpuPlayerControl.WindEnter(2f);
         }
     }
     // Start is called before the first frame update

@@ -5,76 +5,55 @@ using UnityEngine.UI;
 
 public class RankingControl : MonoBehaviour
 {
-    [SerializeField] private Sprite one, two, three, four, five, six, seven, eight, st, nd, rd, th;
-    private Image rankImage;
-    private Image thImage;
-    private GameObject player;
-    private GameObject[] cpuPlayer;
-    private int ranking;
-
-
+    [SerializeField] private Sprite[] rankSprites;
+    [SerializeField] private Sprite[] suffixSprites;
+    
+    private Image _rankImageUI;
+    private Image _suffixImageUI;
+    private GameObject _player;
+    private GameObject[] _cpuPlayer;
+    private int _ranking;
+    
     public int GetRanking()
     {
-        return ranking+1;
+        return _ranking;
     }
 
     void Awake()
     {
-        rankImage = this.GetComponent<Image>();
-        thImage = this.transform.GetChild(0).GetComponent<Image>();
+        _rankImageUI = this.GetComponent<Image>();
+        _suffixImageUI = this.transform.GetChild(0).GetComponent<Image>();
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        cpuPlayer = GameObject.FindGameObjectsWithTag("Enemy");
-        
-        ranking = 1;
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _cpuPlayer = GameObject.FindGameObjectsWithTag("Enemy");
     }
     
     void Update()
     {
-        ranking = 0;
-        for (int i = 0; i < cpuPlayer.Length; i++)
+        _ranking = 1;
+        foreach (var t in _cpuPlayer)
         {
-            if (player.transform.position.x < cpuPlayer[i].transform.position.x)
+            if (_player.transform.position.x < t.transform.position.x)
             {
-                ranking++;
+                _ranking++;
             }
         }
 
-        switch (ranking+1)
+        if (_ranking <= 8)
         {
-            case 1:
-                rankImage.sprite = one;
-                thImage.sprite = st;
-                break;
-            case 2:
-                rankImage.sprite = two;
-                thImage.sprite = nd;
-                break;
-            case 3:
-                rankImage.sprite = three;
-                thImage.sprite = rd;
-                break;
-            case 4:
-                rankImage.sprite = four;
-                thImage.sprite = th;
-                break;
-            case 5:
-                rankImage.sprite = five;
-                thImage.sprite = th;
-                break;
-            case 6:
-                rankImage.sprite = six;
-                thImage.sprite = th;
-                break;
-            case 7:
-                rankImage.sprite = seven;
-                thImage.sprite = th;
-                break;
-            case 8:
-                rankImage.sprite = eight;
-                thImage.sprite = th;
-                break;
+            _rankImageUI.sprite = rankSprites[_ranking - 1];
         }
+
+        if (_ranking <= 3)
+        {
+            _suffixImageUI.sprite = suffixSprites[_ranking - 1];
+        }
+        else
+        {
+            _suffixImageUI.sprite = suffixSprites[3];
+        }
+
+        
 
         
     }

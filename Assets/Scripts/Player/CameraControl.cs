@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraControl : MonoBehaviour
 {
-    [SerializeField] private GameObject Player;
-    [SerializeField] private float speed = 10.0f;
-    [SerializeField] private float xOffset = 0f;
-    private Vector3 setPos;
+    [SerializeField] private float xOffset = 0f;    //画面内のプレイヤーの水平位置
     
-    void Start()
+    private Vector3 _newPos;
+    private GameObject _player;
+
+    private void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player");
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
-    void Update()
+    private void Update()
     {
-        setPos = new Vector3(Player.transform.position.x + xOffset, Player.transform.position.y,
-            Player.transform.position.z - 10);
-        this.transform.position = Vector3.Slerp(this.transform.position, setPos, Time.deltaTime * speed);
+        var playerPos = _player.transform.position;
+        _newPos = new Vector3(playerPos.x + xOffset, playerPos.y, playerPos.z - 10);
+        this.transform.position = _newPos;
     }
 }
