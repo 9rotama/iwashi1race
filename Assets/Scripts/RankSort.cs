@@ -60,6 +60,7 @@ public class RankSort : MonoBehaviour
 
     public int GetRank(GameObject obj)
     {
+        Debug.Log(obj);
         for(int i=0; i<targets.Length; i++){
             //Debug.Log(targets[i].obj.gameObject);
             if(obj.gameObject == targets[i].obj.gameObject){
