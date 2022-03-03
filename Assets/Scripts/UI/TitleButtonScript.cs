@@ -12,27 +12,26 @@ public class TitleButtonScript : MonoBehaviour
     {
         GetComponent<Image>().sprite = image[2];
 
-        if (gameObject.name == "StartButton")
+        switch (gameObject.name)
         {
-            Debug.Log("StartButton");
-        }
-        else if (gameObject.name == "SkinButton")
-        {
-            Debug.Log("SkinButton");
-        }
-        else if (gameObject.name == "RuleButton")
-        {
-            Debug.Log("RuleButton");
-        }
-        else if (gameObject.name == "SettingButton")
-        {
-            Debug.Log("SettingButton");
+            case "StartButton":
+                Debug.Log("StartButton");
+                break;
+            case "SkinButton":
+                Debug.Log("SkinButton");
+                break;
+            case "RuleButton":
+                Debug.Log("RuleButton");
+                break;
+            case "SettingButton":
+                Debug.Log("SettingButton");
+                break;
         }
 
 		var audioSource = GetComponent<AudioSource>();
 		audioSource.Play();
 
-        Invoke("ChangeScene",0.5f);
+        Invoke(nameof(ChangeScene),0.5f);
     }
 
     public void MouseOver()
@@ -47,24 +46,21 @@ public class TitleButtonScript : MonoBehaviour
 
     public void ChangeScene()
     {
-        if (gameObject.name == "StartButton")
+        switch (gameObject.name)
         {
-            var bgm = GameObject.FindGameObjectWithTag("BGM");
-			Destroy(bgm);
-
-			SceneManager.LoadScene("Meadow");
-        }
-        else if (gameObject.name == "SkinButton")
-        {
-            
-        }
-        else if (gameObject.name == "RuleButton")
-        {
-            SceneManager.LoadScene("Rule");
-        }
-        else if (gameObject.name == "SettingButton")
-        {
-            
+            case "StartButton":
+            {
+                SceneManager.LoadScene("Stage");
+                break;
+            }
+            case "SkinButton":
+                SceneManager.LoadScene("Skin");
+                break;
+            case "RuleButton":
+                SceneManager.LoadScene("Rule");
+                break;
+            case "SettingButton":
+                break;
         }
     }
 }

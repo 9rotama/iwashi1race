@@ -1,42 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CrowControl : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float DestroyPosX;
+    [SerializeField] private float destroyPosX;
     
-    private PlayerControl playerControl;
-    private CPUplayerControl cpuPlayerControl;
-    
+    private PlayerControl _playerControl;
+    private CPUplayerControl _cpuPlayerControl;
 
-    void OnTriggerEnter2D(Collider2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" )
+        if (other.gameObject.CompareTag("Player") )
         {
-            playerControl = other.GetComponent<PlayerControl>();
-            playerControl.CrowEnter();
+            _playerControl = other.GetComponent<PlayerControl>();
+            _playerControl.CrowEnter();
             Destroy(this.gameObject);
         }
-        else if (other.gameObject.tag == "Enemy")
+        else if (other.gameObject.CompareTag("Enemy"))
         { 
-            cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            cpuPlayerControl.CrowEnter();
+            _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
+            _cpuPlayerControl.CrowEnter();
             Destroy(this.gameObject);
         }
     }
-    void Start()
+
+    private void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        this.transform.position = new Vector3(this.transform.position.x - moveSpeed, this.transform.position.y,
-            this.transform.position.z);
-        if (this.transform.position.x <= DestroyPosX)
+        var position = this.transform.position;
+        position = new Vector3(position.x - moveSpeed, position.y, position.z);
+        
+        transform.position = position;
+        if (this.transform.position.x <= destroyPosX)
             Destroy(this.gameObject);
     }
 }

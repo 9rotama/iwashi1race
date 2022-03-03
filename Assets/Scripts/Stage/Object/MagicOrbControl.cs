@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class MagicOrbControl : MonoBehaviour
 {
-    private PlayerControl playerControl;
-    private CPUplayerControl cpuPlayerControl;
-    private OrbSpawner orbSpawner;
+    private PlayerControl _playerControl;
+    private CPUplayerControl _cpuPlayerControl;
+    private OrbSpawner _orbSpawner;
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" )
+        if (other.gameObject.CompareTag("Player") )
         {
-            playerControl = other.GetComponent<PlayerControl>();
-            playerControl.MagicOrbEnter();
-            orbSpawner.OrbDestroyed();
+            _playerControl = other.GetComponent<PlayerControl>();
+            _playerControl.MagicOrbEnter(10);
+            _orbSpawner.OrbDestroyed();
             Destroy(this.gameObject);
         }
-        else if (other.gameObject.tag == "Enemy")
+        else if (other.gameObject.CompareTag("Enemy"))
         { 
-            cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            cpuPlayerControl.MagicOrbEnter();
-            orbSpawner.OrbDestroyed();
+            _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
+            _cpuPlayerControl.MagicOrbEnter(10);
+            _orbSpawner.OrbDestroyed();
             Destroy(this.gameObject);
         }
     }
@@ -29,7 +29,7 @@ public class MagicOrbControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        orbSpawner = transform.parent.GetComponent<OrbSpawner>();
+        _orbSpawner = transform.parent.GetComponent<OrbSpawner>();
     }
 
     // Update is called once per frame

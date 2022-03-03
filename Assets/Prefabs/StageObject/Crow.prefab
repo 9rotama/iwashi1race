@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  DestroyPosX: -270
+  destroyPosX: -270
 --- !u!70 &5154093311922193771
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
