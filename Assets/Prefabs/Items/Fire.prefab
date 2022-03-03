@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 9210210537631362534}
   - component: {fileID: 1715624219318459722}
   - component: {fileID: 3909947673629235970}
-  - component: {fileID: -6842805787217279165}
   - component: {fileID: 863927011466311261}
   m_Layer: 0
   m_Name: Fire
@@ -139,18 +138,6 @@ MonoBehaviour:
   creatorObj: {fileID: 0}
   fireSe: {fileID: 8300000, guid: 18cc4ba3a14144b0da99b075c43aa1ff, type: 3}
   damageSe: {fileID: 8300000, guid: 1d9afa98bf0e14a0daae646a157dabc3, type: 3}
---- !u!114 &-6842805787217279165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278507702049012106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be80cdc5083754a44a0ce17b7f746be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &863927011466311261
 AudioSource:
   m_ObjectHideFlags: 0

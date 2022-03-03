@@ -15,10 +15,7 @@ public class ItemControlScript : MonoBehaviour
 {
     [SerializeField] GameObject[] itemObjs;
     [SerializeField] GameObject rankObj;
-    [SerializeField] GameObject itemUI;
-    GameObject UI_Item;
-    GameObject UI;
-    GameObject itemPlate;
+    [SerializeField] GameObject randomItemUI;
 
     public bool isDefence;
 
@@ -41,18 +38,14 @@ public class ItemControlScript : MonoBehaviour
         randNum = Random.Range(5f,10f);
         rankObj = GameObject.Find("Rank");
 
-        UI = GameObject.Find("UI");
-        itemPlate = UI.transform.Find("ItemPlate").gameObject;
-
     }
 
     public void DeterminItem()
     {
         determinItem = (int)DecideItem();
         if(transform.parent.tag == "Player"){
-            UI_Item = (GameObject)Instantiate(itemUI, itemPlate.transform.position, Quaternion.identity);
-            UI_Item.transform.SetParent(UI.transform);
-            UI_Item.GetComponent<ItemRandomDisplay>().determinItem = (int)determinItem; 
+            randomItemUI.SetActive(true);
+            randomItemUI.GetComponent<ItemRandomDisplay>().determinItem = (int)determinItem; 
         }
      
     }
@@ -64,7 +57,7 @@ public class ItemControlScript : MonoBehaviour
             if(Input.GetMouseButtonDown(0) && transform.parent.tag == "Player"){
                 CreatePrefab((Items)determinItem);
                 determinItem = -1;
-                Destroy(UI_Item);
+                randomItemUI.SetActive(false);
             }
             if(transform.parent.tag == "Enemy" && time > randNum){
                 randNum = Random.Range(5f,10f);
@@ -74,24 +67,12 @@ public class ItemControlScript : MonoBehaviour
             }
         }
 
-        // time += Time.deltaTime;
-        // if(Input.GetMouseButtonDown(0) && transform.parent.tag == "Player"){
-        //     Items decidedItem = DecideItem(); 
-        //     CreatePrefab(decidedItem);
-        // }
-
-        // if(transform.parent.tag == "Enemy" && time > randNum){
-        //     randNum = Random.Range(5f,10f);
-        //     time = 0;
-        //     Items decidedItem = DecideItem(); 
-        //     CreatePrefab(decidedItem);
-        // }
     }
 
     Items DecideItem()
     {
         int[] probItem = new int[System.Enum.GetNames(typeof(Items)).Length];
-        Debug.Log(rankObj.GetComponent<RankSort>().GetRank(transform.parent.gameObject));
+        //Debug.Log(rankObj.GetComponent<RankSort>().GetRank(gameObject));
         switch(rankObj.GetComponent<RankSort>().GetRank(transform.parent.gameObject)){
             case 1:
                 probItem[(int)Items.Wind]    = 1;

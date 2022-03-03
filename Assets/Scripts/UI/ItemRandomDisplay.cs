@@ -16,7 +16,14 @@ public class ItemRandomDisplay : MonoBehaviour
     void Start()
     {
         image = GetComponent<Image>();
+        OnEnable();
+    }
+
+    void OnEnable()
+    {
         GetComponent<ItemRandomAudio>().PlayItemSound();
+        time = 0;
+        changeTime = 0;
     }
 
     void FixedUpdate()
