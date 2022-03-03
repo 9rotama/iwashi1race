@@ -72,7 +72,7 @@ public class ItemControlScript : MonoBehaviour
     Items DecideItem()
     {
         int[] probItem = new int[System.Enum.GetNames(typeof(Items)).Length];
-        //Debug.Log(rankObj.GetComponent<RankSort>().GetRank(gameObject));
+        Debug.Log(gameObject);
         switch(rankObj.GetComponent<RankSort>().GetRank(transform.parent.gameObject)){
             case 1:
                 probItem[(int)Items.Wind]    = 1;
