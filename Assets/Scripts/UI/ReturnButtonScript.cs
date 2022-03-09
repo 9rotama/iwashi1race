@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class ReturnButtonScript : MonoBehaviour
 {
-    [SerializeField] Sprite[] image;
+    [SerializeField] private Sprite[] image;
+
+    [SerializeField] private GameObject returnSe;
 
     public void OnClick()
     {
         GetComponent<Image>().sprite = image[2];
-
+        var sound = Instantiate(returnSe);
+        var endTime = sound.GetComponent<AudioSource>().clip.length;
+        Destroy(sound, endTime);
         switch (gameObject.name)
         {
             case "ReturnButton":
