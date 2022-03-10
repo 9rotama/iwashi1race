@@ -33,9 +33,6 @@ public class RankSort : MonoBehaviour
     void Update()
     {
         InsertionSort();
-        // for(int i=0; i<targets.Length; i++){
-        //     Debug.Log(targets[i].rank + " " + targets[i].obj);
-        // }
     }
 
     void InsertionSort()
@@ -60,15 +57,28 @@ public class RankSort : MonoBehaviour
 
     public int GetRank(GameObject obj)
     {
-        Debug.Log(obj);
+        //Debug.Log(obj);
         for(int i=0; i<targets.Length; i++){
-            //Debug.Log(targets[i].obj.gameObject);
             if(obj.gameObject == targets[i].obj.gameObject){
                 return targets[i].rank;
             }
         }
-        Debug.Log(obj.gameObject);
+        //Debug.Log(obj.gameObject);
         return 0;
     }
+
+    public GameObject GetGameObject(int rank)
+    {
+        return targets[rank-1].obj;
+    }
+
+    public GameObject GetOneRankUpObj(GameObject obj)
+    {
+        int rank = GetRank(obj);
+        int onceUpRank = rank-1;
+        if(onceUpRank == 0){ onceUpRank = 2;}
+        return GetGameObject(onceUpRank);
+    }
+
 }
 

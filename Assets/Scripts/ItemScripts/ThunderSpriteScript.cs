@@ -108,7 +108,7 @@ public class ThunderSpriteScript : MonoBehaviour
     {
         Rigidbody2D rb = targetObj.GetComponent<Rigidbody2D>();
         const float targetVelocity = 0;
-        const float power =  30;
+        const float power =  10;
         rb.AddForce(Vector3.right * ((targetVelocity - rb.velocity.x) * power), ForceMode2D.Force);
         rb.AddForce(Vector3.up * ((targetVelocity - rb.velocity.y) * power), ForceMode2D.Force);
     }

@@ -19,6 +19,7 @@ public class FireScript : MonoBehaviour
 
     [SerializeField] AudioClip fireSe;
     [SerializeField] AudioClip damageSe;
+    static GameObject rank;
 
 
     // Start is called before the first frame update
@@ -28,15 +29,19 @@ public class FireScript : MonoBehaviour
         itemControl = GameObject.Find("ItemController");
         itemScript = itemControl.GetComponent<ItemControlScript>();
         rb = transform.GetComponent<Rigidbody2D>();
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        shotForward = Vector3.Scale((mouseWorldPos - transform.parent.position), new Vector3(1, 1, 0)).normalized;
+        //shotForward = Vector3.Scale((mouseWorldPos - transform.parent.position), new Vector3(1, 1, 0)).normalized;
         creatorObj = transform.parent.gameObject;
         if(creatorObj.tag == "Player"){
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             shotForward = Vector3.Scale((mouseWorldPos - transform.parent.position), new Vector3(1, 1, 0)).normalized;
             audioSource.PlayOneShot(fireSe);
         }
         else{
-            shotForward = new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f), 0f).normalized;
+            if(rank == null) {
+                rank = GameObject.Find("Rank");
+            }
+            GameObject tar = rank.GetComponent<RankSort>().GetOneRankUpObj(creatorObj);
+            shotForward = Vector3.Scale((tar.transform.position - transform.parent.position), new Vector3(1, 1, 0)).normalized;
         }
         transform.parent = null;
 
