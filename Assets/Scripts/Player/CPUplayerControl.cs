@@ -10,7 +10,7 @@ public class CPUplayerControl : MonoBehaviour
 
     private bool _hitCrow = false;
     
-    public float moveSpeed;
+    private float _moveSpeed = 1000f;
     public float nextWaypointDistance;
 
     private Path _path;
@@ -51,7 +51,7 @@ public class CPUplayerControl : MonoBehaviour
 	//速度x成分,y成分(Vector2)を返す
 
 	public void WindEnter(float multiplier){
-		_rb2D.AddForce(_forwardVec * moveSpeed * multiplier); 
+		_rb2D.AddForce(_forwardVec * _moveSpeed * Time.deltaTime * 16 * multiplier); 
 	}
 	//追い風,向かい風に接触したとき風側から呼び出される
 
@@ -123,7 +123,7 @@ public class CPUplayerControl : MonoBehaviour
     void Update()
     {
 		/*-----------*/
-		if(_gameManagerCtrl.GetGameState() == 0) return;
+		if(_gameManagerCtrl.GetGameState() == 0 || transform.position.x > target.position.x + 10) return;
 		/*-----------*/
 		
 		if (_hitCrow)
@@ -154,9 +154,9 @@ public class CPUplayerControl : MonoBehaviour
         var direction = ((Vector2) _path.vectorPath[_currentWaypoint] - _rb2D.position + scatterVec * scatterFac).normalized;
         
         var orbNum = (float) _magicOrbNum;
-        var orbBoost = (orbNum / MaxMagicOrb) * moveSpeed / MaxRateOfBoostByMagicOrb;
+        var orbBoost = (orbNum / MaxMagicOrb) * _moveSpeed / MaxRateOfBoostByMagicOrb;
         
-        var force = direction * (moveSpeed + orbBoost);
+        var force = direction * (_moveSpeed * Time.deltaTime * 16 + orbBoost);
 		
         _rb2D.AddForce(force);
 

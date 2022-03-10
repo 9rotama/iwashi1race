@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class PlayerControl : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    private float _moveSpeed = 1000f;
     [SerializeField] private GameObject itemOrbSePrefab;
     [SerializeField] private GameObject magicOrbSePrefab;
 	
@@ -46,7 +46,7 @@ public class PlayerControl : MonoBehaviour
 	//速度x成分,y成分(Vector2)を返す
 
 	public void WindEnter(float multiplier){
-		_rb2D.AddForce(_forwardVec * moveSpeed * multiplier); 
+		_rb2D.AddForce(_forwardVec * _moveSpeed * Time.deltaTime * 16 * multiplier); 
 	}
 	//追い風,向かい風に接触したとき風側から呼び出される
 
@@ -149,29 +149,29 @@ public class PlayerControl : MonoBehaviour
         // 移動速度計算
 
         var orbNum = (float) _magicOrbNum;
-        var orbBoost = (orbNum / MaxMagicOrb) * moveSpeed / MaxRateOfBoostByMagicOrb;
+        var orbBoost = (orbNum / MaxMagicOrb) * _moveSpeed / MaxRateOfBoostByMagicOrb;
 
         if (Input.GetKey(KeyCode.D))
         {
-            _rb2D.AddForce(_forwardVec * (moveSpeed + orbBoost)); 
+            _rb2D.AddForce(_forwardVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //アクセル
         
         if (Input.GetKey(KeyCode.A))
         {
-            _rb2D.AddForce(-_forwardVec * (moveSpeed + orbBoost)); 
+            _rb2D.AddForce(-_forwardVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //ブレーキ
         
         if (Input.GetKey(KeyCode.W))
         {
-            _rb2D.AddForce(_upVec * (moveSpeed + orbBoost)); 
+            _rb2D.AddForce(_upVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //上向き
         
         if (Input.GetKey(KeyCode.S))
         {
-            _rb2D.AddForce(-_upVec * (moveSpeed + orbBoost)); 
+            _rb2D.AddForce(-_upVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //下向き
         

@@ -1450,7 +1450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: nextWaypointDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802363, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_Radius
@@ -6401,7 +6401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: nextWaypointDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802363, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_Radius
@@ -6962,7 +6962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: nextWaypointDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802363, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_Radius
@@ -7886,7 +7886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: nextWaypointDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802363, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_Radius
@@ -23608,7 +23608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: nextWaypointDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802363, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_Radius
@@ -25714,7 +25714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: nextWaypointDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802363, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_Radius
@@ -26086,6 +26086,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4589436510101421240, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589436510101421240, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
       propertyPath: m_ReferenceResolution.x
       value: 480
       objectReference: {fileID: 0}
@@ -26184,6 +26188,30 @@ PrefabInstance:
     - target: {fileID: 4589436510101421245, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
       propertyPath: m_Name
       value: NightBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589436511148872736, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589436511148872736, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589436511148872736, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589436511148872736, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589436511148872736, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589436511148872736, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4589436511148872739, guid: eadbc8f52bc894a80959461a07df6bf8, type: 3}
       propertyPath: m_Name
@@ -26789,7 +26817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: nextWaypointDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802363, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: m_Radius
@@ -27173,10 +27201,10 @@ RectTransform:
   m_Father: {fileID: 1943514055}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 50, y: 0}
-  m_SizeDelta: {x: 270, y: 270}
+  m_SizeDelta: {x: -210, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2035929550
 MonoBehaviour:
@@ -28318,6 +28346,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4148986014574287325, guid: e717946af6f7c467e883b97d7320fb75, type: 3}
+      propertyPath: randomItemUI
+      value: 
+      objectReference: {fileID: 25652015}
+    - target: {fileID: 8313561030629518619, guid: e717946af6f7c467e883b97d7320fb75, type: 3}
       propertyPath: randomItemUI
       value: 
       objectReference: {fileID: 25652015}

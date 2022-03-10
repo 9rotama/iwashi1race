@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage.unity
     guid: 638f93271f8f84f91adae4b227b9f8ff
+  - enabled: 1
+    path: Assets/Scenes/Night.unity
+    guid: 4ef5b585b58244115bab77f11b37c203
   m_configObjects: {}

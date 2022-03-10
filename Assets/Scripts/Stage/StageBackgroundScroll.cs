@@ -25,7 +25,7 @@ public class StageBackgroundScroll : MonoBehaviour
 
     void Update()
     {
-        offset = new Vector2(offset.x + playerControl.GetVelocityVec2().x * (xSpeed * 0.000005f), offset.y + playerControl.GetVelocityVec2().y * (ySpeed * 0.000001f));
+        offset = new Vector2(offset.x + playerControl.GetVelocityVec2().x * (xSpeed * Time.deltaTime * 16 * 0.00001f), offset.y + playerControl.GetVelocityVec2().y * (ySpeed * Time.deltaTime * 16 * 0.000001f));
 
         material.mainTextureOffset = offset;
     }
