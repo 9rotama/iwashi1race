@@ -17,13 +17,13 @@ public class CrowControl : MonoBehaviour
         if (other.gameObject.CompareTag("Player") )
         {
             _playerControl = other.GetComponent<PlayerControl>();
-            _playerControl.CrowEnter();
+            _playerControl.CrowEnter(-2f);
             Destroy(this.gameObject);
         }
         else if (other.gameObject.CompareTag("Enemy"))
         { 
             _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            _cpuPlayerControl.CrowEnter();
+            _cpuPlayerControl.CrowEnter(-2f);
             Destroy(this.gameObject);
         }
     }

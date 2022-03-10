@@ -8,6 +8,8 @@ public class CPUplayerControl : MonoBehaviour
 {
     public Transform target;
 
+    private bool _hitCrow = false;
+    
     public float moveSpeed;
     public float nextWaypointDistance;
 
@@ -28,7 +30,7 @@ public class CPUplayerControl : MonoBehaviour
     private Vector2 _velocityVec2;
     private float _velocity = 0f;
     
-    private const float MaxRateOfBoostByMagicOrb = 10f;
+    private const float MaxRateOfBoostByMagicOrb = 20f;
     private const int MaxMagicOrb = 50;
 
 	/*-----------*/
@@ -75,14 +77,23 @@ public class CPUplayerControl : MonoBehaviour
 	}
 	*/
 
-	public void CrowEnter(){
+	public void CrowEnter(float multiplier){
+		StartCoroutine(nameof(CrowBump));
+		
 		_magicOrbNum -= 10;
 		if(_magicOrbNum < 0) _magicOrbNum = 0;
 	}
-    
+
+	private IEnumerator CrowBump()
+	{
+		_hitCrow = true;
+		yield return new WaitForSeconds(1f);
+		_hitCrow = false;
+	}
 
 
-    void Start()
+
+	void Start()
     {
         _seeker = GetComponent<Seeker>();
         _rb2D = GetComponent<Rigidbody2D>();
@@ -114,6 +125,12 @@ public class CPUplayerControl : MonoBehaviour
 		/*-----------*/
 		if(_gameManagerCtrl.GetGameState() == 0) return;
 		/*-----------*/
+		
+		if (_hitCrow)
+		{
+			_rb2D.velocity /= 5;
+			return;
+		}
 
 		_velocityVec2 = (transform.position - _prevPosition) / Time.deltaTime;
         _velocity = (float)Math.Sqrt(Math.Pow(_velocityVec2.x,2)+Math.Pow(_velocityVec2.y,2));

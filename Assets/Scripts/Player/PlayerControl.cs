@@ -12,6 +12,8 @@ public class PlayerControl : MonoBehaviour
 	
 	private GameObject _goal; 
 	private bool _isInGoal;
+
+	private bool _hitCrow = false;
     
     private Rigidbody2D _rb2D;
 
@@ -21,7 +23,7 @@ public class PlayerControl : MonoBehaviour
     private Vector2 _velocityVec2;
     private float _velocity = 0f;
 
-    private const float MaxRateOfBoostByMagicOrb = 10f;
+    private const float MaxRateOfBoostByMagicOrb = 20f;
     private const int MaxMagicOrb = 50;
     
 	private AudioSource _audioSource;
@@ -83,13 +85,32 @@ public class PlayerControl : MonoBehaviour
 		Destroy(sound, endTime);	//音のプレハブを作成して再生後削除する
 	}
 	*/
+	
+	
+	
+	
 
-	public void CrowEnter(){
+	public void CrowEnter(float multiplier)
+	{
+		StartCoroutine(nameof(CrowBump));
+		
 		_magicOrbNum -= 10;
 		if(_magicOrbNum < 0) _magicOrbNum = 0;
 		SetMagicOrbNum();
 		_audioSource.Play();
 	}
+
+	private IEnumerator CrowBump()
+	{
+		_hitCrow = true;
+		yield return new WaitForSeconds(1f);
+		_hitCrow = false;
+	}
+	
+	
+	
+	
+	
 	
 	private void Start()
     {
@@ -116,6 +137,11 @@ public class PlayerControl : MonoBehaviour
 		/*-----------*/
 		if(_gameManagerCtrl.GetGameState() == 0) return;
 		/*-----------*/
+		if (_hitCrow)
+		{
+			_rb2D.velocity /= 5;
+			return;
+		}
 		
 		_velocityVec2 = (transform.position - _prevPosition) / Time.deltaTime;
         _velocity = (float)Math.Sqrt(Math.Pow(_velocityVec2.x,2)+Math.Pow(_velocityVec2.y,2));
