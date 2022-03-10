@@ -20741,6 +20741,10 @@ PrefabInstance:
       propertyPath: randomItemUI
       value: 
       objectReference: {fileID: 25652015}
+    - target: {fileID: 8313561030629518619, guid: e717946af6f7c467e883b97d7320fb75, type: 3}
+      propertyPath: randomItemUI
+      value: 
+      objectReference: {fileID: 25652015}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e717946af6f7c467e883b97d7320fb75, type: 3}
 --- !u!1001 &4589436510184454822

@@ -9,8 +9,7 @@ public class DarkScript : MonoBehaviour
     [SerializeField] GameObject darkImage;
     GameObject[] targets;
     GameObject parentObj;
-    GameObject rankObj;
-
+    static GameObject rankObj;
 
     float[] sqrtRank;
 
@@ -32,7 +31,7 @@ public class DarkScript : MonoBehaviour
             }
         }
 
-        rankObj = GameObject.Find("Rank");
+        if(rankObj == null) {rankObj = GameObject.Find("Rank");}
         sqrtRank = new float[targets.Length];
         for(int i=0; i<targets.Length; i++){
             sqrtRank[i] = rankObj.GetComponent<RankSort>().GetRank(targets[i]);
@@ -50,8 +49,8 @@ public class DarkScript : MonoBehaviour
             if(targets[i] != parentObj){
                 if(time < destroyTime/sqrtRank[i]){
                     Rigidbody2D rb = targets[i].GetComponent<Rigidbody2D>();
-                    rb.AddForce(new Vector2(UnityEngine.Random.Range(-110,100) , 
-                                UnityEngine.Random.Range(-200,200)));
+                    rb.AddForce(new Vector2(UnityEngine.Random.Range(-400,100) , 
+                                UnityEngine.Random.Range(-400,400)));
                 }
             }
         }
