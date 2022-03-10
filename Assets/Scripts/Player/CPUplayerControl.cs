@@ -8,7 +8,9 @@ public class CPUplayerControl : MonoBehaviour
 {
     public Transform target;
 
-    public float moveSpeed;
+    private bool _hitCrow = false;
+    
+    private float _moveSpeed = 1000f;
     public float nextWaypointDistance;
 
     private Path _path;
@@ -28,7 +30,7 @@ public class CPUplayerControl : MonoBehaviour
     private Vector2 _velocityVec2;
     private float _velocity = 0f;
     
-    private const float MaxRateOfBoostByMagicOrb = 10f;
+    private const float MaxRateOfBoostByMagicOrb = 20f;
     private const int MaxMagicOrb = 50;
 
 	/*-----------*/
@@ -49,7 +51,7 @@ public class CPUplayerControl : MonoBehaviour
 	//速度x成分,y成分(Vector2)を返す
 
 	public void WindEnter(float multiplier){
-		_rb2D.AddForce(_forwardVec * moveSpeed * multiplier); 
+		_rb2D.AddForce(_forwardVec * _moveSpeed * Time.deltaTime * 16 * multiplier); 
 	}
 	//追い風,向かい風に接触したとき風側から呼び出される
 
@@ -75,14 +77,23 @@ public class CPUplayerControl : MonoBehaviour
 	}
 	*/
 
-	public void CrowEnter(){
+	public void CrowEnter(float multiplier){
+		StartCoroutine(nameof(CrowBump));
+		
 		_magicOrbNum -= 10;
 		if(_magicOrbNum < 0) _magicOrbNum = 0;
 	}
-    
+
+	private IEnumerator CrowBump()
+	{
+		_hitCrow = true;
+		yield return new WaitForSeconds(1f);
+		_hitCrow = false;
+	}
 
 
-    void Start()
+
+	void Start()
     {
         _seeker = GetComponent<Seeker>();
         _rb2D = GetComponent<Rigidbody2D>();
@@ -112,8 +123,14 @@ public class CPUplayerControl : MonoBehaviour
     void Update()
     {
 		/*-----------*/
-		if(_gameManagerCtrl.GetGameState() == 0) return;
+		if(_gameManagerCtrl.GetGameState() == 0 || transform.position.x > target.position.x + 10) return;
 		/*-----------*/
+		
+		if (_hitCrow)
+		{
+			_rb2D.velocity /= 5;
+			return;
+		}
 
 		_velocityVec2 = (transform.position - _prevPosition) / Time.deltaTime;
         _velocity = (float)Math.Sqrt(Math.Pow(_velocityVec2.x,2)+Math.Pow(_velocityVec2.y,2));
@@ -137,9 +154,9 @@ public class CPUplayerControl : MonoBehaviour
         var direction = ((Vector2) _path.vectorPath[_currentWaypoint] - _rb2D.position + scatterVec * scatterFac).normalized;
         
         var orbNum = (float) _magicOrbNum;
-        var orbBoost = (orbNum / MaxMagicOrb) * moveSpeed / MaxRateOfBoostByMagicOrb;
+        var orbBoost = (orbNum / MaxMagicOrb) * _moveSpeed / MaxRateOfBoostByMagicOrb;
         
-        var force = direction * (moveSpeed + orbBoost);
+        var force = direction * (_moveSpeed * Time.deltaTime * 16 + orbBoost);
 		
         _rb2D.AddForce(force);
 

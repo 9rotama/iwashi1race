@@ -6,12 +6,14 @@ using UnityEngine.Serialization;
 
 public class PlayerControl : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    private float _moveSpeed = 1000f;
     [SerializeField] private GameObject itemOrbSePrefab;
     [SerializeField] private GameObject magicOrbSePrefab;
 	
 	private GameObject _goal; 
 	private bool _isInGoal;
+
+	private bool _hitCrow = false;
     
     private Rigidbody2D _rb2D;
 
@@ -21,7 +23,7 @@ public class PlayerControl : MonoBehaviour
     private Vector2 _velocityVec2;
     private float _velocity = 0f;
 
-    private const float MaxRateOfBoostByMagicOrb = 10f;
+    private const float MaxRateOfBoostByMagicOrb = 20f;
     private const int MaxMagicOrb = 50;
     
 	private AudioSource _audioSource;
@@ -44,7 +46,7 @@ public class PlayerControl : MonoBehaviour
 	//速度x成分,y成分(Vector2)を返す
 
 	public void WindEnter(float multiplier){
-		_rb2D.AddForce(_forwardVec * moveSpeed * multiplier); 
+		_rb2D.AddForce(_forwardVec * _moveSpeed * Time.deltaTime * 16 * multiplier); 
 	}
 	//追い風,向かい風に接触したとき風側から呼び出される
 
@@ -83,13 +85,32 @@ public class PlayerControl : MonoBehaviour
 		Destroy(sound, endTime);	//音のプレハブを作成して再生後削除する
 	}
 	*/
+	
+	
+	
+	
 
-	public void CrowEnter(){
+	public void CrowEnter(float multiplier)
+	{
+		StartCoroutine(nameof(CrowBump));
+		
 		_magicOrbNum -= 10;
 		if(_magicOrbNum < 0) _magicOrbNum = 0;
 		SetMagicOrbNum();
 		_audioSource.Play();
 	}
+
+	private IEnumerator CrowBump()
+	{
+		_hitCrow = true;
+		yield return new WaitForSeconds(1f);
+		_hitCrow = false;
+	}
+	
+	
+	
+	
+	
 	
 	private void Start()
     {
@@ -116,6 +137,11 @@ public class PlayerControl : MonoBehaviour
 		/*-----------*/
 		if(_gameManagerCtrl.GetGameState() == 0) return;
 		/*-----------*/
+		if (_hitCrow)
+		{
+			_rb2D.velocity /= 5;
+			return;
+		}
 		
 		_velocityVec2 = (transform.position - _prevPosition) / Time.deltaTime;
         _velocity = (float)Math.Sqrt(Math.Pow(_velocityVec2.x,2)+Math.Pow(_velocityVec2.y,2));
@@ -123,29 +149,29 @@ public class PlayerControl : MonoBehaviour
         // 移動速度計算
 
         var orbNum = (float) _magicOrbNum;
-        var orbBoost = (orbNum / MaxMagicOrb) * moveSpeed / MaxRateOfBoostByMagicOrb;
+        var orbBoost = (orbNum / MaxMagicOrb) * _moveSpeed / MaxRateOfBoostByMagicOrb;
 
         if (Input.GetKey(KeyCode.D))
         {
-            _rb2D.AddForce(_forwardVec * (moveSpeed + orbBoost)); 
+            _rb2D.AddForce(_forwardVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //アクセル
         
         if (Input.GetKey(KeyCode.A))
         {
-            _rb2D.AddForce(-_forwardVec * (moveSpeed + orbBoost)); 
+            _rb2D.AddForce(-_forwardVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //ブレーキ
         
         if (Input.GetKey(KeyCode.W))
         {
-            _rb2D.AddForce(_upVec * (moveSpeed + orbBoost)); 
+            _rb2D.AddForce(_upVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //上向き
         
         if (Input.GetKey(KeyCode.S))
         {
-            _rb2D.AddForce(-_upVec * (moveSpeed + orbBoost)); 
+            _rb2D.AddForce(-_upVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //下向き
         

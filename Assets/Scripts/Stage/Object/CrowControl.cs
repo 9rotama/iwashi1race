@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class CrowControl : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    private float moveSpeed = 100f;
     [SerializeField] private float destroyPosX;
     
     private PlayerControl _playerControl;
@@ -17,13 +17,13 @@ public class CrowControl : MonoBehaviour
         if (other.gameObject.CompareTag("Player") )
         {
             _playerControl = other.GetComponent<PlayerControl>();
-            _playerControl.CrowEnter();
+            _playerControl.CrowEnter(-2f);
             Destroy(this.gameObject);
         }
         else if (other.gameObject.CompareTag("Enemy"))
         { 
             _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            _cpuPlayerControl.CrowEnter();
+            _cpuPlayerControl.CrowEnter(-2f);
             Destroy(this.gameObject);
         }
     }
@@ -37,7 +37,7 @@ public class CrowControl : MonoBehaviour
     private void Update()
     {
         var position = this.transform.position;
-        position = new Vector3(position.x - moveSpeed, position.y, position.z);
+        position = new Vector3(position.x - moveSpeed * Time.deltaTime, position.y, position.z);
         
         transform.position = position;
         if (this.transform.position.x <= destroyPosX)

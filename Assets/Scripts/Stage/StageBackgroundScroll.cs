@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class StageBackgroundScroll : MonoBehaviour
 {
-    [SerializeField] private float speed = 1.0f;
+    [SerializeField] private float xSpeed = 1.0f;
+    [SerializeField] private float ySpeed = 1.0f;
     
     private GameObject player;
     private PlayerControl playerControl;
@@ -24,7 +25,7 @@ public class StageBackgroundScroll : MonoBehaviour
 
     void Update()
     {
-        offset = new Vector2(offset.x + playerControl.GetVelocityVec2().x * (speed * 0.000005f), offset.y + playerControl.GetVelocityVec2().y * (speed * 0.000001f));
+        offset = new Vector2(offset.x + playerControl.GetVelocityVec2().x * (xSpeed * Time.deltaTime * 16 * 0.00001f), offset.y + playerControl.GetVelocityVec2().y * (ySpeed * Time.deltaTime * 16 * 0.000001f));
 
         material.mainTextureOffset = offset;
     }

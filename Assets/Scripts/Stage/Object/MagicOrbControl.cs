@@ -13,14 +13,14 @@ public class MagicOrbControl : MonoBehaviour
         if (other.gameObject.CompareTag("Player") )
         {
             _playerControl = other.GetComponent<PlayerControl>();
-            _playerControl.MagicOrbEnter(10);
+            _playerControl.MagicOrbEnter(5);
             _orbSpawner.OrbDestroyed();
             Destroy(this.gameObject);
         }
         else if (other.gameObject.CompareTag("Enemy"))
         { 
             _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            _cpuPlayerControl.MagicOrbEnter(10);
+            _cpuPlayerControl.MagicOrbEnter(5);
             _orbSpawner.OrbDestroyed();
             Destroy(this.gameObject);
         }

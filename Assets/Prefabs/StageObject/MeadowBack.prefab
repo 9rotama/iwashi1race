@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 4589436510101421240}
   - component: {fileID: 4589436510101421243}
   m_Layer: 5
-  m_Name: BackgroundCanvas
+  m_Name: MeadowBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

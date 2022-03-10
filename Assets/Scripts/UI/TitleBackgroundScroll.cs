@@ -16,7 +16,7 @@ public class TitleBackgroundScroll : MonoBehaviour
 
     void Update()
     {
-        offset = new Vector2(offset.x + speed * 0.005f, 0);
+        offset = new Vector2(offset.x + speed * Time.deltaTime * 0.5f, 0);
 
         material.mainTextureOffset = offset;
     }
