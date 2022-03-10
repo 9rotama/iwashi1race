@@ -9,6 +9,7 @@ enum Items {
     Fire,
     Bubble,
     Orb,
+    Freeze,
 };
 
 public class ItemControlScript : MonoBehaviour
@@ -75,12 +76,13 @@ public class ItemControlScript : MonoBehaviour
         Debug.Log(gameObject);
         switch(rankObj.GetComponent<RankSort>().GetRank(transform.parent.gameObject)){
             case 1:
-                probItem[(int)Items.Wind]    = 1;
+                probItem[(int)Items.Wind]    = 0;
                 probItem[(int)Items.Dark]    = 0;
                 probItem[(int)Items.Thunder] = 0;
                 probItem[(int)Items.Fire]    = 2;
-                probItem[(int)Items.Bubble]  = 2;
+                probItem[(int)Items.Bubble]  = 1;
                 probItem[(int)Items.Orb]     = 6;
+                probItem[(int)Items.Freeze]  = 2;
                 break;
             case 2:
                 probItem[(int)Items.Wind]    = 1;
@@ -89,6 +91,7 @@ public class ItemControlScript : MonoBehaviour
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 2;
                 probItem[(int)Items.Orb]     = 5;
+                probItem[(int)Items.Freeze]  = 2;
                 break;
             case 3:
                 probItem[(int)Items.Wind]    = 1;
@@ -97,6 +100,7 @@ public class ItemControlScript : MonoBehaviour
                 probItem[(int)Items.Fire]    = 3;
                 probItem[(int)Items.Bubble]  = 2;
                 probItem[(int)Items.Orb]     = 4;
+                probItem[(int)Items.Freeze]  = 2;
                 break;
             case 4:
                 probItem[(int)Items.Wind]    = 2;
@@ -105,6 +109,7 @@ public class ItemControlScript : MonoBehaviour
                 probItem[(int)Items.Fire]    = 3;
                 probItem[(int)Items.Bubble]  = 2;
                 probItem[(int)Items.Orb]     = 3;
+                probItem[(int)Items.Freeze]  = 2;
                 break;
             case 5:
                 probItem[(int)Items.Wind]    = 2;
@@ -113,6 +118,7 @@ public class ItemControlScript : MonoBehaviour
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 2;
                 probItem[(int)Items.Orb]     = 2;
+                probItem[(int)Items.Freeze]  = 2;
                 break;
             case 6:
                 probItem[(int)Items.Wind]    = 3;
@@ -121,6 +127,7 @@ public class ItemControlScript : MonoBehaviour
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 2;
                 probItem[(int)Items.Orb]     = 1;
+                probItem[(int)Items.Freeze]  = 2;
                 break;
             case 7:
                 probItem[(int)Items.Wind]    = 5;
@@ -129,6 +136,7 @@ public class ItemControlScript : MonoBehaviour
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 1;
                 probItem[(int)Items.Orb]     = 0;
+                probItem[(int)Items.Freeze]  = 2;
                 break;    
             default:
                 probItem[(int)Items.Wind]    = 5;
@@ -137,6 +145,7 @@ public class ItemControlScript : MonoBehaviour
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 1;
                 probItem[(int)Items.Orb]     = 0;
+                probItem[(int)Items.Freeze]  = 2;
                 break;                                                                                           
         }
 
@@ -145,6 +154,10 @@ public class ItemControlScript : MonoBehaviour
 
         int randValue = Random.Range(0,sum);
         int tmp=0;
+
+        // if(transform.parent.tag == "Player") return Items.Dark;
+        // else return Items.Orb;
+
 
         for(int i=0; i<probItem.Length; i++){
             tmp += probItem[i];
