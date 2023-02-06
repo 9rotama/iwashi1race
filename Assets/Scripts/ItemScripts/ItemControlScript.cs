@@ -99,17 +99,17 @@ public class ItemControlScript : MonoBehaviour
                 probItem[(int)Items.Thunder] = 0;
                 probItem[(int)Items.Fire]    = 3;
                 probItem[(int)Items.Bubble]  = 2;
-                probItem[(int)Items.Orb]     = 4;
-                probItem[(int)Items.Freeze]  = 2;
+                probItem[(int)Items.Orb]     = 3;
+                probItem[(int)Items.Freeze]  = 3;
                 break;
             case 4:
                 probItem[(int)Items.Wind]    = 2;
-                probItem[(int)Items.Dark]    = 0;
-                probItem[(int)Items.Thunder] = 0;
+                probItem[(int)Items.Dark]    = 1;
+                probItem[(int)Items.Thunder] = 1;
                 probItem[(int)Items.Fire]    = 3;
                 probItem[(int)Items.Bubble]  = 2;
-                probItem[(int)Items.Orb]     = 3;
-                probItem[(int)Items.Freeze]  = 2;
+                probItem[(int)Items.Orb]     = 2;
+                probItem[(int)Items.Freeze]  = 3;
                 break;
             case 5:
                 probItem[(int)Items.Wind]    = 2;
@@ -117,33 +117,33 @@ public class ItemControlScript : MonoBehaviour
                 probItem[(int)Items.Thunder] = 1;
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 2;
-                probItem[(int)Items.Orb]     = 2;
-                probItem[(int)Items.Freeze]  = 2;
+                probItem[(int)Items.Orb]     = 1;
+                probItem[(int)Items.Freeze]  = 3;
                 break;
             case 6:
                 probItem[(int)Items.Wind]    = 3;
                 probItem[(int)Items.Dark]    = 2;
-                probItem[(int)Items.Thunder] = 1;
+                probItem[(int)Items.Thunder] = 2;
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 2;
                 probItem[(int)Items.Orb]     = 1;
-                probItem[(int)Items.Freeze]  = 2;
+                probItem[(int)Items.Freeze]  = 3;
                 break;
             case 7:
                 probItem[(int)Items.Wind]    = 5;
-                probItem[(int)Items.Dark]    = 1;
-                probItem[(int)Items.Thunder] = 1;
+                probItem[(int)Items.Dark]    = 2;
+                probItem[(int)Items.Thunder] = 2;
                 probItem[(int)Items.Fire]    = 2;
                 probItem[(int)Items.Bubble]  = 1;
                 probItem[(int)Items.Orb]     = 0;
-                probItem[(int)Items.Freeze]  = 2;
+                probItem[(int)Items.Freeze]  = 3;
                 break;    
             default:
-                probItem[(int)Items.Wind]    = 5;
-                probItem[(int)Items.Dark]    = 1;
-                probItem[(int)Items.Thunder] = 1;
+                probItem[(int)Items.Wind]    = 4;
+                probItem[(int)Items.Dark]    = 2;
+                probItem[(int)Items.Thunder] = 3;
                 probItem[(int)Items.Fire]    = 2;
-                probItem[(int)Items.Bubble]  = 1;
+                probItem[(int)Items.Bubble]  = 0;
                 probItem[(int)Items.Orb]     = 0;
                 probItem[(int)Items.Freeze]  = 2;
                 break;                                                                                           
