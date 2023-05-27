@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// レース中の順位を計測、管理するクラス
+/// </summary>
 public class RankManager : MonoBehaviour
 {
 

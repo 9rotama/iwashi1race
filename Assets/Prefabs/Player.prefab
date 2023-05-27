@@ -468,7 +468,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451607084beec4d53a9498c2b939af96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 500
   itemOrbSePrefab: {fileID: 482917955309039379, guid: 2662230eaad3b4ec392fef1a3e439252, type: 3}
   magicOrbSePrefab: {fileID: 2562034221193356283, guid: 5434597eba19442c48a839e493eb76e9, type: 3}
 --- !u!82 &4148986014203615286
@@ -721,7 +720,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5530516802472293634, guid: 8fd2f89d6b20c49ebb056ad5592ddafd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8fd2f89d6b20c49ebb056ad5592ddafd, type: 3}
 --- !u!4 &8313561030629518820 stripped
 Transform:
