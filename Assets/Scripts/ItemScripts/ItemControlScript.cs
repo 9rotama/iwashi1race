@@ -2,15 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum Items {
-    Wind,
-    Dark,
-    Thunder,
-    Fire,
-    Bubble,
-    Orb,
-    Freeze,
-};
+
 
 public class ItemControlScript : MonoBehaviour
 {
