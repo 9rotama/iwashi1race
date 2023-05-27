@@ -28,6 +28,7 @@ public class SkinSetInvoker : MonoBehaviour
                 break;
             case "StageSelect":
                 break;
+            case "Night":
             case "Meadow":
                 _skinValueHolder = GameObject.FindGameObjectWithTag("SkinValueHolder");
                 _playerSkinValue = _skinValueHolder.GetComponent<PlayerSkinValue>();

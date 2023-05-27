@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerSkinValue : MonoBehaviour
 {
     public float hairHue, clothesHue, shoesHue;
     public int hairLong;
+
+    private GameObject child;
     
 
     public void SetValueFromSlider()
@@ -58,6 +61,7 @@ public class PlayerSkinValue : MonoBehaviour
     }
 
     private void Awake() {
+        child = transform.GetChild(0).gameObject;
         var numSkinValues = GameObject.FindGameObjectsWithTag("SkinValueHolder").Length;
         if (numSkinValues > 1)
         {
@@ -67,6 +71,18 @@ public class PlayerSkinValue : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+
+        // if (!created)
+        // {
+        //     created = true;
+        //     DontDestroyOnLoad(this.gameObject);
+        //     DontDestroyOnLoad(IF_name.gameObject.transform.parent.gameObject);
+        // }
+        // else
+        // {
+        //     Destroy(this.gameObject);
+        //     Destroy(IF_name.gameObject.transform.parent.gameObject);
+        // }
     }
     
     // Start is called before the first frame update
@@ -78,6 +94,10 @@ public class PlayerSkinValue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(SceneManager.GetActiveScene().name == "Skin"){ 
+            child.SetActive(true);
+        }else{ 
+            child.SetActive(false);
+        }
     }
 }
