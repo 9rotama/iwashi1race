@@ -31,20 +31,20 @@ public class ItemCreator : MonoBehaviour
     /// <summary>
     /// レーサーの座標にアイテムを生成する
     /// </summary>
-    /// <param name="racer">レーサークラスを持つGameObject</param>
-    public void CreateItemGameObject(GameObject racer) {
-        Items havingItem = racer.GetComponent<Racer>().havingItem;
+    /// <param name="position">アイテム生成位置</param>
+    /// <param name="racer">レーサー</param>
+    public void CreateItemGameObject(Vector3 position, Racer racer) { 
 
         GameObject itemObj = (GameObject)Instantiate(
-                itemObjects[(int)havingItem], 
-                racer.transform.position, 
+                itemObjects[(int)racer.havingItem], 
+                position,
                 Quaternion.identity
             );
         
         // itemObjを作った生みの親(レーサー)のIDを保持する
-        itemObj.GetComponent<CollisionObject>().birtherId = racer.GetComponent<Racer>().id;
+        itemObj.GetComponent<CollisionObject>().birtherId = racer.id;
 
-        if(havingItem == Items.Bubble) {
+        if(racer.havingItem == Items.Bubble) {
             itemObj.transform.SetParent(racer.transform);
         } 
         else {

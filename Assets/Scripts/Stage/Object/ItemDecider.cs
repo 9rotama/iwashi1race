@@ -13,8 +13,8 @@ public class ItemDecider : MonoBehaviour
     /// <summary>
     /// レーサーのアイテムを決める関数
     /// </summary>
-    /// <param name="racer">Racerクラスを持つGameObject</param>
-    void DecideItem(GameObject racer)
+    /// <param name="racer">レーサー</param>
+    void DecideItem(Racer racer)
     {
         //!他のクラスアイテムオーブかなに移行するかどうか、上の変数も
         // if(transform.parent.tag == "Player"){
@@ -26,7 +26,7 @@ public class ItemDecider : MonoBehaviour
         int[] ItemProbabilities = new int[System.Enum.GetNames(typeof(Items)).Length-1];
         
         // 順位によってどのItemが使えるかの確率が変わる
-        switch(racer.GetComponent<Racer>().GetRank()){
+        switch(racer.GetRank()){
             case 1:
                 ItemProbabilities[(int)Items.Wind]    = 0;
                 ItemProbabilities[(int)Items.Dark]    = 0;
@@ -109,11 +109,11 @@ public class ItemDecider : MonoBehaviour
         for(int i=0, probability=0; i<ItemProbabilities.Length-1; i++){
             probability += ItemProbabilities[i];
             if(randNumber < probability){
-                racer.GetComponent<Racer>().havingItem =  (Items)i;
+                racer.havingItem =  (Items)i;
                 return;
             }
         }
-        racer.GetComponent<Racer>().havingItem = 0;
+        racer.havingItem = 0;
 
     }
 }
