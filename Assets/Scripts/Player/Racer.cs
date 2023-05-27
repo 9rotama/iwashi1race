@@ -9,10 +9,14 @@ using UnityEngine;
 
 public class Racer : MonoBehaviour
 {
-    public int id;
+    /// <summary> 識別固有番号 </summary>
+    public int id { get;}
 
-    [SerializeField] private RankManager _rankManager;
-    [SerializeField] private ItemControlScript _itemControlScript;
+    /// <summary> 所持しているアイテム </summary>
+    public Items havingItem;
+
+    [SerializeField] private RankManager rankManager;
+    [SerializeField] private ItemCreator itemCreator;
 
     /// <summary>
     /// レーサーがアイテムを使用するための手続き
@@ -20,6 +24,7 @@ public class Racer : MonoBehaviour
     
     private void UseItem()
     {
+        itemCreator.CreateItemGameObject(gameObject);
     }
 
     
@@ -30,7 +35,7 @@ public class Racer : MonoBehaviour
 
     public int GetRank()
     {
-        return _rankManager.GetRank(id);
+        return rankManager.GetRank(id);
     }
 
 }
