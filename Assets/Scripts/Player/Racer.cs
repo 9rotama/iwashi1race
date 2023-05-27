@@ -24,7 +24,7 @@ public class Racer : MonoBehaviour
     
     private void UseItem()
     {
-        itemCreator.CreateItemGameObject(gameObject);
+        itemCreator.CreateItemGameObject(transform.position, this);
     }
 
     
