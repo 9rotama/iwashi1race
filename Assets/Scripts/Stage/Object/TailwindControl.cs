@@ -26,6 +26,6 @@ public class TailwindControl : CollisionStayObject
     public override void OnTriggerStayPlayer(GameObject player)
     {
         var cpuPlayerControl = player.GetComponent<CPUplayerControl>();
-        cpuPlayerControl.WindEnter(strength);
+        cpuPlayerControl.WindStay(strength);
     }
 }

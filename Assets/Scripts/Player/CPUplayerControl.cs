@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class CPUplayerControl : MonoBehaviour
+public class CPUplayerControl : Racer
 {
 	[SerializeField] private float moveSpeed = 1000f;
 	[SerializeField] private float nextWaypointDistance;
@@ -42,7 +42,7 @@ public class CPUplayerControl : MonoBehaviour
 	/// プレイヤーの速度を返す
 	/// </summary>
 	/// <returns>速度</returns>
-	public float GetVelocity()
+	public override float GetVelocity()
     {
         return _velocity; 
     }
@@ -51,7 +51,7 @@ public class CPUplayerControl : MonoBehaviour
 	/// プレイヤーの速度x成分,y成分(Vector2)を返す
 	/// </summary>
 	/// <returns>速度のVector2</returns>
-	public Vector2 GetVelocityVec2()
+	public override Vector2 GetVelocityVec2()
     {
         return _velocityVec2; 
     }
@@ -71,7 +71,7 @@ public class CPUplayerControl : MonoBehaviour
 	/// 風のコントローラ側から呼び出される
 	/// </summary>
 	/// <param name="multiplier">風の強さの係数</param>
-	public void WindEnter(float multiplier){
+	public override void WindStay(float multiplier){
 		_rb2D.AddForce(_forwardVec * Time.deltaTime * multiplier); 
 	}
 
@@ -82,7 +82,7 @@ public class CPUplayerControl : MonoBehaviour
 	/// </summary>
 	/// <param name="duration">スタン状態の長さ</param>
 	/// <param name="lostMagicOrbNum">没収するマジックオーブの数</param>
-	public void StopperEnter(float duration, int lostMagicOrbNum)
+	public override void StopperEnter(float duration, int lostMagicOrbNum)
 	{
 		StartCoroutine(StopperBump(duration));
 		
@@ -94,7 +94,7 @@ public class CPUplayerControl : MonoBehaviour
 	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
 	/// </summary>
 	/// <param name="duration">スタン状態の長さ</param>
-	private IEnumerator StopperBump(float duration)
+	protected override IEnumerator StopperBump(float duration)
 	{
 		_isStopped = true;
 		yield return new WaitForSeconds(duration);
@@ -108,7 +108,7 @@ public class CPUplayerControl : MonoBehaviour
 		_currentWaypoint = 0;
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
+	protected override void OnTriggerEnter2D(Collider2D other)
 	{
 		var cpuPlayerCollision = other.gameObject.GetComponent<ICPUPlayerCollisionEnterer>();
 		cpuPlayerCollision?.OnTriggerEnterCPUPlayer(gameObject);

@@ -42,7 +42,19 @@ public class ItemCreator : MonoBehaviour
             );
         
         // itemObjを作った生みの親(レーサー)のIDを保持する
-        itemObj.GetComponent<CollisionObject>().birtherId = racer.id;
+        itemObj.GetComponent<CollisionEnterObject>().birtherId = racer.id;
+
+        // レーサーの派生クラスによって初期化を変える
+        if(racer is CPUplayerControl){
+            itemObj.GetComponent<IItemInitializerOfCPUPlayer>().ItemInitializeOfCPUPlayer(racer.id, position, racer.gameObject);
+        }
+        else if(racer is PlayerControl){
+            itemObj.GetComponent<IItemInitializerOfPlayer>().ItemInitializeOfPlayer(racer.id, position, racer.gameObject);
+        }
+        else {
+            //何もしない
+        }
+
 
         if(racer.havingItem == Items.Bubble) {
             itemObj.transform.SetParent(racer.transform);

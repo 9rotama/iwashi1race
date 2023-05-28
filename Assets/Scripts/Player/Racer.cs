@@ -7,7 +7,7 @@ using UnityEngine;
 /// CPU,プレイヤー含めたレーサー（レース選手）を指すクラス
 /// </summary>
 
-public class Racer : MonoBehaviour
+public abstract class Racer : MonoBehaviour
 {
     /// <summary> 識別固有番号 </summary>
     public int id { get;}
@@ -37,5 +37,17 @@ public class Racer : MonoBehaviour
     {
         return rankManager.GetRank(id);
     }
+
+    public abstract float GetVelocity();
+
+    public abstract Vector2 GetVelocityVec2();
+
+    public abstract void WindStay(float multiplier);
+
+    public abstract void StopperEnter(float duration, int lostMagicOrbNum);
+
+    protected abstract IEnumerator StopperBump(float duration);
+
+    protected abstract void OnTriggerEnter2D(Collider2D other);
 
 }

@@ -5,16 +5,13 @@ using UnityEngine.UI;
 public class DarkAlpha : MonoBehaviour
 {
     float time;
-    Image render;
+    [SerializeField] Image render;
 
     float alphaTime;
     // Start is called before the first frame update
     void Start()
     {
-        render = gameObject.GetComponent<Image>();
-        Color proColor = render.color;
-        proColor.a = 0f;
-        render.color = proColor;
+        new Color(render.color.r, render.color.g, 0f);
     }
 
     // Update is called once per frame

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class StateFreezeScript : MonoBehaviour
+public class StateFreezeScript : CollisionStayObject 
 {
     Vector2 fixedSp;
     Rigidbody2D tarRb;
     int clickedCnt;
-    [SerializeField] Sprite[] sprites;
+    [SerializeField] private Sprite[] sprites;
+
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     //音声
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip crackSE;
-    [SerializeField] AudioClip brokenSE;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip crackSE;
+    [SerializeField] private AudioClip brokenSE;
 
     // Start is called before the first frame update
     void Start()
@@ -25,54 +28,49 @@ public class StateFreezeScript : MonoBehaviour
     void Update()
     {
         //タグで処理変化
-        if(transform.parent.tag == "Player"){
-            PlayerUpdate();
+        if(transform.parent.CompareTag("Player")){
+
+            //ボタン、クリックの回数加算
+            if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || 
+                Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            {
+                audioSource.PlayOneShot(crackSE);
+                clickedCnt++;
+            }
         }
-        else{
-            EnemyUpdate();
+        else if(transform.parent.CompareTag("Enemy")){
+            clickedCnt += Mathf.CeilToInt(Random.Range(-0.5f,1.0f));       
+        }
+        else {
+            // 何もしない
         }
 
-         //スプライト変更
-        if(GetComponent<SpriteRenderer>().sprite != sprites[sprites.Length-1]) {
-            GetComponent<SpriteRenderer>().sprite = sprites[clickedCnt/2%sprites.Length];
+
+
+        //スプライト変更、最後のスプライトになったとき破棄する
+        if(spriteRenderer.sprite != sprites.Last()) {
+
+            spriteRenderer.sprite = sprites[clickedCnt / 2 % sprites.Length];
         }
-        else{
-            if(transform.parent.tag == "Player") {
-                Vector3 cameraPos = Camera.main.gameObject.transform.position;
-                AudioSource.PlayClipAtPoint(brokenSE, cameraPos - Vector3.back*5f);
-            }
+        else {
+
+            Vector3 cameraPos = Camera.main.gameObject.transform.position;
+            AudioSource.PlayClipAtPoint(brokenSE, cameraPos - Vector3.back*5f);
             Destroy(this.gameObject);
         }
 
     }
-
-    void FixedUpdate()
+    public override void OnTriggerStayPlayer(GameObject cpuPlayer)
     {
-        //動きを制限
-        fixedSp *= 0.95f;
-        tarRb.AddForce(Vector2.one * ((fixedSp - tarRb.velocity) * 30), ForceMode2D.Force);
+        var racerRb = cpuPlayer.GetComponent<Rigidbody2D>();
+        racerRb.AddForce(Vector2.one * ((fixedSp - tarRb.velocity) * 30), ForceMode2D.Force);
+       
     }
 
-    //Playerの処理
-    void PlayerUpdate()
+    public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
     {
-        //ボタン、クリックの回数加算
-        if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || 
-            Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) ||
-            Input.GetMouseButtonDown(0)){
-            audioSource.PlayOneShot(crackSE);
-            clickedCnt++;
-        }
-    }
-
-    //Enemyの処理
-    float crackTime;
-    void EnemyUpdate()
-    {
-        crackTime += Time.deltaTime;
-        if(crackTime > 0.1f){
-            crackTime = Random.Range(-0.1f,0.1f);
-            clickedCnt++;
-        }
+        var racerRb = cpuPlayer.GetComponent<Rigidbody2D>();
+        racerRb.AddForce(Vector2.one * ((fixedSp - tarRb.velocity) * 30), ForceMode2D.Force);
+       
     }
 }

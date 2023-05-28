@@ -27,6 +27,6 @@ public class HeadwindControl : CollisionStayObject
     public override void OnTriggerStayPlayer(GameObject player)
     {
         var cpuPlayerControl = player.GetComponent<CPUplayerControl>();
-        cpuPlayerControl.WindEnter(Strength);
+        cpuPlayerControl.WindStay(Strength);
     }
 }

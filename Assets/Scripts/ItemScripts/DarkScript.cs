@@ -3,63 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class DarkScript : MonoBehaviour
+public class DarkScript : CollisionStayObject
 {
-    float time;
-    [SerializeField] GameObject darkImage;
-    GameObject[] targets;
-    GameObject parentObj;
-    static GameObject rankObj;
+    public int targetRank;
 
-    float[] sqrtRank;
+    public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
+    {
+        var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
+        cpuPlayerControl.WindStay(UnityEngine.Random.Range(-600,600) / targetRank);
+    }
+
+    public override void OnTriggerStayPlayer(GameObject player)
+    {
+        var playerControl = player.GetComponent<CPUplayerControl>();
+        playerControl.WindStay(UnityEngine.Random.Range(-600,600)/targetRank);
+    }
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        parentObj = transform.parent.gameObject;
-
-        targets = GameObject.FindGameObjectsWithTag("Enemy");
-        Array.Resize(ref targets, targets.Length + 1);
-        targets[targets.Length - 1] = GameObject.FindGameObjectWithTag("Player");
-
-        
-        for(int i=0; i<targets.Length; i++){
-            if(targets[i] != parentObj){
-                if(targets[i].tag == "Player"){
-                    transform.GetChild(0).gameObject.SetActive(true);
-                }
-            }
-        }
-
-        if(rankObj == null) {rankObj = GameObject.Find("Rank");}
-        sqrtRank = new float[targets.Length];
-        for(int i=0; i<targets.Length; i++){
-            sqrtRank[i] = rankObj.GetComponent<RankSort>().GetRank(targets[i]);
-            sqrtRank[i] = Mathf.Sqrt(sqrtRank[i]);
-        }
+        Destroy(gameObject, 5.0f);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        const float destroyTime = 5.0f;
-        time += Time.deltaTime;
 
-        for(int i=0; i<targets.Length; i++){
-            if(targets[i] != parentObj){
-                if(time < destroyTime/sqrtRank[i]){
-                    Rigidbody2D rb = targets[i].GetComponent<Rigidbody2D>();
-                    rb.AddForce(new Vector2(UnityEngine.Random.Range(-400,100) , 
-                                UnityEngine.Random.Range(-400,400)));
-                }
-            }
-        }
-
-        if(time > destroyTime){
-            Destroy(gameObject);
-        }
-
-
-        
-    }
+ 
 }

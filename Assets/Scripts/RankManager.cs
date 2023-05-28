@@ -59,5 +59,9 @@ public class RankManager : MonoBehaviour
         return racers[rank-1].gameObject;
     }
 
+    public GameObject GetRacer(int id) {
+        return Array.Find(racers, a => a.id == id).gameObject;
+    }
+
     
 }
