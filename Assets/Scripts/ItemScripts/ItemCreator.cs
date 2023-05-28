@@ -42,7 +42,7 @@ public class ItemCreator : MonoBehaviour
             );
         
         // itemObjを作った生みの親(レーサー)のIDを保持する
-        itemObj.GetComponent<CollisionObject>().birtherId = racer.id;
+        itemObj.GetComponent<CollisionEnterObject>().birtherId = racer.id;
 
         if(racer.havingItem == Items.Bubble) {
             itemObj.transform.SetParent(racer.transform);
