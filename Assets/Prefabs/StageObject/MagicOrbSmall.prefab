@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8737354749509043276}
   - component: {fileID: 8737354749509043277}
   - component: {fileID: 8737354749509043314}
-  - component: {fileID: 8737354749509043279}
+  - component: {fileID: -487816503312454228}
   m_Layer: 0
   m_Name: MagicOrbSmall
   m_TagString: Untagged
@@ -100,7 +100,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 8
---- !u!114 &8737354749509043279
+--- !u!114 &-487816503312454228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,6 +109,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8737354749509043315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3770a215b19c4f93ba505832713f589, type: 3}
+  m_Script: {fileID: 11500000, guid: f5867765015147a5b6266dbcb8f79a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birtherId: 0
+  increaseNum: 1

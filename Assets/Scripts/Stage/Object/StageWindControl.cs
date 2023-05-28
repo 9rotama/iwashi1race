@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// プレイヤーと向かい風の接触した際の処理を担当するクラス
-/// 向かい風オブジェクトに直接アタッチされる
+/// プレイヤーと追い風の接触した際の処理を担当するクラス
 /// </summary>
-public class HeadwindControl : CollisionStayObject
+public class StageWindControl : CollisionStayObject
 {
-    [SerializeField] private const float Strength = -3f;
-    
+    [SerializeField] private float strength = 20f;
+
     /// <summary>
     /// CPUが風内にいるときCPU側の風の力を加える関数を実行する
     /// </summary>
@@ -17,9 +14,9 @@ public class HeadwindControl : CollisionStayObject
     public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
     {
         var playerControl = cpuPlayer.GetComponent<PlayerControl>();
-        playerControl.WindStay(Strength);
+        playerControl.WindStay(strength);
     }
-    
+
     /// <summary>
     ///  CPUが風内にいるときCPU側の風の力を加える関数を実行する
     /// </summary>
@@ -27,6 +24,6 @@ public class HeadwindControl : CollisionStayObject
     public override void OnTriggerStayPlayer(GameObject player)
     {
         var cpuPlayerControl = player.GetComponent<CPUplayerControl>();
-        cpuPlayerControl.WindEnter(Strength);
+        cpuPlayerControl.WindEnter(strength);
     }
 }
