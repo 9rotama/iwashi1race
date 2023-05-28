@@ -42,7 +42,7 @@ public class FireScript : CollisionEnterObject, IItemInitializer
 
     public void ItemInitializeOfPlayer(int id, Vector3 birtherPos, GameObject racer)
     {
-        Vector3 targetPos = rankManager.GetOneRankHigherRacer(birtherId).transform.position;
+        Vector3 targetPos = rankManager.GetOneRankHigherRacer(id).transform.position;
         shotForward = Vector3.Scale((targetPos - birtherPos), new Vector3(1, 1, 0)).normalized;
 
         // 三秒後に消える

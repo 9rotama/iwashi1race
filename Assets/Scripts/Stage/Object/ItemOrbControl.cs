@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class ItemOrbControl : CollisionEnterObject
 {
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy")))
-        {
-            var itemCon = other.transform.Find("ItemController").gameObject;
-            if(itemCon.GetComponent<ItemControlScript>().GetdeterminItem() == -1){
-                itemCon.GetComponent<ItemControlScript>().DeterminItem();
-            }
-            Destroy(this.gameObject);
-        }
+    [SerializeField] ItemDecider itemDecider;
 
+    public override void OnTriggerEnterCPUPlayer(GameObject racerObject)
+    {
+        var racer = racerObject.GetComponent<Racer>();
+        itemDecider.DecideItem(racer);
+        Destroy(this.gameObject);
     }
 
-    public override void OnTriggerEnterCPUPlayer(GameObject other)
+    public override void OnTriggerEnterPlayer(GameObject racerObject)
     {
-        
+        var racer = racerObject.GetComponent<Racer>();
+        itemDecider.DecideItem(racer);
+        Destroy(this.gameObject);
     }
 
-    public override void OnTriggerEnterPlayer(GameObject other)
-    {
-        
-    }
 }

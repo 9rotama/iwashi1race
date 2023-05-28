@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dark : MonoBehaviour, IItemInitializer
+public class DarkCreator : MonoBehaviour, IItemInitializer
 {
     [SerializeField] private GameObject darkBody;
     [SerializeField] private RankManager rankManager;

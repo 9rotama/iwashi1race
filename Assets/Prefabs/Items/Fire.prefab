@@ -135,14 +135,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c281c0231064457a0e68b2f9569f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birtherId: 0
   audioSource: {fileID: 0}
-  creatorObj: {fileID: 0}
-  audiohSource: {fileID: 0}
   fireSe: {fileID: 8300000, guid: 18cc4ba3a14144b0da99b075c43aa1ff, type: 3}
   damageSe: {fileID: 8300000, guid: 1d9afa98bf0e14a0daae646a157dabc3, type: 3}
+  rankManager: {fileID: 4920645455341692619, guid: b52b3adf88e0a4647a633e6db55a942a, type: 3}
+  rb: {fileID: 9210210537631362534}
   playerStopDur: 1
   lostMagicOrbNum: 10
+  speed: 500
 --- !u!82 &863927011466311261
 AudioSource:
   m_ObjectHideFlags: 0

@@ -13,7 +13,10 @@ public abstract class Racer : MonoBehaviour
     public int id { get;}
 
     /// <summary> 所持しているアイテム </summary>
-    public Items havingItem;
+    [System.NonSerialized] public Items havingItem = Items.Nothing;
+
+    /// <summary> 無敵状態か否か保持する </summary>
+    [System.NonSerialized] public bool isInvincible = false;
 
     [SerializeField] private RankManager rankManager;
     [SerializeField] private ItemCreator itemCreator;
@@ -22,9 +25,9 @@ public abstract class Racer : MonoBehaviour
     /// レーサーがアイテムを使用するための手続き
     /// </summary>
     
-    private void UseItem()
+    protected void UseItem()
     {
-        itemCreator.CreateItemGameObject(transform.position, this);
+        itemCreator.CreateItemGameObject(this.gameObject, this);
     }
 
     
@@ -41,7 +44,7 @@ public abstract class Racer : MonoBehaviour
     public abstract float GetVelocity();
 
     public abstract Vector2 GetVelocityVec2();
-
+    public abstract void MagicOrbEnter(int num);
     public abstract void WindStay(float multiplier);
 
     public abstract void StopperEnter(float duration, int lostMagicOrbNum);

@@ -412,9 +412,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6c267f3ec754f139adbfc74e266a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  havingItem: 7
+  isInvincible: 0
+  rankManager: {fileID: 0}
+  itemCreator: {fileID: 0}
+  moveSpeed: 300
+  nextWaypointDistance: 20
+  scatterFac: 0
   target: {fileID: 0}
-  nextWaypointDistance: 10
-  scatterFac: 10
 --- !u!1 &3653764231190195906
 GameObject:
   m_ObjectHideFlags: 0

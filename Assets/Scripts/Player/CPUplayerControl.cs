@@ -61,7 +61,7 @@ public class CPUplayerControl : Racer
 	/// ゲージに反映する
 	/// </summary>
 	/// <param name="num">マジックオーブの増加量</param>
-	public void MagicOrbEnter(int num){
+	public override void MagicOrbEnter(int num){
 		_magicOrbNum += num; 
 		if(_magicOrbNum > 50) _magicOrbNum = 50;
 	}
@@ -111,7 +111,10 @@ public class CPUplayerControl : Racer
 	protected override void OnTriggerEnter2D(Collider2D other)
 	{
 		var cpuPlayerCollision = other.gameObject.GetComponent<ICPUPlayerCollisionEnterer>();
-		cpuPlayerCollision?.OnTriggerEnterCPUPlayer(gameObject);
+		if(cpuPlayerCollision != null){
+			cpuPlayerCollision?.OnTriggerEnterCPUPlayer(gameObject);
+		}
+		
 	}
 	
 	private void Start()
@@ -133,6 +136,11 @@ public class CPUplayerControl : Racer
 
 	private void Update()
     {
+		// if(UnityEngine.Random.Range(0,100) == 0) {
+		// 	UseItem();
+		// }
+		//アイテム使用
+
 		if(_gameManagerCtrl.GetGameState() == 0 || transform.position.x > target.position.x + 10) return;
 		
 		if (_isStopped)

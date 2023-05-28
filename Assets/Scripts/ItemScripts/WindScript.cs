@@ -14,16 +14,16 @@ public class WindScript : CollisionStayObject, IItemInitializer
     [SerializeField] float[] imageSp = new float[2];
 
     public void ItemInitializeOfPlayer(int id, Vector3 birtherPos, GameObject racer) {
+        transform.SetParent(racer.transform);
         transform.position += new Vector3(-1.3f, 0.3f, 0);
         transform.rotation = transform.parent.rotation;
-        transform.SetParent(racer.transform);
         Destroy(gameObject, addForceTime);
     }
 
     public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) {
+        transform.SetParent(racer.transform);
         transform.position += new Vector3(-1.3f, 0.3f, 0);
         transform.rotation = transform.parent.rotation;
-        transform.SetParent(racer.transform);
         Destroy(gameObject, addForceTime);
     }
 

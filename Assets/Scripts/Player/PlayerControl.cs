@@ -71,7 +71,7 @@ public class PlayerControl : Racer
 	/// ゲージに反映する
 	/// </summary>
 	/// <param name="num">マジックオーブの増加量</param>
-	public void MagicOrbEnter(int num){
+	public override void MagicOrbEnter(int num){
 		_magicOrbNum += num; 
 		if(_magicOrbNum > MaxMagicOrb) _magicOrbNum = MaxMagicOrb;
 		SetMagicOrbMeter();
@@ -176,6 +176,12 @@ public class PlayerControl : Racer
             _rb2D.AddForce(-UpVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //下向き
+
+		if (Input.GetMouseButtonDown(0))
+		{
+			UseItem();
+		}
+		//アイテムを使う
         
 
         if (!(this.transform.position.x >= _goal.transform.position.x) || _isInGoal) return;

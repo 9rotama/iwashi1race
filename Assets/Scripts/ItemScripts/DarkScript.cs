@@ -5,7 +5,7 @@ using System;
 
 public class DarkScript : CollisionStayObject
 {
-    public int targetRank;
+    [System.NonSerialized] public int targetRank;
 
     public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
     {

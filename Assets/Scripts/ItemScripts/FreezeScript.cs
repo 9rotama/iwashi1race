@@ -24,7 +24,7 @@ public class FreezeScript : CollisionEnterObject, IItemInitializer
     public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) {
 
         //発射方向指定
-        Vector3 targetPos = rankManager.GetOneRankHigherRacer(birtherId).transform.position;
+        Vector3 targetPos = rankManager.GetOneRankHigherRacer(id).transform.position;
         shotForward = Vector3.Scale((targetPos - birtherPos), new Vector3(1, 1, 0)).normalized;
     }
 
@@ -39,7 +39,13 @@ public class FreezeScript : CollisionEnterObject, IItemInitializer
 
     public override void OnTriggerEnterPlayer(GameObject player)
     {
-        var playerControl = player.GetComponent<PlayerControl>();
+        var playerControl = player.GetComponent<Racer>();
+        
+        if(playerControl.isInvincible) {
+            playerControl.isInvincible = false;
+            Destroy(gameObject);
+            return;
+        }
         playerControl.StopperEnter(0, lostMagicOrbNum);
         GameObject obj = (GameObject)Instantiate(stateFreeze, player.transform.position, Quaternion.identity);
         obj.transform.SetParent(player.transform);

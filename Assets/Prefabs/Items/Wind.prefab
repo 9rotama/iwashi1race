@@ -271,13 +271,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fd3b19cad614cd2918853d24afb4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxV: 400
   addSp: 300
   addForceTime: 1
   windImage:
   - {fileID: 21300000, guid: bc965c1a15d8c49718786b289076da4d, type: 3}
   - {fileID: 21300000, guid: 169410e7330714c259374608d01620ac, type: 3}
   - {fileID: 21300000, guid: 0ab277aeeb256419da799aa4a8381de0, type: 3}
+  spriteRenderer: {fileID: 7561708161564952075}
   imageSp:
   - 3
   - 6
