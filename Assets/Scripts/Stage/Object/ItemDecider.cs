@@ -13,7 +13,6 @@ public class ItemDecider : MonoBehaviour
     /// <summary>
     /// レーサーのアイテムを決める関数
     /// </summary>
-    /// <param name="racer">レーサー</param>
     void DecideItem(Racer racer)
     {
         //!他のクラスアイテムオーブかなに移行するかどうか、上の変数も
@@ -107,7 +106,9 @@ public class ItemDecider : MonoBehaviour
 
         // アイテムを選定する。Itemsの項目数の大きさ-1でfor文を回す
         for(int i=0, probability=0; i<ItemProbabilities.Length-1; i++){
+
             probability += ItemProbabilities[i];
+            
             if(randNumber < probability){
                 racer.havingItem =  (Items)i;
                 return;
