@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 /// <summary>
 /// レース中の順位を計測、管理するクラス
@@ -9,31 +10,14 @@ using System;
 public class RankManager : MonoBehaviour
 {
 
-    
-    /// <summary>
-    /// Racerクラスをコンポーネントに持つGameObjetの配列。
-    /// ランク順でソートされる
-    /// </summary>
-    [SerializeField] private GameObject[] _racers;
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        SortRank();
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        SortRank();
-    }
+    [SerializeField] private Racer[] racers;
 
     /// <summary>
     /// 配列レーサーをx座標が大きい順(降順)にソートする。
     /// ランク順に並び替えられる
     /// </summary>
-    private void SortRank() {
-        Array.Sort(_racers,  (a, b) => (b.transform.position.x).CompareTo(a.transform.position.x));
+    private void SortRank() {  
+        Array.Sort(racers, (a, b) => (b.transform.position.x).CompareTo(a.transform.position.x));
     }
 
 
@@ -44,18 +28,9 @@ public class RankManager : MonoBehaviour
     /// <param name="id">個体識別番号</param>
     /// <returns>順位</returns>
     public int GetRank(int id) {
-        
-        for(int i=0; i<_racers.Length; i++){
-            if(id == _racers[i].GetComponent<Racer>().id) {
-                return i+1;
-            }
-            else {
-                // 何もしない
-            }
-        }
+        SortRank();
 
-        //該当するものがないとき0を返す
-        return 0;
+        return Array.FindIndex(racers, a => a.id == id ) + 1;
     }
 
 
@@ -64,7 +39,9 @@ public class RankManager : MonoBehaviour
     /// </summary>
     /// <returns>Racerクラスをコンポーネントに持つGameObjetの配列</returns>
     public GameObject[] GetSortedRacers() {
-        return _racers;
+        SortRank();
+
+        return racers.Select(a => a.gameObject).ToArray();
     }
 
     /// <summary>
@@ -74,10 +51,12 @@ public class RankManager : MonoBehaviour
     /// <param name="id">個体識別番号</param>
     /// <returns>Racerクラスをコンポーネントに持つGameObject</returns>
     public GameObject GetOneRankHigherRacer(int id) {
+        SortRank();
+
         int rank = GetRank(id);
         int oneRankHigher = rank > 1 ? rank-1 : rank;
 
-        return _racers[rank-1];
+        return racers[rank-1].gameObject;
     }
 
     
