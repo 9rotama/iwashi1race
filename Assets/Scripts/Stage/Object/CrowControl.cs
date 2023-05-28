@@ -1,45 +1,54 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class CrowControl : MonoBehaviour
+/// <summary>
+/// スポーンしたカラスの挙動を担当するクラス
+/// カラスのPrefab及びインスタンスにアタッチされる
+/// </summary>
+public class CrowControl : CollisionEnterObject
 {
-    private float moveSpeed = 100f;
     [SerializeField] private float destroyPosX;
+    [SerializeField] private float moveSpeed = 100f;
+    [SerializeField] private float playerStopDur = 1.0f;
+    [SerializeField] private int lostMagicOrbNum = 10;
+
+
+    /// <summary>
+    /// カラスがCPUと衝突したときCPU側を止まらせる処理を行う
+    /// 自身は削除される
+    /// </summary>
+    /// <param name="cpuPlayer">cpuプレイヤーのGameObject</param>
+    public override void OnTriggerEnterCPUPlayer(GameObject cpuPlayer)
+    {
+        var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
+        cpuPlayerControl.StopperEnter(playerStopDur, lostMagicOrbNum);
+        Destroy(this.gameObject);
+    }
     
-    private PlayerControl _playerControl;
-    private CPUplayerControl _cpuPlayerControl;
-
-
-    private void OnTriggerEnter2D(Collider2D other)
+    /// <summary>
+    /// カラスがプレイヤーと衝突したときプレイヤー側を止まらせる処理を行う
+    /// 自身は削除される
+    /// </summary>
+    /// <param name="player">プレイヤーのGameObject</param>
+    public override void OnTriggerEnterPlayer(GameObject player)
     {
-        if (other.gameObject.CompareTag("Player") )
-        {
-            _playerControl = other.GetComponent<PlayerControl>();
-            _playerControl.CrowEnter(-2f);
-            Destroy(this.gameObject);
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        { 
-            _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            _cpuPlayerControl.CrowEnter(-2f);
-            Destroy(this.gameObject);
-        }
+        var playerControl = player.GetComponent<PlayerControl>();
+        playerControl.StopperEnter(playerStopDur, lostMagicOrbNum);
+        Destroy(this.gameObject);
     }
 
-    private void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     private void Update()
     {
-        var position = this.transform.position;
+        var transform1 = transform;
+        var position = transform1.position;
         position = new Vector3(position.x - moveSpeed * Time.deltaTime, position.y, position.z);
         
-        transform.position = position;
+        transform1.position = position;
         if (this.transform.position.x <= destroyPosX)
             Destroy(this.gameObject);
     }

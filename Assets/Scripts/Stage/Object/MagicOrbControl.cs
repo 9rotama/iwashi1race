@@ -2,39 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicOrbControl : MonoBehaviour
+/// <summary>
+/// マジックオーブの回収処理などを担当するクラス
+/// マジックオーブのPrefab及びインスタンスにアタッチされる
+/// </summary>
+public class MagicOrbControl : CollisionEnterObject
 {
-    private PlayerControl _playerControl;
-    private CPUplayerControl _cpuPlayerControl;
-    private OrbSpawner _orbSpawner;
-    
-    void OnTriggerEnter2D(Collider2D other)
+    private OrbSpawner _parentOrbSpawner;
+
+    /// <summary>
+    /// マジックオーブがCPUと衝突したときCPU側のマジックオーブゲージを増やす関数を実行
+    /// 自身は削除される
+    /// </summary>
+    /// <param name="cpuPlayer">cpuプレイヤーのGameObject</param>
+    public override void OnTriggerEnterCPUPlayer(GameObject cpuPlayer)
     {
-        if (other.gameObject.CompareTag("Player") )
-        {
-            _playerControl = other.GetComponent<PlayerControl>();
-            _playerControl.MagicOrbEnter(5);
-            _orbSpawner.OrbDestroyed();
-            Destroy(this.gameObject);
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        { 
-            _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            _cpuPlayerControl.MagicOrbEnter(5);
-            _orbSpawner.OrbDestroyed();
-            Destroy(this.gameObject);
-        }
+        var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
+        cpuPlayerControl.MagicOrbEnter(5);
+        _parentOrbSpawner.OrbDestroyed();
+        Destroy(this.gameObject);
+    }
+    
+    /// <summary>
+    /// マジックオーブがCPUと衝突したときプレイヤー側のマジックオーブゲージを増やす関数を実行
+    /// 自身は削除される
+    /// </summary>
+    /// <param name="player">プレイヤーのGameObject</param>
+    public override void OnTriggerEnterPlayer(GameObject player)
+    {
+        var playerControl = player.GetComponent<PlayerControl>();
+        playerControl.MagicOrbEnter(5);
+        _parentOrbSpawner.OrbDestroyed();
+        Destroy(this.gameObject);
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        _orbSpawner = transform.parent.GetComponent<OrbSpawner>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _parentOrbSpawner = transform.parent.GetComponent<OrbSpawner>();
     }
 }

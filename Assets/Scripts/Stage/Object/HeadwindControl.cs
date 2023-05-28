@@ -2,33 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadwindControl : MonoBehaviour
+/// <summary>
+/// プレイヤーと向かい風の接触した際の処理を担当するクラス
+/// 向かい風オブジェクトに直接アタッチされる
+/// </summary>
+public class HeadwindControl : CollisionStayObject
 {
-    private PlayerControl _playerControl;
-    private CPUplayerControl _cpuPlayerControl;
+    [SerializeField] private const float Strength = -3f;
     
-    void OnTriggerStay2D(Collider2D other)
+    /// <summary>
+    /// CPUが風内にいるときCPU側の風の力を加える関数を実行する
+    /// </summary>
+    /// <param name="cpuPlayer">cpuプレイヤーのGameObject</param>
+    public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
     {
-        if (other.gameObject.CompareTag("Player") )
-        {
-            _playerControl = other.GetComponent<PlayerControl>();
-            _playerControl.WindEnter(-0.3f);
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        { 
-            _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            _cpuPlayerControl.WindEnter(-0.3f);
-        }
+        var playerControl = cpuPlayer.GetComponent<PlayerControl>();
+        playerControl.WindStay(Strength);
     }
-    // Start is called before the first frame update
-    private void Start()
+    
+    /// <summary>
+    ///  CPUが風内にいるときCPU側の風の力を加える関数を実行する
+    /// </summary>
+    /// <param name="player">プレイヤーのGameObject</param>
+    public override void OnTriggerStayPlayer(GameObject player)
     {
-        
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
+        var cpuPlayerControl = player.GetComponent<CPUplayerControl>();
+        cpuPlayerControl.WindEnter(Strength);
     }
 }
