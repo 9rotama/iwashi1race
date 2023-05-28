@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemOrbControl : MonoBehaviour
+public class ItemOrbControl : CollisionEnterObject
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -15,5 +15,15 @@ public class ItemOrbControl : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+    }
+
+    public override void OnTriggerEnterCPUPlayer(GameObject other)
+    {
+        
+    }
+
+    public override void OnTriggerEnterPlayer(GameObject other)
+    {
+        
     }
 }

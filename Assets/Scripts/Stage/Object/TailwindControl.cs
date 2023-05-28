@@ -2,33 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TailwindControl : MonoBehaviour
+/// <summary>
+/// プレイヤーと追い風の接触した際の処理を担当するクラス
+/// </summary>
+public class TailwindControl : CollisionStayObject
 {
-    private PlayerControl _playerControl;
-    private CPUplayerControl _cpuPlayerControl;
+    [SerializeField] private float strength = 20f;
     
-    void OnTriggerStay2D(Collider2D other)
+    /// <summary>
+    /// CPUが風内にいるときCPU側の風の力を加える関数を実行する
+    /// </summary>
+    /// <param name="cpuPlayer">cpuプレイヤーのGameObject</param>
+    public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
     {
-        if (other.gameObject.CompareTag("Player") )
-        {
-            _playerControl = other.GetComponent<PlayerControl>();
-            _playerControl.WindEnter(2f);
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        { 
-            _cpuPlayerControl = other.GetComponent<CPUplayerControl>();
-            _cpuPlayerControl.WindEnter(2f);
-        }
+        var playerControl = cpuPlayer.GetComponent<PlayerControl>();
+        playerControl.WindStay(strength);
     }
-    // Start is called before the first frame update
-    void Start()
+    
+    /// <summary>
+    ///  CPUが風内にいるときCPU側の風の力を加える関数を実行する
+    /// </summary>
+    /// <param name="player">プレイヤーのGameObject</param>
+    public override void OnTriggerStayPlayer(GameObject player)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        var cpuPlayerControl = player.GetComponent<CPUplayerControl>();
+        cpuPlayerControl.WindEnter(strength);
     }
 }

@@ -6,172 +6,174 @@ using UnityEngine.Serialization;
 
 public class PlayerControl : MonoBehaviour
 {
-    private float _moveSpeed = 1000f;
+    [SerializeField] private float moveSpeed = 1000f;
     [SerializeField] private GameObject itemOrbSePrefab;
     [SerializeField] private GameObject magicOrbSePrefab;
 	
-	private GameObject _goal; 
-	private bool _isInGoal;
+    private const int MaxMagicOrb = 50;
+    private const float MaxRateOfBoostByMagicOrb = 20f;
 
-	private bool _hitCrow = false;
-    
+    private static Vector3 ForwardVec => new Vector3(1.0f, 0f, 0f);
+
+    private static Vector3 UpVec => new Vector3(0f, 1.0f, 0f);
+
     private Rigidbody2D _rb2D;
-
-    private Vector3 _forwardVec, _upVec;
-
+    private GameObject _goal; 
+	private bool _isInGoal;
+	private bool _isStopped = false;
 	private Vector3 _prevPosition;
     private Vector2 _velocityVec2;
     private float _velocity = 0f;
-
-    private const float MaxRateOfBoostByMagicOrb = 20f;
-    private const int MaxMagicOrb = 50;
+    
+    private MagicOrbMeterControl _magicOrbMeterControl;
+    private int _magicOrbNum;
     
 	private AudioSource _audioSource;
 	
-	/*-----------*/
-	private GameObject _gameManager;
 	private GameManagerControl _gameManagerCtrl;
-	/*-----------*/
 	
+	/// <summary>
+	/// プレイヤーの速度を返す
+	/// </summary>
+	/// <returns>速度</returns>
 	public float GetVelocity()
     {
         return _velocity; 
     }
-	//速度(float)を返す
 
+	/// <summary>
+	/// プレイヤーの速度x成分,y成分(Vector2)を返す
+	/// </summary>
+	/// <returns>速度のVector2</returns>
 	public Vector2 GetVelocityVec2()
     {
         return _velocityVec2; 
     }
-	//速度x成分,y成分(Vector2)を返す
 
-	public void WindEnter(float multiplier){
-		_rb2D.AddForce(_forwardVec * _moveSpeed * Time.deltaTime * 16 * multiplier); 
-	}
-	//追い風,向かい風に接触したとき風側から呼び出される
-
-
-
-
-	private GameObject _magicOrbMeter;
-	private MagicOrbMeterControl _magicOrbMeterControl;
-	private int _magicOrbNum;
-	
-	private void SetMagicOrbNum(){
-		_magicOrbMeterControl = _magicOrbMeter.GetComponent<MagicOrbMeterControl>();
+	/// <summary>
+	/// 魔法オーブの取得数をゲージに反映
+	/// </summary>
+	private void SetMagicOrbMeter(){
 		_magicOrbMeterControl.SetMeter(_magicOrbNum);
 	}
-	//魔法オーブの取得数を返す
 
+	/// <summary>
+	/// 追い風,向かい風に侵入している間プレイヤーに風力を加える
+	/// 風のコントローラ側から呼び出される
+	/// </summary>
+	/// <param name="multiplier">風の強さの係数</param>
+	public void WindStay(float multiplier){
+		_rb2D.AddForce(ForwardVec * Time.deltaTime * multiplier); 
+	}
+
+	/// <summary>
+	/// プレイヤーのマジックオーブの所持量を増やす
+	/// ゲージに反映する
+	/// </summary>
+	/// <param name="num">マジックオーブの増加量</param>
 	public void MagicOrbEnter(int num){
 		_magicOrbNum += num; 
-		if(_magicOrbNum > 50) _magicOrbNum = 50;
-		SetMagicOrbNum();
+		if(_magicOrbNum > MaxMagicOrb) _magicOrbNum = MaxMagicOrb;
+		SetMagicOrbMeter();
 		
+		//音のプレハブを作成して再生後削除する
 		var sound = Instantiate(magicOrbSePrefab);
 		var endTime = sound.GetComponent<AudioSource>().clip.length;
-		Destroy(sound, endTime);	//音のプレハブを作成して再生後削除する
+		Destroy(sound, endTime);
 	}
-	//魔法オーブ(大)
 
-	/*
-	 public void SmallMagicOrbEnter(){
-		_magicOrbNum++; 
-		if(_magicOrbNum > 50) _magicOrbNum = 50;
-		SetMagicOrbNum();
-		
-		var sound = Instantiate(magicOrbSePrefab);
-		var endTime = sound.GetComponent<AudioSource>().clip.length;
-		Destroy(sound, endTime);	//音のプレハブを作成して再生後削除する
-	}
-	*/
-	
-	
-	
-	
-
-	public void CrowEnter(float multiplier)
+	/// <summary>
+	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
+	/// </summary>
+	/// <param name="duration">スタン状態の長さ</param>
+	/// <param name="lostMagicOrbNum">没収するマジックオーブの数</param>
+	public void StopperEnter(float duration, int lostMagicOrbNum)
 	{
-		StartCoroutine(nameof(CrowBump));
+		StartCoroutine(StopperBump(duration));
 		
-		_magicOrbNum -= 10;
+		_magicOrbNum -= lostMagicOrbNum;
 		if(_magicOrbNum < 0) _magicOrbNum = 0;
-		SetMagicOrbNum();
+		SetMagicOrbMeter();
 		_audioSource.Play();
 	}
 
-	private IEnumerator CrowBump()
+	/// <summary>
+	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
+	/// </summary>
+	/// <param name="duration">スタン状態の長さ</param>
+	private IEnumerator StopperBump(float duration)
 	{
-		_hitCrow = true;
-		yield return new WaitForSeconds(1f);
-		_hitCrow = false;
+		_isStopped = true;
+		yield return new WaitForSeconds(duration);
+		_isStopped = false;
 	}
-	
-	
-	
-	
-	
-	
+
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		var playerCollision = other.gameObject.GetComponent<IPlayerCollisionEnterer>();
+ 		playerCollision?.OnTriggerEnterPlayer(gameObject);
+	}
+
+
 	private void Start()
     {
         _rb2D = this.GetComponent<Rigidbody2D>();
 		_audioSource = GetComponent<AudioSource>();
-
-		_forwardVec = new Vector3(1.0f, 0f, 0f);
-        _upVec = new Vector3(0f, 1.0f, 0f);
-
+		
 		_prevPosition = transform.position;
 
 		_goal = GameObject.FindGameObjectWithTag("Goal");
 		_isInGoal = false;
 
-		/*-----------*/
-		_gameManager = GameObject.FindGameObjectWithTag("GameManager");
-		_gameManagerCtrl = _gameManager.GetComponent<GameManagerControl>();
-		/*-----------*/
-		_magicOrbMeter = GameObject.Find("MagicOrbMeter");
+		var gameManager = GameObject.FindGameObjectWithTag("GameManager");
+		_gameManagerCtrl = gameManager.GetComponent<GameManagerControl>();
+		var magicOrbMeter = GameObject.Find("MagicOrbMeter");
+		_magicOrbMeterControl = magicOrbMeter.GetComponent<MagicOrbMeterControl>();
+
     }
 
 	private void Update()
     {
-		/*-----------*/
 		if(_gameManagerCtrl.GetGameState() == 0) return;
-		/*-----------*/
-		if (_hitCrow)
+		//レースがスタートしていなければ処理しない
+
+		if (_isStopped)
 		{
 			_rb2D.velocity /= 5;
 			return;
 		}
-		
-		_velocityVec2 = (transform.position - _prevPosition) / Time.deltaTime;
+
+		var position = transform.position;
+		_velocityVec2 = (position - _prevPosition) / Time.deltaTime;
         _velocity = (float)Math.Sqrt(Math.Pow(_velocityVec2.x,2)+Math.Pow(_velocityVec2.y,2));
-        _prevPosition = transform.position;
+        _prevPosition = position;
         // 移動速度計算
 
         var orbNum = (float) _magicOrbNum;
-        var orbBoost = (orbNum / MaxMagicOrb) * _moveSpeed / MaxRateOfBoostByMagicOrb;
+        var orbBoost = (orbNum / MaxMagicOrb) * moveSpeed / MaxRateOfBoostByMagicOrb;
 
         if (Input.GetKey(KeyCode.D))
         {
-            _rb2D.AddForce(_forwardVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            _rb2D.AddForce(ForwardVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //アクセル
         
         if (Input.GetKey(KeyCode.A))
         {
-            _rb2D.AddForce(-_forwardVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            _rb2D.AddForce(-ForwardVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //ブレーキ
         
         if (Input.GetKey(KeyCode.W))
         {
-            _rb2D.AddForce(_upVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            _rb2D.AddForce(UpVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //上向き
         
         if (Input.GetKey(KeyCode.S))
         {
-            _rb2D.AddForce(-_upVec * (_moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            _rb2D.AddForce(-UpVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //下向き
         
