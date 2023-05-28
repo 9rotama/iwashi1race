@@ -29,7 +29,7 @@ public class ItemCreator : MonoBehaviour
     // [SerializeField] GameObject randomItemUI;
 
     /// <summary>
-    /// レーサーの座標にアイテムを生成する
+    /// 与えた座標にアイテムを生成する
     /// </summary>
     /// <param name="position">アイテム生成位置</param>
     /// <param name="racer">レーサー</param>
@@ -52,7 +52,7 @@ public class ItemCreator : MonoBehaviour
         }
 
         // 所持アイテムをなくす
-        racer.GetComponent<Racer>().havingItem = Items.Nothing;
+        racer.havingItem = Items.Nothing;
 
         //!Playerクラスに移行するかどうか↓
         // randomItemUI.SetActive(false);
