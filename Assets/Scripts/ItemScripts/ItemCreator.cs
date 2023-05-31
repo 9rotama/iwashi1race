@@ -34,7 +34,11 @@ public class ItemCreator : MonoBehaviour
     /// <param name="position">アイテム生成位置</param>
     /// <param name="racer">レーサー</param>
     public void CreateItemGameObject(GameObject racerObject, Racer racer) { 
+
+        // デバッグ
+        racer.havingItem = Items.Dark;
         Debug.Log(racer.havingItem);
+
         if(racer.havingItem == Items.Nothing) {
             return;
         }

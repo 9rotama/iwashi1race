@@ -15,13 +15,10 @@ public class ItemDecider : MonoBehaviour
     /// </summary>
     public void DecideItem(Racer racer)
     {
+
         if(racer.havingItem != Items.Nothing) {
             return;
         }
-
-        // デバッグ
-        racer.havingItem = Items.Wind;
-        return;
 
         //!他のクラスアイテムオーブかなに移行するかどうか、上の変数も
         // if(transform.parent.tag == "Player"){

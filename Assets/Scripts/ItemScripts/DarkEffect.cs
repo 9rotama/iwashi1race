@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class DarkAlpha : MonoBehaviour
+public class DarkEffect : MonoBehaviour
 {
     float time;
-    [SerializeField] Image render;
+    [SerializeField] Image effectImage;
 
-    float alphaTime;
     // Start is called before the first frame update
     void Start()
     {
-        new Color(render.color.r, render.color.g, 0f);
+        new Color(effectImage.color.r, effectImage.color.g, 0f);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log("aiueo");
         time += Time.deltaTime;
 
         const float sp = 0.01f;
-        Color proColor = render.color;
+        Color proColor = effectImage.color;
 
         if(time < 1.0f){
             proColor.a += sp*2f;
@@ -47,7 +47,7 @@ public class DarkAlpha : MonoBehaviour
             proColor.a -= sp;
         }
 
-        render.color = proColor;
+        effectImage.color = proColor;
 
     }
 }
