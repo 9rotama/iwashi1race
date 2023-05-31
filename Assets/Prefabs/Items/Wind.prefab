@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 892579711012184959}
   - component: {fileID: 7561708161564952075}
   - component: {fileID: 3440539599427808558}
+  - component: {fileID: 994412549738289251}
   m_Layer: 0
   m_Name: Wind
   m_TagString: Item
@@ -248,7 +249,7 @@ SpriteRenderer:
   m_SortingLayerID: -678697595
   m_SortingLayer: 4
   m_SortingOrder: 4
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0ab277aeeb256419da799aa4a8381de0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -271,14 +272,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fd3b19cad614cd2918853d24afb4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addSp: 300
-  addForceTime: 1
-  windImage:
+  addSpeed: 500
+  addForceTime: 10
+  windEffectImages:
   - {fileID: 21300000, guid: bc965c1a15d8c49718786b289076da4d, type: 3}
   - {fileID: 21300000, guid: 169410e7330714c259374608d01620ac, type: 3}
   - {fileID: 21300000, guid: 0ab277aeeb256419da799aa4a8381de0, type: 3}
   spriteRenderer: {fileID: 7561708161564952075}
-  imageSp:
-  - 3
-  - 6
-  - 10
+  imageLimitSpeeds:
+  - 200
+  - 100
+--- !u!58 &994412549738289251
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3778199659502264424}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10

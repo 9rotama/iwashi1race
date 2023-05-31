@@ -5,10 +5,9 @@ using UnityEngine;
 public class DarkCreator : MonoBehaviour, IItemInitializer
 {
     [SerializeField] private GameObject darkBody;
-    [SerializeField] private RankManager rankManager;
 
     public void ItemInitializeOfPlayer(int id, Vector3 birtherPos, GameObject racer) {
-        var targets = rankManager.GetSortedRacers();
+        var targets = RankManager.Instance.GetSortedRacersExceptSelf(id);
         
         for(int i=0; i<targets.Length; i++){
             GameObject obj = (GameObject)Instantiate(
@@ -19,7 +18,7 @@ public class DarkCreator : MonoBehaviour, IItemInitializer
             obj.GetComponent<DarkScript>().targetRank = i+1;
 
             //プレイヤー用のエフェクトを適用
-            if(targets[i] != racer && targets[i].CompareTag("Player")){
+            if(targets[i].CompareTag("Player")){
                 transform.GetChild(0).gameObject.SetActive(true);
             }
         }
@@ -28,7 +27,7 @@ public class DarkCreator : MonoBehaviour, IItemInitializer
     }
 
     public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) {
-        var targets = rankManager.GetSortedRacers();
+        var targets = RankManager.Instance.GetSortedRacersExceptSelf(id);
         
         for(int i=0; i<targets.Length; i++){
             GameObject obj = (GameObject)Instantiate(
@@ -39,7 +38,7 @@ public class DarkCreator : MonoBehaviour, IItemInitializer
             obj.GetComponent<DarkScript>().targetRank = i+1;
 
             //プレイヤー用のエフェクトを適用
-            if(targets[i] != racer && targets[i].CompareTag("Player")){
+            if(targets[i].CompareTag("Player")){
                 transform.GetChild(0).gameObject.SetActive(true);
             }
         }

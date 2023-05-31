@@ -10,7 +10,7 @@ using UnityEngine;
 public abstract class Racer : MonoBehaviour
 {
     /// <summary> 識別固有番号 </summary>
-    public int id { get;}
+    [field: SerializeField] public int id { get; private set;}
 
     /// <summary> 所持しているアイテム </summary>
     [System.NonSerialized] public Items havingItem = Items.Nothing;
@@ -18,7 +18,6 @@ public abstract class Racer : MonoBehaviour
     /// <summary> 無敵状態か否か保持する </summary>
     [System.NonSerialized] public bool isInvincible = false;
 
-    [SerializeField] private RankManager rankManager;
     [SerializeField] private ItemCreator itemCreator;
 
     /// <summary>
@@ -36,10 +35,6 @@ public abstract class Racer : MonoBehaviour
     /// </summary>
     /// <returns>順位の数値</returns>
 
-    public int GetRank()
-    {
-        return rankManager.GetRank(id);
-    }
 
     public abstract float GetVelocity();
 
@@ -52,5 +47,7 @@ public abstract class Racer : MonoBehaviour
     protected abstract IEnumerator StopperBump(float duration);
 
     protected abstract void OnTriggerEnter2D(Collider2D other);
+
+    protected abstract void OnTriggerStay2D(Collider2D other);
 
 }

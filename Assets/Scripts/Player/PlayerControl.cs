@@ -63,7 +63,7 @@ public class PlayerControl : Racer
 	/// </summary>
 	/// <param name="multiplier">風の強さの係数</param>
 	public override void WindStay(float multiplier){
-		_rb2D.AddForce(ForwardVec * Time.deltaTime * multiplier); 
+		_rb2D.AddForce(ForwardVec * multiplier); 
 	}
 
 	/// <summary>
@@ -113,6 +113,16 @@ public class PlayerControl : Racer
 	{
 		var playerCollision = other.gameObject.GetComponent<IPlayerCollisionEnterer>();
  		playerCollision?.OnTriggerEnterPlayer(gameObject);
+	}
+
+	protected override void OnTriggerStay2D(Collider2D other) 
+	{
+		var playerCollision = other.gameObject.GetComponent<IPlayerCollisionStayer>();
+		
+		if(playerCollision != null){
+			Debug.Log(other.gameObject);
+			playerCollision.OnTriggerStayPlayer(gameObject);
+		}
 	}
 
 

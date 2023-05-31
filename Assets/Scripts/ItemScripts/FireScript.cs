@@ -6,7 +6,6 @@ public class FireScript : CollisionEnterObject, IItemInitializer
 {
     [SerializeField] AudioClip fireSe;
     [SerializeField] AudioClip damageSe;
-    [SerializeField] RankManager rankManager;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] private float playerStopDur = 1.0f;
     [SerializeField] private int lostMagicOrbNum = 10;
@@ -17,6 +16,13 @@ public class FireScript : CollisionEnterObject, IItemInitializer
     public override void OnTriggerEnterCPUPlayer(GameObject cpuPlayer)
     {
         var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
+        if(cpuPlayerControl.id == birtherId) {
+            return;
+        }
+        if(cpuPlayerControl.isInvincible == true) {
+            cpuPlayerControl.isInvincible = false;
+            return;
+        }
         cpuPlayerControl.StopperEnter(playerStopDur, lostMagicOrbNum);
         audioSource.PlayOneShot(damageSe);
         Destroy(this.gameObject);
@@ -25,6 +31,13 @@ public class FireScript : CollisionEnterObject, IItemInitializer
     public override void OnTriggerEnterPlayer(GameObject player)
     {
         var playerControl = player.GetComponent<PlayerControl>();
+        if(playerControl.id == birtherId) {
+            return;
+        }
+        if(playerControl.isInvincible == true) {
+            playerControl.isInvincible = false;
+            return;
+        }
         playerControl.StopperEnter(playerStopDur, lostMagicOrbNum);
         audioSource.PlayOneShot(damageSe);
         Destroy(this.gameObject);
@@ -32,8 +45,8 @@ public class FireScript : CollisionEnterObject, IItemInitializer
 
     public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) 
     {
-        audioSource.PlayOneShot(fireSe);
-        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 targetPos = RankManager.Instance.GetOneRankHigherRacer(id).transform.position;
         shotForward = Vector3.Scale((targetPos - birtherPos), new Vector3(1, 1, 0)).normalized;
         
         // 三秒後に消える
@@ -42,7 +55,8 @@ public class FireScript : CollisionEnterObject, IItemInitializer
 
     public void ItemInitializeOfPlayer(int id, Vector3 birtherPos, GameObject racer)
     {
-        Vector3 targetPos = rankManager.GetOneRankHigherRacer(id).transform.position;
+        audioSource.PlayOneShot(fireSe);
+        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         shotForward = Vector3.Scale((targetPos - birtherPos), new Vector3(1, 1, 0)).normalized;
 
         // 三秒後に消える

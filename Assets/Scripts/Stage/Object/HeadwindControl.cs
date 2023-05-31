@@ -16,8 +16,8 @@ public class HeadwindControl : CollisionStayObject
     /// <param name="cpuPlayer">cpuプレイヤーのGameObject</param>
     public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
     {
-        var playerControl = cpuPlayer.GetComponent<PlayerControl>();
-        playerControl.WindStay(Strength);
+        var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
+        cpuPlayerControl.WindStay(Strength);
     }
     
     /// <summary>
@@ -26,7 +26,8 @@ public class HeadwindControl : CollisionStayObject
     /// <param name="player">プレイヤーのGameObject</param>
     public override void OnTriggerStayPlayer(GameObject player)
     {
-        var cpuPlayerControl = player.GetComponent<CPUplayerControl>();
-        cpuPlayerControl.WindStay(Strength);
+        var playerControl = player.GetComponent<PlayerControl>();
+        playerControl.WindStay(Strength);
+
     }
 }

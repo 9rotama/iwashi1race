@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FreezeScript : CollisionEnterObject, IItemInitializer
 {
-    [SerializeField] private RankManager rankManager;
     [SerializeField] private Rigidbody2D rb;
     Vector3 shotForward;
     const float speed = 500.0f;
@@ -24,7 +23,7 @@ public class FreezeScript : CollisionEnterObject, IItemInitializer
     public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) {
 
         //発射方向指定
-        Vector3 targetPos = rankManager.GetOneRankHigherRacer(id).transform.position;
+        Vector3 targetPos = RankManager.Instance.GetOneRankHigherRacer(id).transform.position;
         shotForward = Vector3.Scale((targetPos - birtherPos), new Vector3(1, 1, 0)).normalized;
     }
 

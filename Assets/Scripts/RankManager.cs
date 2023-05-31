@@ -5,9 +5,9 @@ using System;
 using System.Linq;
 
 /// <summary>
-/// レース中の順位を計測、管理するクラス
+/// レース中の順位を計測、管理するシングルトンのクラス
 /// </summary>
-public class RankManager : MonoBehaviour
+public class RankManager : SingletonMonoBehaviour<RankManager>
 {
 
     [SerializeField] private Racer[] racers;
@@ -59,9 +59,17 @@ public class RankManager : MonoBehaviour
         return racers[rank-1].gameObject;
     }
 
-    public GameObject GetRacer(int id) {
-        return Array.Find(racers, a => a.id == id).gameObject;
+    /// <summary>
+    /// 引数のIDを持つRacerを除くランク順(1,2,...)に並び替えたRacerクラスを持つGameObjectの配列を返す
+    /// </summary>
+    /// <returns>Racerクラスをコンポーネントに持つGameObjetの配列</returns>
+    public GameObject[] GetSortedRacersExceptSelf(int id) {
+        SortRank();
+
+        return racers.Where(a => a.id != id).Select(a => a.gameObject).ToArray();
     }
+
+
 
     
 }

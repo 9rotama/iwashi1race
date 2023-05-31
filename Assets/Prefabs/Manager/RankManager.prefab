@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8358363149661470826
+--- !u!1 &2590375574373669326
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8834713976966898958}
-  - component: {fileID: 4920645455341692619}
+  - component: {fileID: 3068981395002490026}
+  - component: {fileID: 1460757430456926063}
   m_Layer: 0
   m_Name: RankManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8834713976966898958
+--- !u!4 &3068981395002490026
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8358363149661470826}
+  m_GameObject: {fileID: 2590375574373669326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 217.1164, y: 75.86975, z: -48.32411}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,24 +31,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4920645455341692619
+--- !u!114 &1460757430456926063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8358363149661470826}
+  m_GameObject: {fileID: 2590375574373669326}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e899ebc479a74730885567c9b138ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   racers:
-  - {fileID: 4148986014203615285, guid: e717946af6f7c467e883b97d7320fb75, type: 3}
-  - {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
-  - {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
-  - {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
-  - {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
-  - {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
-  - {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
-  - {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

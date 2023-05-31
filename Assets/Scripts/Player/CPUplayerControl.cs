@@ -112,9 +112,17 @@ public class CPUplayerControl : Racer
 	{
 		var cpuPlayerCollision = other.gameObject.GetComponent<ICPUPlayerCollisionEnterer>();
 		if(cpuPlayerCollision != null){
-			cpuPlayerCollision?.OnTriggerEnterCPUPlayer(gameObject);
+			cpuPlayerCollision.OnTriggerEnterCPUPlayer(gameObject);
 		}
 		
+	}
+
+	protected override void OnTriggerStay2D(Collider2D other) 
+	{
+		var cpuPlayerCollision = other.gameObject.GetComponent<ICPUPlayerCollisionStayer>();
+		if(cpuPlayerCollision != null){
+			cpuPlayerCollision.OnTriggerStayCPUPlayer(gameObject);
+		}
 	}
 	
 	private void Start()

@@ -7,11 +7,10 @@ public class ThunderScript : MonoBehaviour, IItemInitializer
 {
     [SerializeField] private GameObject thunderSprite;
 
-    [SerializeField] private RankManager rankManager;
 
 
     public void ItemInitializeOfPlayer(int id, Vector3 birtherPos, GameObject racer) {
-        var targets = rankManager.GetSortedRacers();
+        var targets = RankManager.Instance.GetSortedRacers();
 
         for(int i=0; i<targets.Length; i++){
             if(id != targets[i].GetComponent<Racer>().id){
@@ -29,8 +28,8 @@ public class ThunderScript : MonoBehaviour, IItemInitializer
     }
 
     public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) {
-        var targets = rankManager.GetSortedRacers();
-
+        var targets =  RankManager.Instance.GetSortedRacers();
+        
         for(int i=0; i<targets.Length; i++){
             if(id != targets[i].GetComponent<Racer>().id){
                 GameObject obj = (GameObject)Instantiate(
