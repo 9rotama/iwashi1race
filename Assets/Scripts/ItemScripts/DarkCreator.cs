@@ -4,33 +4,36 @@ using UnityEngine;
 
 public class DarkCreator : MonoBehaviour, IItemInitializer
 {
-    // [SerializeField] private GameObject darkBody;
-
     [SerializeField] private DarkBody darkBody;
-    [SerializeField] private DarkEffect playerDarkEffect;
+    [SerializeField] private DarkEffect darkEffect;
+    [SerializeField] private float baseBodyDestroyTime = 5;
 
     public void ItemInitializeOfPlayer(int id, Vector3 birtherPos, GameObject racer) {
         var targets = RankManager.Instance.GetSortedRacers();
         
         for(int i=0; i<targets.Length; i++){
 
-            // if(targets[i].id == id) {
-            //     continue;
-            // }
+            if(targets[i].id == id) {
+                continue;
+            }
+
+            var destroyTime = baseBodyDestroyTime / Mathf.Sqrt(i+1);
 
             var darkBodyInstance = Instantiate(
                 darkBody,
                 targets[i].transform.position,
                 Quaternion.identity
             );
-            darkBodyInstance.initialize(targets[i], i+1);
+            darkBodyInstance.initialize(targets[i], i+1, destroyTime);
 
             //プレイヤー用のエフェクトを適用
             if(targets[i].CompareTag("Player")){
-                Instantiate(playerDarkEffect).transform.SetParent(darkBodyInstance.transform);
+                Instantiate(darkEffect).initialize(destroyTime);
             }
 
         }
+
+        Destroy(this);
     }
 
     public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) {

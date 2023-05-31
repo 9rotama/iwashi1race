@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   darkBody: {fileID: 9112737047676924416, guid: 2a6aa0c83b17f48ab971b9ca68b1ba19, type: 3}
-  playerDarkEffect: {fileID: 6581383213515747988, guid: 9c67e3818c44044759eef1598e06cbc9, type: 3}
+  darkEffect: {fileID: 5029976024546661610, guid: 9c67e3818c44044759eef1598e06cbc9, type: 3}
+  baseBodyDestroyTime: 5

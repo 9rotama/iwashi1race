@@ -9,15 +9,15 @@ public class DarkBody : MonoBehaviour
     private float _destroyTime;
 
     private Racer _targetRacer;
-
-    [SerializeField] private float baseDestroyTime = 5;
+    
     [SerializeField] private float baseAddedForce = 1000;
 
-    public void initialize(Racer target, int rank)
+    public void initialize(Racer target, int rank, float destroyTime)
     {
         _targetRacer = target;
         _targetRank = rank;
-        _destroyTime = baseDestroyTime / Mathf.Sqrt(rank);
+        _destroyTime = destroyTime;
+        transform.SetParent(target.transform);
     }    
 
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class DarkBody : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        float AddedForce = Random.Range(-baseAddedForce, baseAddedForce)/((float)_targetRank);
+        float AddedForce = Random.Range(-baseAddedForce, baseAddedForce) / ((float)_targetRank);
         _targetRacer.WindStay(AddedForce);
     }
 

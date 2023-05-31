@@ -4,50 +4,36 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DarkEffect : MonoBehaviour
 {
-    float time;
+    private float _elapsedTime;
+    private float _destroyTime;
     [SerializeField] Image effectImage;
+    [SerializeField] float alphaChangeSpeed = 2;
 
-    // Start is called before the first frame update
-    void Start()
+    public void initialize(float destroyTime)
     {
-        new Color(effectImage.color.r, effectImage.color.g, 0f);
+        _destroyTime = destroyTime;
+
+        Color alphaZeroColor = effectImage.color;
+        alphaZeroColor.a = 0; 
+        effectImage.color = alphaZeroColor;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    // 経過時間に応じてDarkEffectの画像の透明度を変化させる
+    private void Update()
     {
-        Debug.Log("aiueo");
-        time += Time.deltaTime;
+        _elapsedTime += Time.deltaTime;
 
-        const float sp = 0.01f;
-        Color proColor = effectImage.color;
+        // sinの値が-1/4〜1になるように調整
+        float alphaChangeValue = (Mathf.Sin(_elapsedTime*alphaChangeSpeed) * 3 + 1) / 4 ;
 
-        if(time < 1.0f){
-            proColor.a += sp*2f;
-        }
-        else if(time < 2.0f){
-            proColor.a -= sp;
-        }
-        else if(time < 3f){
-            proColor.a += sp;
-        }
-        else if(time < 4f){ 
-            proColor.a -= sp;
-        }
-        else if(time < 5f){
-            proColor.a += sp;
-        }
-        else if(time < 6f){
-            proColor.a -= sp;
-        }
-        else if(time < 7f){
-            proColor.a += sp;
-        }
-        else if(time < 8f){
-            proColor.a -= sp;
-        }
+        Color tmpColor = effectImage.color;
+        tmpColor.a = alphaChangeValue;
+        effectImage.color = tmpColor;
 
-        effectImage.color = proColor;
-
+        if(_elapsedTime > _destroyTime && alphaChangeValue < 0) {
+            Destroy(gameObject);
+        }
+    
     }
 }

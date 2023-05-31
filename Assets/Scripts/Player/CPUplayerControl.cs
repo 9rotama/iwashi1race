@@ -72,7 +72,7 @@ public class CPUplayerControl : Racer
 	/// </summary>
 	/// <param name="multiplier">風の強さの係数</param>
 	public override void WindStay(float multiplier){
-		_rb2D.AddForce(_forwardVec * Time.deltaTime * multiplier); 
+		_rb2D.AddForce(_forwardVec * multiplier); 
 	}
 
 
