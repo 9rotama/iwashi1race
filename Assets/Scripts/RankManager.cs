@@ -11,12 +11,19 @@ public class RankManager : SingletonMonoBehaviour<RankManager>
 {
 
     [SerializeField] private Racer[] racers;
+    
+    private void Update() 
+    {
+        SortRank();
+    }
+    
 
     /// <summary>
     /// 配列レーサーをx座標が大きい順(降順)にソートする。
     /// ランク順に並び替えられる
     /// </summary>
-    private void SortRank() {  
+    private void SortRank() 
+    {  
         Array.Sort(racers, (a, b) => (b.transform.position.x).CompareTo(a.transform.position.x));
     }
 
@@ -27,9 +34,8 @@ public class RankManager : SingletonMonoBehaviour<RankManager>
     /// </summary>
     /// <param name="id">個体識別番号</param>
     /// <returns>順位</returns>
-    public int GetRank(int id) {
-        SortRank();
-
+    public int GetRank(int id)
+    {
         return Array.FindIndex(racers, a => a.id == id ) + 1;
     }
 
@@ -38,25 +44,23 @@ public class RankManager : SingletonMonoBehaviour<RankManager>
     /// ランク順(1,2,...)に並び替えたRacerクラスの配列を返す
     /// </summary>
     /// <returns>ソートされたRacer配列</returns>
-    public Racer[] GetSortedRacers() {
-        SortRank();
-
+    public Racer[] GetSortedRacers() 
+    {
         return racers;
     }
 
     /// <summary>
     /// １つ順位が上のRacerを返す。
-    /// １つ順位が上のRacerが無いとき、引数のidが指すRacerの順位を返す
+    /// １つ順位が上のRacerが無いとき、最下位を返す
     /// </summary>
     /// <param name="id">個体識別番号</param>
     /// <returns>順位がひとつ上のRacerクラス</returns>
-    public Racer GetOneRankHigherRacer(int id) {
-        SortRank();
-
+    public Racer GetOneRankHigherRacer(int id) 
+    {
         int rank = GetRank(id);
-        int oneRankHigher = rank > 1 ? rank-1 : rank;
+        int oneRankHigher = rank > 1 ? rank-1 : racer.Length-1;
 
-        return racers[rank-1];
+        return racers[oneRankHigher-1];
     }
 
     /// <summary>
@@ -64,9 +68,8 @@ public class RankManager : SingletonMonoBehaviour<RankManager>
     /// </summary>
     /// <param name="id">個体識別番号</param>
     /// <returns>Racerクラスの配列</returns>
-    public Racer[] GetSortedRacersExceptSelf(int id) {
-        SortRank();
-
+    public Racer[] GetSortedRacersExceptSelf(int id) 
+    {
         return racers.Where(a => a.id != id).ToArray();
     }
     
