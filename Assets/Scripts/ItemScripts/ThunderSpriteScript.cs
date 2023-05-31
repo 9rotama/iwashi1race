@@ -72,18 +72,18 @@ public class ThunderSpriteScript : MonoBehaviour
     void CreateBullet()
     {
         GameObject itemCon = targetObj.transform.Find("ItemController").gameObject;
-        ItemControlScript itemScript = itemCon.GetComponent<ItemControlScript>();
+        // ItemControlScript itemScript = itemCon.GetComponent<ItemControlScript>();
          
-        if(itemScript.isDefence){
-            Destroy(itemCon.transform.GetChild(0).gameObject);
-            itemScript.isDefence = false;
-            Destroy(this.gameObject);
-        } 
-        else{
-            if(targetObj.tag == "Player") { audioSource.Play();}
-            isShocked = true;
-            CreateShockPlayer();
-        }
+        // if(itemScript.isDefence){
+        //     Destroy(itemCon.transform.GetChild(0).gameObject);
+        //     itemScript.isDefence = false;
+        //     Destroy(this.gameObject);
+        // } 
+        // else{
+        //     if(targetObj.tag == "Player") { audioSource.Play();}
+        //     isShocked = true;
+        //     CreateShockPlayer();
+        // }
     }
 
     public void CreateShockPlayer()

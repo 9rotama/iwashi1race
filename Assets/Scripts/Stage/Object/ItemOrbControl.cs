@@ -2,20 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemOrbControl : CollisionEnterObject
+public class ItemOrbControl : MonoBehaviour, IRacerCollisionEnterer
 {
     [SerializeField] ItemDecider itemDecider;
 
-    public override void OnTriggerEnterCPUPlayer(GameObject racerObject)
+    public void OnTriggerEnterRacer(Racer racer)
     {
-        var racer = racerObject.GetComponent<Racer>();
-        itemDecider.DecideItem(racer);
-        Destroy(this.gameObject);
-    }
-
-    public override void OnTriggerEnterPlayer(GameObject racerObject)
-    {
-        var racer = racerObject.GetComponent<Racer>();
         itemDecider.DecideItem(racer);
         Destroy(this.gameObject);
     }

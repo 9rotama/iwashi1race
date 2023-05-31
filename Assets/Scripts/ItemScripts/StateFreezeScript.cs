@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class StateFreezeScript : CollisionStayObject 
+public class StateFreezeScript : MonoBehaviour, IRacerCollisionStayer
 {
     Vector2 fixedSp;
     Rigidbody2D tarRb;
@@ -60,17 +60,12 @@ public class StateFreezeScript : CollisionStayObject
         }
 
     }
-    public override void OnTriggerStayPlayer(GameObject cpuPlayer)
+    public void OnTriggerStayRacer(Racer racer)
     {
-        var racerRb = cpuPlayer.GetComponent<Rigidbody2D>();
-        racerRb.AddForce(Vector2.one * ((fixedSp - tarRb.velocity) * 30), ForceMode2D.Force);
+        
+        racer.AddForce(1000, Vector2.one);
        
     }
 
-    public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
-    {
-        var racerRb = cpuPlayer.GetComponent<Rigidbody2D>();
-        racerRb.AddForce(Vector2.one * ((fixedSp - tarRb.velocity) * 30), ForceMode2D.Force);
-       
-    }
+
 }

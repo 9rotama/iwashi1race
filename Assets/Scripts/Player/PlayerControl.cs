@@ -6,49 +6,16 @@ using UnityEngine.Serialization;
 
 public class PlayerControl : Racer
 {
-    [SerializeField] private float moveSpeed = 1000f;
     [SerializeField] private GameObject itemOrbSePrefab;
     [SerializeField] private GameObject magicOrbSePrefab;
-	
-    private const int MaxMagicOrb = 50;
-    private const float MaxRateOfBoostByMagicOrb = 20f;
-
-    private static Vector3 ForwardVec => new Vector3(1.0f, 0f, 0f);
 
     private static Vector3 UpVec => new Vector3(0f, 1.0f, 0f);
-
-    private Rigidbody2D _rb2D;
     private GameObject _goal; 
 	private bool _isInGoal;
-	private bool _isStopped = false;
-	private Vector3 _prevPosition;
-    private Vector2 _velocityVec2;
-    private float _velocity = 0f;
-    
     private MagicOrbMeterControl _magicOrbMeterControl;
-    private int _magicOrbNum;
-    
 	private AudioSource _audioSource;
 	
-	private GameManagerControl _gameManagerCtrl;
 	
-	/// <summary>
-	/// プレイヤーの速度を返す
-	/// </summary>
-	/// <returns>速度</returns>
-	public override float GetVelocity()
-    {
-        return _velocity; 
-    }
-
-	/// <summary>
-	/// プレイヤーの速度x成分,y成分(Vector2)を返す
-	/// </summary>
-	/// <returns>速度のVector2</returns>
-	public override Vector2 GetVelocityVec2()
-    {
-        return _velocityVec2; 
-    }
 
 	/// <summary>
 	/// 魔法オーブの取得数をゲージに反映
@@ -57,14 +24,7 @@ public class PlayerControl : Racer
 		_magicOrbMeterControl.SetMeter(_magicOrbNum);
 	}
 
-	/// <summary>
-	/// 追い風,向かい風に侵入している間プレイヤーに風力を加える
-	/// 風のコントローラ側から呼び出される
-	/// </summary>
-	/// <param name="multiplier">風の強さの係数</param>
-	public override void WindStay(float multiplier){
-		_rb2D.AddForce(ForwardVec * multiplier); 
-	}
+
 
 	/// <summary>
 	/// プレイヤーのマジックオーブの所持量を増やす
@@ -72,8 +32,7 @@ public class PlayerControl : Racer
 	/// </summary>
 	/// <param name="num">マジックオーブの増加量</param>
 	public override void MagicOrbEnter(int num){
-		_magicOrbNum += num; 
-		if(_magicOrbNum > MaxMagicOrb) _magicOrbNum = MaxMagicOrb;
+		base.MagicOrbEnter(num);
 		SetMagicOrbMeter();
 		
 		//音のプレハブを作成して再生後削除する
@@ -82,47 +41,11 @@ public class PlayerControl : Racer
 		Destroy(sound, endTime);
 	}
 
-	/// <summary>
-	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
-	/// </summary>
-	/// <param name="duration">スタン状態の長さ</param>
-	/// <param name="lostMagicOrbNum">没収するマジックオーブの数</param>
 	public override void StopperEnter(float duration, int lostMagicOrbNum)
 	{
-		StartCoroutine(StopperBump(duration));
-		
-		_magicOrbNum -= lostMagicOrbNum;
-		if(_magicOrbNum < 0) _magicOrbNum = 0;
+		base.StopperEnter(duration, lostMagicOrbNum);
 		SetMagicOrbMeter();
 		_audioSource.Play();
-	}
-
-	/// <summary>
-	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
-	/// </summary>
-	/// <param name="duration">スタン状態の長さ</param>
-	protected override IEnumerator StopperBump(float duration)
-	{
-		_isStopped = true;
-		yield return new WaitForSeconds(duration);
-		_isStopped = false;
-	}
-
-
-	protected override void OnTriggerEnter2D(Collider2D other)
-	{
-		var playerCollision = other.gameObject.GetComponent<IPlayerCollisionEnterer>();
- 		playerCollision?.OnTriggerEnterPlayer(gameObject);
-	}
-
-	protected override void OnTriggerStay2D(Collider2D other) 
-	{
-		var playerCollision = other.gameObject.GetComponent<IPlayerCollisionStayer>();
-		
-		if(playerCollision != null){
-			Debug.Log(other.gameObject);
-			playerCollision.OnTriggerStayPlayer(gameObject);
-		}
 	}
 
 
