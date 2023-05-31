@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6932463880584171440}
   - component: {fileID: 6932463880584171441}
   - component: {fileID: 6932463880584171442}
-  - component: {fileID: 6932463880584171443}
   - component: {fileID: 6932463880584171340}
+  - component: {fileID: -7197186774481300186}
   m_Layer: 6
   m_Name: Headwind
   m_TagString: Headwind
@@ -104,18 +104,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6932463880584171443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6932463880584171341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e82fde618ca04487ad9955c86ecad1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &6932463880584171340
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142,3 +130,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 32}
   m_EdgeRadius: 0
+--- !u!114 &-7197186774481300186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6932463880584171341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b217be3495418abdb326b1076e6357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: -5

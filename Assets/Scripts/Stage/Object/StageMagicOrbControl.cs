@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +6,9 @@ using UnityEngine;
 /// マジックオーブの回収処理などを担当するクラス
 /// マジックオーブのPrefab及びインスタンスにアタッチされる
 /// </summary>
-public class MagicOrbControl : CollisionEnterObject
+public class StageMagicOrbControl : CollisionEnterObject
 {
+    [SerializeField] private int increaseNum;
     private OrbSpawner _parentOrbSpawner;
 
     /// <summary>
@@ -18,7 +19,7 @@ public class MagicOrbControl : CollisionEnterObject
     public override void OnTriggerEnterCPUPlayer(GameObject cpuPlayer)
     {
         var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
-        cpuPlayerControl.MagicOrbEnter(5);
+        cpuPlayerControl.MagicOrbEnter(increaseNum);
         _parentOrbSpawner.OrbDestroyed();
         Destroy(this.gameObject);
     }
@@ -31,7 +32,7 @@ public class MagicOrbControl : CollisionEnterObject
     public override void OnTriggerEnterPlayer(GameObject player)
     {
         var playerControl = player.GetComponent<PlayerControl>();
-        playerControl.MagicOrbEnter(5);
+        playerControl.MagicOrbEnter(increaseNum);
         _parentOrbSpawner.OrbDestroyed();
         Destroy(this.gameObject);
     }

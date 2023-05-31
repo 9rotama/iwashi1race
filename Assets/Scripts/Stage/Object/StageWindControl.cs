@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// プレイヤーと追い風の接触した際の処理を担当するクラス
 /// </summary>
-public class TailwindControl : CollisionStayObject
+public class StageWindControl : CollisionStayObject
 {
     [SerializeField] private float strength = 20f;
-    
+
     /// <summary>
     /// CPUが風内にいるときCPU側の風の力を加える関数を実行する
     /// </summary>
@@ -18,7 +16,7 @@ public class TailwindControl : CollisionStayObject
         var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
         cpuPlayerControl.WindStay(strength);
     }
-    
+
     /// <summary>
     ///  CPUが風内にいるときCPU側の風の力を加える関数を実行する
     /// </summary>
