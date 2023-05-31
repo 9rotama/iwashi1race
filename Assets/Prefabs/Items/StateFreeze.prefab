@@ -109,6 +109,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cd1eb485092d446dfa564ba797523f5c, type: 3}
   - {fileID: 21300000, guid: 32528458794ba42489b6c7cb529909b3, type: 3}
   - {fileID: 21300000, guid: 74651f38101a14ea0b3c0647adb830ad, type: 3}
+  spriteRenderer: {fileID: 9144136603376716326}
   audioSource: {fileID: 8988830822636126460}
   crackSE: {fileID: 8300000, guid: 1e546b367e9954e9ea98db330918b5ab, type: 3}
   brokenSE: {fileID: 8300000, guid: 8e090f51edf2440989174fd9ef919819, type: 3}

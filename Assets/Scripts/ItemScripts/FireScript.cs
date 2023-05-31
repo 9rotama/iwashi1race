@@ -2,77 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireScript : MonoBehaviour
+public class FireScript : CollisionEnterObject, IItemInitializer
 {
-    Rigidbody2D rb;
-    Vector3 shotForward;
-    GameObject otherObj;
-    public GameObject creatorObj;
-    bool isCollision;
-    float time;
-    const float sp = 500.0f;
-
-    GameObject itemControl;
-    ItemControlScript itemScript;
-
-    AudioSource audioSource;
-
     [SerializeField] AudioClip fireSe;
     [SerializeField] AudioClip damageSe;
-    static GameObject rank;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] private float playerStopDur = 1.0f;
+    [SerializeField] private int lostMagicOrbNum = 10;
+    [SerializeField] private float speed = 500.0f;
+    private Vector3 shotForward;
+    
 
-
-    // Start is called before the first frame update
-    void Start()
+    public override void OnTriggerEnterCPUPlayer(GameObject cpuPlayer)
     {
-        audioSource = GetComponent<AudioSource>();
-        itemControl = GameObject.Find("ItemController");
-        itemScript = itemControl.GetComponent<ItemControlScript>();
-        rb = transform.GetComponent<Rigidbody2D>();
-        //shotForward = Vector3.Scale((mouseWorldPos - transform.parent.position), new Vector3(1, 1, 0)).normalized;
-        creatorObj = transform.parent.gameObject;
-        if(creatorObj.tag == "Player"){
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            shotForward = Vector3.Scale((mouseWorldPos - transform.parent.position), new Vector3(1, 1, 0)).normalized;
-            audioSource.PlayOneShot(fireSe);
+        var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
+        if(cpuPlayerControl.id == birtherId) {
+            return;
         }
-        else{
-            if(rank == null) {
-                rank = GameObject.Find("Rank");
-            }
-            GameObject tar = rank.GetComponent<RankSort>().GetOneRankUpObj(creatorObj);
-            shotForward = Vector3.Scale((tar.transform.position - transform.parent.position), new Vector3(1, 1, 0)).normalized;
+        if(cpuPlayerControl.isInvincible == true) {
+            cpuPlayerControl.isInvincible = false;
+            return;
         }
-        transform.parent = null;
+        cpuPlayerControl.StopperEnter(playerStopDur, lostMagicOrbNum);
+        audioSource.PlayOneShot(damageSe);
+        Destroy(this.gameObject);
+    }
 
+    public override void OnTriggerEnterPlayer(GameObject player)
+    {
+        var playerControl = player.GetComponent<PlayerControl>();
+        if(playerControl.id == birtherId) {
+            return;
+        }
+        if(playerControl.isInvincible == true) {
+            playerControl.isInvincible = false;
+            return;
+        }
+        playerControl.StopperEnter(playerStopDur, lostMagicOrbNum);
+        audioSource.PlayOneShot(damageSe);
+        Destroy(this.gameObject);
+    }
+
+    public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) 
+    {
+
+        Vector3 targetPos = RankManager.Instance.GetOneRankHigherRacer(id).transform.position;
+        shotForward = Vector3.Scale((targetPos - birtherPos), new Vector3(1, 1, 0)).normalized;
+        
+        // 三秒後に消える
+        Destroy(this.gameObject, 3.0f);
+    }
+
+    public void ItemInitializeOfPlayer(int id, Vector3 birtherPos, GameObject racer)
+    {
+        audioSource.PlayOneShot(fireSe);
+        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        shotForward = Vector3.Scale((targetPos - birtherPos), new Vector3(1, 1, 0)).normalized;
+
+        // 三秒後に消える
+        Destroy(this.gameObject, 3.0f);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        rb.velocity = shotForward * sp;
-        if(isCollision){
-            time += Time.deltaTime;
-            if(time < 1.0f){
-                Rigidbody2D rb = otherObj.GetComponent<Rigidbody2D>();
-                rb.AddForce(Vector3.right * ((0 - rb.velocity.x) * 30), ForceMode2D.Force);
-                rb.AddForce(Vector3.up * ((0 - rb.velocity.y) * 30), ForceMode2D.Force);
-                itemScript.isDefence = true;
-            }
-            else{
-                Destroy(this.gameObject);
-                itemScript.isDefence = false;
-            }
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if((other.tag == "Player" || other.tag == "Enemy") && other.gameObject != creatorObj){
-            audioSource.PlayOneShot(damageSe);
-            isCollision = true;
-            otherObj = other.gameObject;
-            transform.position = new Vector3(-1000, -1000, 0);
-        }
+        rb.velocity = shotForward * speed;
     }
 }

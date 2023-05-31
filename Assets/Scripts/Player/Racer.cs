@@ -7,24 +7,26 @@ using UnityEngine;
 /// CPU,プレイヤー含めたレーサー（レース選手）を指すクラス
 /// </summary>
 
-public class Racer : MonoBehaviour
+public abstract class Racer : MonoBehaviour
 {
     /// <summary> 識別固有番号 </summary>
-    public int id { get;}
+    [field: SerializeField] public int id { get; private set;}
 
     /// <summary> 所持しているアイテム </summary>
-    public Items havingItem;
+    [System.NonSerialized] public Items havingItem = Items.Nothing;
 
-    [SerializeField] private RankManager rankManager;
+    /// <summary> 無敵状態か否か保持する </summary>
+    [System.NonSerialized] public bool isInvincible = false;
+
     [SerializeField] private ItemCreator itemCreator;
 
     /// <summary>
     /// レーサーがアイテムを使用するための手続き
     /// </summary>
     
-    private void UseItem()
+    protected void UseItem()
     {
-        itemCreator.CreateItemGameObject(transform.position, this);
+        itemCreator.CreateItemGameObject(this.gameObject, this);
     }
 
     
@@ -33,9 +35,19 @@ public class Racer : MonoBehaviour
     /// </summary>
     /// <returns>順位の数値</returns>
 
-    public int GetRank()
-    {
-        return rankManager.GetRank(id);
-    }
+
+    public abstract float GetVelocity();
+
+    public abstract Vector2 GetVelocityVec2();
+    public abstract void MagicOrbEnter(int num);
+    public abstract void WindStay(float multiplier);
+
+    public abstract void StopperEnter(float duration, int lostMagicOrbNum);
+
+    protected abstract IEnumerator StopperBump(float duration);
+
+    protected abstract void OnTriggerEnter2D(Collider2D other);
+
+    protected abstract void OnTriggerStay2D(Collider2D other);
 
 }

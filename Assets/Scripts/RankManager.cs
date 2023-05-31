@@ -5,9 +5,9 @@ using System;
 using System.Linq;
 
 /// <summary>
-/// レース中の順位を計測、管理するクラス
+/// レース中の順位を計測、管理するシングルトンのクラス
 /// </summary>
-public class RankManager : MonoBehaviour
+public class RankManager : SingletonMonoBehaviour<RankManager>
 {
 
     [SerializeField] private Racer[] racers;
@@ -35,29 +35,39 @@ public class RankManager : MonoBehaviour
 
 
     /// <summary>
-    /// ランク順(1,2,...)に並び替えたRacerクラスを持つGameObjectの配列を返す
+    /// ランク順(1,2,...)に並び替えたRacerクラスの配列を返す
     /// </summary>
-    /// <returns>Racerクラスをコンポーネントに持つGameObjetの配列</returns>
-    public GameObject[] GetSortedRacers() {
+    /// <returns>ソートされたRacer配列</returns>
+    public Racer[] GetSortedRacers() {
         SortRank();
 
-        return racers.Select(a => a.gameObject).ToArray();
+        return racers;
     }
 
     /// <summary>
-    /// １つ順位が上のRacerクラスを持つGameObjectを返す。
-    /// １つ順位が上のGameObjectが無いとき、引数のidが指すGameObjectの順位を返す
+    /// １つ順位が上のRacerを返す。
+    /// １つ順位が上のRacerが無いとき、引数のidが指すRacerの順位を返す
     /// </summary>
     /// <param name="id">個体識別番号</param>
-    /// <returns>Racerクラスをコンポーネントに持つGameObject</returns>
-    public GameObject GetOneRankHigherRacer(int id) {
+    /// <returns>順位がひとつ上のRacerクラス</returns>
+    public Racer GetOneRankHigherRacer(int id) {
         SortRank();
 
         int rank = GetRank(id);
         int oneRankHigher = rank > 1 ? rank-1 : rank;
 
-        return racers[rank-1].gameObject;
+        return racers[rank-1];
     }
 
+    /// <summary>
+    /// 引数のIDを持つRacerを除くランク順(1,2,...)に並び替えたRacerクラスの配列を返す
+    /// </summary>
+    /// <param name="id">個体識別番号</param>
+    /// <returns>Racerクラスの配列</returns>
+    public Racer[] GetSortedRacersExceptSelf(int id) {
+        SortRank();
+
+        return racers.Where(a => a.id != id).ToArray();
+    }
     
 }

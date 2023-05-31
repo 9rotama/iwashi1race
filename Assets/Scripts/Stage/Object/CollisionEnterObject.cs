@@ -4,7 +4,10 @@ using UnityEngine;
 
 public abstract class CollisionEnterObject : MonoBehaviour, IPlayerCollisionEnterer, ICPUPlayerCollisionEnterer
 {
-   public int birtherId;
+   [System.NonSerialized] public int birtherId;
+   
+   [SerializeField] protected AudioSource audioSource;
+
    public abstract void OnTriggerEnterCPUPlayer(GameObject cpuPlayer);
 
    public abstract void OnTriggerEnterPlayer(GameObject player);

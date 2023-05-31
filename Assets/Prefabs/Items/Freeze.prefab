@@ -135,6 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827ee12a74ed14adda459a9e8bafe7fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 1587969412544878333}
+  rankManager: {fileID: 4920645455341692619, guid: b52b3adf88e0a4647a633e6db55a942a, type: 3}
+  rb: {fileID: 1865164393002590434}
+  lostMagicOrbNum: 10
   stateFreeze: {fileID: 3169329395183549740, guid: 80769130c2bb4439fa76c76c7c5bb77f, type: 3}
 --- !u!82 &1587969412544878333
 AudioSource:

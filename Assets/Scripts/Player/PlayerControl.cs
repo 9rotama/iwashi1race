@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : Racer
 {
     [SerializeField] private float moveSpeed = 1000f;
     [SerializeField] private GameObject itemOrbSePrefab;
@@ -36,7 +36,7 @@ public class PlayerControl : MonoBehaviour
 	/// プレイヤーの速度を返す
 	/// </summary>
 	/// <returns>速度</returns>
-	public float GetVelocity()
+	public override float GetVelocity()
     {
         return _velocity; 
     }
@@ -45,7 +45,7 @@ public class PlayerControl : MonoBehaviour
 	/// プレイヤーの速度x成分,y成分(Vector2)を返す
 	/// </summary>
 	/// <returns>速度のVector2</returns>
-	public Vector2 GetVelocityVec2()
+	public override Vector2 GetVelocityVec2()
     {
         return _velocityVec2; 
     }
@@ -62,8 +62,8 @@ public class PlayerControl : MonoBehaviour
 	/// 風のコントローラ側から呼び出される
 	/// </summary>
 	/// <param name="multiplier">風の強さの係数</param>
-	public void WindStay(float multiplier){
-		_rb2D.AddForce(ForwardVec * Time.deltaTime * multiplier); 
+	public override void WindStay(float multiplier){
+		_rb2D.AddForce(ForwardVec * multiplier); 
 	}
 
 	/// <summary>
@@ -71,7 +71,7 @@ public class PlayerControl : MonoBehaviour
 	/// ゲージに反映する
 	/// </summary>
 	/// <param name="num">マジックオーブの増加量</param>
-	public void MagicOrbEnter(int num){
+	public override void MagicOrbEnter(int num){
 		_magicOrbNum += num; 
 		if(_magicOrbNum > MaxMagicOrb) _magicOrbNum = MaxMagicOrb;
 		SetMagicOrbMeter();
@@ -87,7 +87,7 @@ public class PlayerControl : MonoBehaviour
 	/// </summary>
 	/// <param name="duration">スタン状態の長さ</param>
 	/// <param name="lostMagicOrbNum">没収するマジックオーブの数</param>
-	public void StopperEnter(float duration, int lostMagicOrbNum)
+	public override void StopperEnter(float duration, int lostMagicOrbNum)
 	{
 		StartCoroutine(StopperBump(duration));
 		
@@ -101,7 +101,7 @@ public class PlayerControl : MonoBehaviour
 	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
 	/// </summary>
 	/// <param name="duration">スタン状態の長さ</param>
-	private IEnumerator StopperBump(float duration)
+	protected override IEnumerator StopperBump(float duration)
 	{
 		_isStopped = true;
 		yield return new WaitForSeconds(duration);
@@ -109,10 +109,20 @@ public class PlayerControl : MonoBehaviour
 	}
 
 
-	private void OnTriggerEnter2D(Collider2D other)
+	protected override void OnTriggerEnter2D(Collider2D other)
 	{
 		var playerCollision = other.gameObject.GetComponent<IPlayerCollisionEnterer>();
  		playerCollision?.OnTriggerEnterPlayer(gameObject);
+	}
+
+	protected override void OnTriggerStay2D(Collider2D other) 
+	{
+		var playerCollision = other.gameObject.GetComponent<IPlayerCollisionStayer>();
+		
+		if(playerCollision != null){
+			Debug.Log(other.gameObject);
+			playerCollision.OnTriggerStayPlayer(gameObject);
+		}
 	}
 
 
@@ -176,6 +186,12 @@ public class PlayerControl : MonoBehaviour
             _rb2D.AddForce(-UpVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
         }
         //下向き
+
+		if (Input.GetMouseButtonDown(0))
+		{
+			UseItem();
+		}
+		//アイテムを使う
         
 
         if (!(this.transform.position.x >= _goal.transform.position.x) || _isInGoal) return;

@@ -432,7 +432,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 1
   m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: c5f3da6488cbf42d6bbbae342902de41, type: 2}
@@ -468,6 +468,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451607084beec4d53a9498c2b939af96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  havingItem: 0
+  isInvincible: 0
+  rankManager: {fileID: 0}
+  itemCreator: {fileID: 0}
+  moveSpeed: 300
   itemOrbSePrefab: {fileID: 482917955309039379, guid: 2662230eaad3b4ec392fef1a3e439252, type: 3}
   magicOrbSePrefab: {fileID: 2562034221193356283, guid: 5434597eba19442c48a839e493eb76e9, type: 3}
 --- !u!82 &4148986014203615286

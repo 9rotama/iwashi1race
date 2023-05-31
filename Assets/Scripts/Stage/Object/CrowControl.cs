@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 /// スポーンしたカラスの挙動を担当するクラス
 /// カラスのPrefab及びインスタンスにアタッチされる
 /// </summary>
-public class CrowControl : CollisionEnterObject
+public class CrowControl :  CollisionEnterObject
 {
     [SerializeField] private float destroyPosX;
     [SerializeField] private float moveSpeed = 100f;

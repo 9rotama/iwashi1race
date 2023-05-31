@@ -13,8 +13,8 @@ public class StageWindControl : CollisionStayObject
     /// <param name="cpuPlayer">cpuプレイヤーのGameObject</param>
     public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
     {
-        var playerControl = cpuPlayer.GetComponent<PlayerControl>();
-        playerControl.WindStay(strength);
+        var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
+        cpuPlayerControl.WindStay(strength);
     }
 
     /// <summary>
@@ -23,7 +23,8 @@ public class StageWindControl : CollisionStayObject
     /// <param name="player">プレイヤーのGameObject</param>
     public override void OnTriggerStayPlayer(GameObject player)
     {
-        var cpuPlayerControl = player.GetComponent<CPUplayerControl>();
-        cpuPlayerControl.WindEnter(strength);
+        Debug.Log("かみすぎる！");
+        var playerControl = player.GetComponent<PlayerControl>();
+        playerControl.WindStay(strength);
     }
 }
