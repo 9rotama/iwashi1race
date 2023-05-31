@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class BubbleScript : MonoBehaviour, IItemInitializer
 {
-    GameObject itemControl;
-    ItemControlScript itemScript;
-
     private Racer parentRacer;
 
-    public void ItemInitializeOfPlayer(int id, Vector3 birtherPos, GameObject racer) {
-        //発射音
-     
-    }
-
-    public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) {
+    public void ItemInitialize(Racer racer) 
+    {
         transform.parent = racer.transform;
         parentRacer = racer.GetComponent<Racer>();
         parentRacer.isInvincible = true;

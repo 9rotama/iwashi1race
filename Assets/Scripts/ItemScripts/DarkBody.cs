@@ -29,7 +29,7 @@ public class DarkBody : MonoBehaviour
     private void FixedUpdate() 
     {
         float AddedForce = Random.Range(-baseAddedForce, baseAddedForce) / ((float)_targetRank);
-        _targetRacer.WindStay(AddedForce);
+        _targetRacer.AddForce(AddedForce, new Vector3(1,1,0));
     }
 
  
