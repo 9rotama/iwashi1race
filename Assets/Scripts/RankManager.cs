@@ -58,7 +58,7 @@ public class RankManager : SingletonMonoBehaviour<RankManager>
     public Racer GetOneRankHigherRacer(int id) 
     {
         int rank = GetRank(id);
-        int oneRankHigher = rank > 1 ? rank-1 : racer.Length-1;
+        int oneRankHigher = rank > 1 ? rank-1 : racers.Length;
 
         return racers[oneRankHigher-1];
     }
