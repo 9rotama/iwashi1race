@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// レーサーの服や髪などのスプライトの見た目を操作するクラス
+/// </summary>
 public class RacerSpriteController : MonoBehaviour
 {
     [SerializeField] private Sprite spriteSpeed0;
@@ -12,7 +14,10 @@ public class RacerSpriteController : MonoBehaviour
     private Racer _racer;
     private readonly int _hue = Shader.PropertyToID("_Hue");
 
-
+    /// <summary>
+    /// 特定のスプライトの色相を変更する
+    /// </summary>
+    /// <param name="h">色相(0.0~1.0)</param>
     public void SetMaterialHue(float h)
     {
         _spriteRenderer.material.SetFloat(_hue, h);

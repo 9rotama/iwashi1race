@@ -10,7 +10,7 @@ public class StageWindControl : MonoBehaviour, IRacerCollisionStayer
     /// <summary>
     /// レーサーが風内にいるときレーサー側の風の力を加える関数を実行する
     /// </summary>
-    /// <param name="cpuPlayer">レーサーのクラス</param>
+    /// <param name="racer">レーサーのクラス</param>
     public void OnTriggerStayRacer(Racer racer)
     {
         racer.AddForce(strength, Vector3.right);
