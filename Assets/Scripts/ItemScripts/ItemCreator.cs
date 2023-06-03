@@ -33,16 +33,31 @@ public class ItemCreator : MonoBehaviour
     /// </summary>
     /// <param name="position">アイテム生成位置</param>
     /// <param name="racer">レーサー</param>
-    public void CreateItemGameObject(Vector3 position, Racer racer) { 
+    public void CreateItemGameObject(Racer racer) { 
+
+        // デバッグ
+        racer.havingItem = Items.Dark;
+        Debug.Log(racer.havingItem);
+
+        if(racer.havingItem == Items.Nothing) {
+            return;
+        }
 
         GameObject itemObj = (GameObject)Instantiate(
                 itemObjects[(int)racer.havingItem], 
-                position,
+                racer.transform.position,
                 Quaternion.identity
             );
-        
-        // itemObjを作った生みの親(レーサー)のIDを保持する
-        itemObj.GetComponent<CollisionEnterObject>().birtherId = racer.id;
+
+        // アイテムの初期化
+        var ItemInitializer = itemObj.GetComponent<IItemInitializer>();
+        if(ItemInitializer != null) {
+            ItemInitializer.ItemInitialize(racer);
+        }
+        else {
+            //何もしない
+        }
+
 
         if(racer.havingItem == Items.Bubble) {
             itemObj.transform.SetParent(racer.transform);

@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 /// スポーンしたカラスの挙動を担当するクラス
 /// カラスのPrefab及びインスタンスにアタッチされる
 /// </summary>
-public class CrowControl : CollisionEnterObject
+public class CrowControl : MonoBehaviour, IRacerCollisionEnterer
 {
     [SerializeField] private float destroyPosX;
     [SerializeField] private float moveSpeed = 100f;
@@ -17,26 +17,13 @@ public class CrowControl : CollisionEnterObject
 
 
     /// <summary>
-    /// カラスがCPUと衝突したときCPU側を止まらせる処理を行う
+    /// カラスがレーサーと衝突したときレーサー側を止まらせる処理を行う
     /// 自身は削除される
     /// </summary>
-    /// <param name="cpuPlayer">cpuプレイヤーのGameObject</param>
-    public override void OnTriggerEnterCPUPlayer(GameObject cpuPlayer)
+    /// <param name="cpuPlayer">レーサーのクラス</param>
+    public void OnTriggerEnterRacer(Racer racer)
     {
-        var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
-        cpuPlayerControl.StopperEnter(playerStopDur, lostMagicOrbNum);
-        Destroy(this.gameObject);
-    }
-    
-    /// <summary>
-    /// カラスがプレイヤーと衝突したときプレイヤー側を止まらせる処理を行う
-    /// 自身は削除される
-    /// </summary>
-    /// <param name="player">プレイヤーのGameObject</param>
-    public override void OnTriggerEnterPlayer(GameObject player)
-    {
-        var playerControl = player.GetComponent<PlayerControl>();
-        playerControl.StopperEnter(playerStopDur, lostMagicOrbNum);
+        racer.StopperEnter(playerStopDur, lostMagicOrbNum);
         Destroy(this.gameObject);
     }
 

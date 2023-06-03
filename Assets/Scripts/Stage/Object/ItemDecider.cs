@@ -13,8 +13,13 @@ public class ItemDecider : MonoBehaviour
     /// <summary>
     /// レーサーのアイテムを決める関数
     /// </summary>
-    void DecideItem(Racer racer)
+    public void DecideItem(Racer racer)
     {
+
+        if(racer.havingItem != Items.Nothing) {
+            return;
+        }
+
         //!他のクラスアイテムオーブかなに移行するかどうか、上の変数も
         // if(transform.parent.tag == "Player"){
         //     randomItemUI.SetActive(true);
@@ -25,7 +30,7 @@ public class ItemDecider : MonoBehaviour
         int[] ItemProbabilities = new int[System.Enum.GetNames(typeof(Items)).Length-1];
         
         // 順位によってどのItemが使えるかの確率が変わる
-        switch(racer.GetRank()){
+        switch(RankManager.Instance.GetRank(racer.id)){
             case 1:
                 ItemProbabilities[(int)Items.Wind]    = 0;
                 ItemProbabilities[(int)Items.Dark]    = 0;

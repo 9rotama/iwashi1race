@@ -6,33 +6,19 @@ using UnityEngine;
 /// マジックオーブの回収処理などを担当するクラス
 /// マジックオーブのPrefab及びインスタンスにアタッチされる
 /// </summary>
-public class StageMagicOrbControl : CollisionEnterObject
+public class StageMagicOrbControl : MonoBehaviour, IRacerCollisionEnterer
 {
     [SerializeField] private int increaseNum;
     private OrbSpawner _parentOrbSpawner;
 
     /// <summary>
-    /// マジックオーブがCPUと衝突したときCPU側のマジックオーブゲージを増やす関数を実行
+    /// マジックオーブがレーサーと衝突したときレーサー側のマジックオーブゲージを増やす関数を実行
     /// 自身は削除される
     /// </summary>
-    /// <param name="cpuPlayer">cpuプレイヤーのGameObject</param>
-    public override void OnTriggerEnterCPUPlayer(GameObject cpuPlayer)
+    /// <param name="cpuPlayer">レーサーのクラス</param>
+    public void OnTriggerEnterRacer(Racer racer)
     {
-        var cpuPlayerControl = cpuPlayer.GetComponent<CPUplayerControl>();
-        cpuPlayerControl.MagicOrbEnter(increaseNum);
-        _parentOrbSpawner.OrbDestroyed();
-        Destroy(this.gameObject);
-    }
-    
-    /// <summary>
-    /// マジックオーブがCPUと衝突したときプレイヤー側のマジックオーブゲージを増やす関数を実行
-    /// 自身は削除される
-    /// </summary>
-    /// <param name="player">プレイヤーのGameObject</param>
-    public override void OnTriggerEnterPlayer(GameObject player)
-    {
-        var playerControl = player.GetComponent<PlayerControl>();
-        playerControl.MagicOrbEnter(increaseNum);
+        racer.MagicOrbEnter(increaseNum);
         _parentOrbSpawner.OrbDestroyed();
         Destroy(this.gameObject);
     }

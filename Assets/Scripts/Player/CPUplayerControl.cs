@@ -4,101 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class CPUplayerControl : MonoBehaviour
+public class CPUplayerControl : Racer
 {
 	[SerializeField] private float nextWaypointDistance;
 	[SerializeField] public float scatterFac = 0.1f;
 
-	private const float MoveSpeed = 180f;
-	private const int MaxMagicOrb = 50;
-	private const float MaxRateOfBoostByMagicOrb = 0.5f;
-    
     public Transform target; //targetに向かってCPUが動く
-
-    private bool _isStopped = false;
-    
-
     private Path _path;
     private int _currentWaypoint;
-    
     private Seeker _seeker;
-    private Rigidbody2D _rb2D;
-    
     private float _scX, _scY;
-
-	private readonly Vector3 _forwardVec = new Vector3(1.0f, 0f, 0f);
-
-	private Vector3 _prevPosition;
-    private Vector2 _velocityVec2;
-    private float _velocity = 0f;
-    
-    private int _magicOrbNum;
-
-    
-	private GameManagerControl _gameManagerCtrl;
-
-	/// <summary>
-	/// プレイヤーの速度を返す
-	/// </summary>
-	/// <returns>速度</returns>
-	public float GetVelocity()
-    {
-        return _velocity; 
-    }
-
-	/// <summary>
-	/// プレイヤーの速度x成分,y成分(Vector2)を返す
-	/// </summary>
-	/// <returns>速度のVector2</returns>
-	public Vector2 GetVelocityVec2()
-    {
-        return _velocityVec2; 
-    }
-
-	/// <summary>
-	/// プレイヤーのマジックオーブの所持量を増やす
-	/// ゲージに反映する
-	/// </summary>
-	/// <param name="num">マジックオーブの増加量</param>
-	public void MagicOrbEnter(int num){
-		_magicOrbNum += num; 
-		if(_magicOrbNum > 50) _magicOrbNum = 50;
-	}
-	
-	/// <summary>
-	/// 追い風,向かい風に侵入している間プレイヤーに風力を加える
-	/// 風のコントローラ側から呼び出される
-	/// </summary>
-	/// <param name="multiplier">風の強さの係数</param>
-	public void WindEnter(float multiplier){
-		_rb2D.AddForce(_forwardVec * Time.deltaTime * multiplier); 
-	}
-
-
-
-	/// <summary>
-	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
-	/// </summary>
-	/// <param name="duration">スタン状態の長さ</param>
-	/// <param name="lostMagicOrbNum">没収するマジックオーブの数</param>
-	public void StopperEnter(float duration, int lostMagicOrbNum)
-	{
-		StartCoroutine(StopperBump(duration));
-		
-		_magicOrbNum -= lostMagicOrbNum;
-		if(_magicOrbNum < 0) _magicOrbNum = 0;
-	}
-
-	/// <summary>
-	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
-	/// </summary>
-	/// <param name="duration">スタン状態の長さ</param>
-	private IEnumerator StopperBump(float duration)
-	{
-		_isStopped = true;
-		yield return new WaitForSeconds(duration);
-		_isStopped = false;
-	}
 
 	private void OnPathComplete(Path p)
 	{
@@ -107,11 +22,6 @@ public class CPUplayerControl : MonoBehaviour
 		_currentWaypoint = 0;
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		var cpuPlayerCollision = other.gameObject.GetComponent<ICPUPlayerCollisionEnterer>();
-		cpuPlayerCollision?.OnTriggerEnterCPUPlayer(gameObject);
-	}
 	
 	private void Start()
     {
@@ -132,6 +42,11 @@ public class CPUplayerControl : MonoBehaviour
 
 	private void FixedUpdate()
     {
+		// if(UnityEngine.Random.Range(0,100) == 0) {
+		// 	UseItem();
+		// }
+		//アイテム使用
+
 		if(_gameManagerCtrl.GetGameState() == 0 || transform.position.x > target.position.x + 10) return;
 		
 		if (_isStopped)

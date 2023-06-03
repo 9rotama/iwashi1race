@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbScript : MonoBehaviour
+public class OrbScript : MonoBehaviour, IItemInitializer
 {
     private GameObject _parant;
     private float _theta;
@@ -22,6 +22,12 @@ public class OrbScript : MonoBehaviour
         else {
             _parant.GetComponent<CPUplayerControl>().MagicOrbEnter(orbGainNum);
         }
+    }
+
+    public void ItemInitialize(Racer racer)
+    {
+        transform.SetParent(racer.transform);
+        racer.MagicOrbEnter(orbGainNum);
     }
 
     // Update is called once per frame

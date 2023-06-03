@@ -4,76 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : Racer
 {
     [SerializeField] private GameObject itemOrbSePrefab;
     [SerializeField] private GameObject magicOrbSePrefab;
-	
-    private const float MoveSpeed = 180f;
-    private const int MaxMagicOrb = 50;
-    private const float MaxRateOfBoostByMagicOrb = 0.5f;
-
-    private static Vector3 ForwardVec => new Vector3(1.0f, 0f, 0f);
-
-    private static Vector3 UpVec => new Vector3(0f, 1.0f, 0f);
-
-    private Rigidbody2D _rb2D;
+    
     private GameObject _goal; 
 	private bool _isInGoal;
-	private bool _isStopped;
-	private Vector3 _prevPosition;
-    private Vector2 _velocityVec2;
-    private float _velocity;
-    
+	
     private MagicOrbMeterControl _magicOrbMeterControl;
-    private int _magicOrbNum;
-    
 	private AudioSource _audioSource;
 	
-	private GameManagerControl _gameManagerCtrl;
-	
-	/// <summary>
-	/// プレイヤーの速度を返す
-	/// </summary>
-	/// <returns>速度</returns>
-	public float GetVelocity()
-    {
-        return _velocity; 
-    }
-
-	/// <summary>
-	/// プレイヤーの速度x成分,y成分(Vector2)を返す
-	/// </summary>
-	/// <returns>速度のVector2</returns>
-	public Vector2 GetVelocityVec2()
-    {
-        return _velocityVec2; 
-    }
-
 	/// <summary>
 	/// 魔法オーブの取得数をゲージに反映
 	/// </summary>
 	private void SetMagicOrbMeter(){
 		_magicOrbMeterControl.SetMeter(_magicOrbNum);
 	}
-
-	/// <summary>
-	/// 追い風,向かい風に侵入している間プレイヤーに風力を加える
-	/// 風のコントローラ側から呼び出される
-	/// </summary>
-	/// <param name="multiplier">風の強さの係数</param>
-	public void WindStay(float multiplier){
-		_rb2D.AddForce(ForwardVec * Time.deltaTime * multiplier); 
-	}
-
+	
 	/// <summary>
 	/// プレイヤーのマジックオーブの所持量を増やす
 	/// ゲージに反映する
 	/// </summary>
 	/// <param name="num">マジックオーブの増加量</param>
-	public void MagicOrbEnter(int num){
-		_magicOrbNum += num; 
-		if(_magicOrbNum > MaxMagicOrb) _magicOrbNum = MaxMagicOrb;
+	public override void MagicOrbEnter(int num){
+		base.MagicOrbEnter(num);
 		SetMagicOrbMeter();
 		
 		//音のプレハブを作成して再生後削除する
@@ -83,36 +38,17 @@ public class PlayerControl : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
+	/// 障害物にぶつかったときにレーサーをスタン状態にし、マジックオーブを没収する
+	/// ぶつかった際のSEを再生する
 	/// </summary>
 	/// <param name="duration">スタン状態の長さ</param>
 	/// <param name="lostMagicOrbNum">没収するマジックオーブの数</param>
-	public void StopperEnter(float duration, int lostMagicOrbNum)
+
+	public override void StopperEnter(float duration, int lostMagicOrbNum)
 	{
-		StartCoroutine(StopperBump(duration));
-		
-		_magicOrbNum -= lostMagicOrbNum;
-		if(_magicOrbNum < 0) _magicOrbNum = 0;
+		base.StopperEnter(duration, lostMagicOrbNum);
 		SetMagicOrbMeter();
 		_audioSource.Play();
-	}
-
-	/// <summary>
-	/// 障害物にぶつかったときにプレイヤーをスタン状態にし、マジックオーブを没収する
-	/// </summary>
-	/// <param name="duration">スタン状態の長さ</param>
-	private IEnumerator StopperBump(float duration)
-	{
-		_isStopped = true;
-		yield return new WaitForSeconds(duration);
-		_isStopped = false;
-	}
-
-
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		var playerCollision = other.gameObject.GetComponent<IPlayerCollisionEnterer>();
- 		playerCollision?.OnTriggerEnterPlayer(gameObject);
 	}
 
 
@@ -155,27 +91,33 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            _rb2D.AddForce(ForwardVec * (MoveSpeed + orbBoost)); 
+            AddForce( MoveSpeed + orbBoost, Vector3.right); 
         }
         //アクセル
         
         if (Input.GetKey(KeyCode.A))
         {
-            _rb2D.AddForce(-ForwardVec * (MoveSpeed + orbBoost)); 
+            AddForce( MoveSpeed + orbBoost, -Vector3.right); 
         }
         //ブレーキ
         
         if (Input.GetKey(KeyCode.W))
         {
-            _rb2D.AddForce(UpVec * (MoveSpeed + orbBoost)); 
+            AddForce( MoveSpeed + orbBoost, -Vector3.up); 
         }
         //上向き
         
         if (Input.GetKey(KeyCode.S))
         {
-            _rb2D.AddForce(-UpVec * (MoveSpeed + orbBoost)); 
+            AddForce( MoveSpeed + orbBoost, -Vector3.up); 
         }
         //下向き
+
+		if (Input.GetMouseButtonDown(0))
+		{
+			UseItem();
+		}
+		//アイテムを使う
         
 
         if (!(this.transform.position.x >= _goal.transform.position.x) || _isInGoal) return;

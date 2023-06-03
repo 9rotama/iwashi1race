@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3653764230540376914}
   - component: {fileID: 3653764230540376915}
   - component: {fileID: 3653764230540376916}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3653764230750094365}
   - component: {fileID: 3653764230750094366}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Broom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 3653764230793957125}
   - component: {fileID: 3653764230793957126}
   - component: {fileID: 3653764230793957127}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 3653764231064802361}
   m_Layer: 7
   m_Name: CPUPlayer
-  m_TagString: Enemy
+  m_TagString: CPUPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -412,6 +412,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6c267f3ec754f139adbfc74e266a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rankManager: {fileID: 0}
+  itemCreator: {fileID: 0}
   nextWaypointDistance: 1
   scatterFac: 10
   target: {fileID: 0}
@@ -426,7 +428,7 @@ GameObject:
   - component: {fileID: 3653764231190195907}
   - component: {fileID: 3653764231190195909}
   - component: {fileID: 3653764231190195908}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shoes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,7 +527,7 @@ GameObject:
   - component: {fileID: 3653764231554895107}
   - component: {fileID: 3653764231554895108}
   - component: {fileID: 3653764231554895109}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Clothes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,6 +625,10 @@ PrefabInstance:
     - target: {fileID: 5530516802472293884, guid: 8fd2f89d6b20c49ebb056ad5592ddafd, type: 3}
       propertyPath: m_Name
       value: ItemController
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530516802472293884, guid: 8fd2f89d6b20c49ebb056ad5592ddafd, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5530516802472293885, guid: 8fd2f89d6b20c49ebb056ad5592ddafd, type: 3}
       propertyPath: m_RootOrder

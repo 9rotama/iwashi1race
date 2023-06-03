@@ -3,27 +3,17 @@
 /// <summary>
 /// プレイヤーと追い風の接触した際の処理を担当するクラス
 /// </summary>
-public class StageWindControl : CollisionStayObject
+public class StageWindControl : MonoBehaviour, IRacerCollisionStayer
 {
     [SerializeField] private float strength = 20f;
 
     /// <summary>
-    /// CPUが風内にいるときCPU側の風の力を加える関数を実行する
+    /// レーサーが風内にいるときレーサー側の風の力を加える関数を実行する
     /// </summary>
-    /// <param name="cpuPlayer">cpuプレイヤーのGameObject</param>
-    public override void OnTriggerStayCPUPlayer(GameObject cpuPlayer)
+    /// <param name="cpuPlayer">レーサーのクラス</param>
+    public void OnTriggerStayRacer(Racer racer)
     {
-        var playerControl = cpuPlayer.GetComponent<PlayerControl>();
-        playerControl.WindStay(strength);
+        racer.AddForce(strength, Vector3.right);
     }
 
-    /// <summary>
-    ///  CPUが風内にいるときCPU側の風の力を加える関数を実行する
-    /// </summary>
-    /// <param name="player">プレイヤーのGameObject</param>
-    public override void OnTriggerStayPlayer(GameObject player)
-    {
-        var cpuPlayerControl = player.GetComponent<CPUplayerControl>();
-        cpuPlayerControl.WindEnter(strength);
-    }
 }

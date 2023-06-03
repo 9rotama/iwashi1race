@@ -7,7 +7,7 @@ public class ThunderSpriteScript : MonoBehaviour
     SpriteRenderer MainSpriteRenderer;
     [SerializeField] Sprite[] sprites;
     [SerializeField] GameObject[] shockPlayer;
-    SpriteRenderer render;
+    [SerializeField] SpriteRenderer spriteRenderer;
     public GameObject targetObj;
     [SerializeField] GameObject bullet;
     int spriteNum = 0;
@@ -16,14 +16,14 @@ public class ThunderSpriteScript : MonoBehaviour
     float time;
     public int rank;
 
-    AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        render = gameObject.GetComponent<SpriteRenderer>();
-        render.color -= new Color(0, 0, 0, 1);
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.color -= new Color(0, 0, 0, 1);
+        
         MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         targetObj = transform.parent.gameObject;
         transform.parent = null;
@@ -34,8 +34,8 @@ public class ThunderSpriteScript : MonoBehaviour
     {
         time += Time.deltaTime;
         transform.position = new Vector3(targetObj.transform.position.x, targetObj.transform.position.y + 25f, 0);
-        render.color += new Color(0,0,0,0.01f);
-        if(render.color.a >= 1f && !once){
+        spriteRenderer.color += new Color(0,0,0,0.01f);
+        if(spriteRenderer.color.a >= 1f && !once){
             for(int i=0; i< sprites.Length; i++){
                 Invoke("ChangeSprite",0.05f*i);
             }
@@ -72,18 +72,18 @@ public class ThunderSpriteScript : MonoBehaviour
     void CreateBullet()
     {
         GameObject itemCon = targetObj.transform.Find("ItemController").gameObject;
-        ItemControlScript itemScript = itemCon.GetComponent<ItemControlScript>();
+        // ItemControlScript itemScript = itemCon.GetComponent<ItemControlScript>();
          
-        if(itemScript.isDefence){
-            Destroy(itemCon.transform.GetChild(0).gameObject);
-            itemScript.isDefence = false;
-            Destroy(this.gameObject);
-        } 
-        else{
-            if(targetObj.tag == "Player") { audioSource.Play();}
-            isShocked = true;
-            CreateShockPlayer();
-        }
+        // if(itemScript.isDefence){
+        //     Destroy(itemCon.transform.GetChild(0).gameObject);
+        //     itemScript.isDefence = false;
+        //     Destroy(this.gameObject);
+        // } 
+        // else{
+        //     if(targetObj.tag == "Player") { audioSource.Play();}
+        //     isShocked = true;
+        //     CreateShockPlayer();
+        // }
     }
 
     public void CreateShockPlayer()
