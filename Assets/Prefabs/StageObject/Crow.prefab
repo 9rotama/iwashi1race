@@ -116,8 +116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee0a1c6d8ad24e7698917f69e680d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  birtherId: 0
   destroyPosX: -270
+  moveSpeed: 100
+  playerStopDur: 1
+  lostMagicOrbNum: 10
 --- !u!70 &5154093311922193771
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

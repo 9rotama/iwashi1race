@@ -8,6 +8,7 @@ public class CPUplayerControl : Racer
 {
 	[SerializeField] private float nextWaypointDistance;
 	[SerializeField] public float scatterFac = 0.1f;
+
     public Transform target; //targetに向かってCPUが動く
     private Path _path;
     private int _currentWaypoint;
@@ -39,27 +40,23 @@ public class CPUplayerControl : Racer
     }
 
 
-	private void Update()
+	private void FixedUpdate()
     {
 		// if(UnityEngine.Random.Range(0,100) == 0) {
 		// 	UseItem();
 		// }
 		//アイテム使用
 
-		if(_gameManagerCtrl.GetGameState() == 0 || transform.position.x > target.position.x + 10) return;
+		if(_gameManagerCtrl.GetGameState() == GameState.Idle || transform.position.x > target.position.x + 10) return;
 		
+		CalcVelocity();
+
 		if (_isStopped)
 		{
-			_rb2D.velocity /= 5;
+			StopRb();
 			return;
 		}
-
-		var position = transform.position;
-		_velocityVec2 = (position - _prevPosition) / Time.deltaTime;
-        _velocity = (float)Math.Sqrt(Math.Pow(_velocityVec2.x,2)+Math.Pow(_velocityVec2.y,2));
-        _prevPosition = position;		
-
-
+		
         if (_path == null) return;
 
         if (_currentWaypoint >= _path.vectorPath.Count)
@@ -72,10 +69,9 @@ public class CPUplayerControl : Racer
         var direction = ((Vector2) _path.vectorPath[_currentWaypoint] - _rb2D.position + scatterVec * scatterFac).normalized;
         
         var orbNum = (float) _magicOrbNum;
-        var orbBoost = (orbNum / MaxMagicOrb) * moveSpeed / MaxRateOfBoostByMagicOrb;
+        var orbBoost = orbNum * MoveSpeed * MaxRateOfBoostByMagicOrb / MaxMagicOrb;
         
-        var force = direction * (moveSpeed * Time.deltaTime * 16 + orbBoost);
-        _rb2D.AddForce(force);
+        AddForce(MoveSpeed + orbBoost, direction);
         
         var distance = Vector2.Distance(_rb2D.position, _path.vectorPath[_currentWaypoint]);
 
@@ -83,5 +79,6 @@ public class CPUplayerControl : Racer
         _currentWaypoint++;
         _scX = UnityEngine.Random.value - 0.5f;
         _scY = UnityEngine.Random.value - 0.5f;
+
     }
 }
