@@ -3,106 +3,118 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+
+public enum GameState
+{
+    Idle,
+    Race,
+    Goal
+}
 
 public class GameManagerControl : MonoBehaviour
 {
     
-    private int gameState = 0; //0...カウントダウン中 1...プレイ中 2...ゴール
+    
+    private GameState _gameState; //0...カウントダウン中 1...プレイ中 2...ゴール
 
-    public AudioClip countdownSE,goalSE,bgm;
+    [SerializeField] private AudioClip countdownSe, goalSe,bgm;
 
     public GameObject countdownUI;
     public GameObject resultUI;
     public GameObject rankingUI;
 
-    private Text rText;
-    private CountdownControl countdownControl;
-    private RankingControl rankingControl;
-    private AudioSource audioSource;
+    private Text _rText;
+    private CountdownControl _countdownControl;
+    private RankingControl _rankingControl;
+    private AudioSource _audioSource;
     // Start is called before the first frame update
 
-    private float totalTime;
+    private float _totalTime;
 
-    public int GetGameState()
+    public GameState GetGameState()
     {
-        return gameState;
+        return _gameState;
+    }
+
+    private void SetGameState(GameState gameState)
+    {
+        _gameState = gameState;
     }
 
     public void PlayerGoal()
     {
         resultUI.SetActive(true); 
         var rank = RankManager.Instance.GetRank(0);
-        rText.text = "position: " + rank.ToString()
-                                  + "\ntime: "+ totalTime.ToString();
+        _rText.text = "position: " + rank + "\ntime: "+ _totalTime;
 
-        audioSource.clip = goalSE;
-        audioSource.loop = false;
-        audioSource.Play();
+        _audioSource.clip = goalSe;
+        _audioSource.loop = false;
+        _audioSource.Play();
         
-        gameState = 2;
+       SetGameState(GameState.Goal);
     }
 
-    void Start()
+    private void Start()
     {
-        
-        audioSource = gameObject.GetComponent<AudioSource>();
+        _audioSource = gameObject.GetComponent<AudioSource>();
 
-        countdownControl = countdownUI.GetComponent<CountdownControl>();
-        rankingControl = rankingUI.GetComponent<RankingControl>();
-        rText = resultUI.transform.GetChild(0).GetComponent<Text>();
+        _countdownControl = countdownUI.GetComponent<CountdownControl>();
+        _rankingControl = rankingUI.GetComponent<RankingControl>();
+        _rText = resultUI.transform.GetChild(0).GetComponent<Text>();
 
-        totalTime = 0;
+        _totalTime = 0;
         resultUI.SetActive(false);
-        StartCoroutine (nameof(BeforeStart));
+        StartCoroutine (CountDown());
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (gameState == 1)
+        switch (_gameState)
         {
-            totalTime += Time.deltaTime;
-        }
-
-        if (gameState == 2 && Input.GetMouseButtonDown (0))
-        {
-            SceneManager.LoadScene ("Title");
+            case GameState.Race:
+                _totalTime += Time.deltaTime;
+                break;
+            case GameState.Goal when Input.GetMouseButtonDown (0):
+                SceneManager.LoadScene ("Title");
+                break;
         }
     }
 
-    IEnumerator BeforeStart()
+    private IEnumerator CountDown()
     {
         while (true)
         {
-            gameState = 0;
+            _gameState = 0;
             
-            countdownControl.SetSprite(0);
+            _countdownControl.SetSprite(0);
             yield return new WaitForSeconds(3);
             
-            countdownControl.SetSprite(3);
-            audioSource.clip = countdownSE;
-            audioSource.Play();
+            _countdownControl.SetSprite(3);
+            _audioSource.clip = countdownSe;
+            _audioSource.Play();
             
             yield return new WaitForSeconds(1);
             
-            countdownControl.SetSprite(2);
+            _countdownControl.SetSprite(2);
             
             yield return new WaitForSeconds(1);
             
-            countdownControl.SetSprite(1);
+            _countdownControl.SetSprite(1);
             
             yield return new WaitForSeconds(1);
-            
-            gameState = 1;
-            countdownControl.SetSprite(4);
+
+            SetGameState(GameState.Race);
+            _countdownControl.SetSprite(4);
             
             yield return new WaitForSeconds(0.5f);
             
-            audioSource.clip = bgm;
-            audioSource.Play();
-            audioSource.loop = true;
+            _audioSource.clip = bgm;
+            _audioSource.Play();
+            _audioSource.loop = true;
             
-            countdownControl.SetSprite(0);
+            _countdownControl.SetSprite(0);
 
             yield break;
         }

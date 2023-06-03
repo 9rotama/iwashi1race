@@ -40,7 +40,7 @@ public class CrowSpawner : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(_gameManagerCtrl.GetGameState() == 0) return;
+        if(_gameManagerCtrl.GetGameState() == GameState.Idle) return;
         //レースがスタートしていなければ処理しない
         if (!_isCoroutineStarted)
         {

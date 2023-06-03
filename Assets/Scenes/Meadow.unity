@@ -7446,6 +7446,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 790126783166863353, guid: 1e6649f5176184685a64a15e75cf3840, type: 3}
   m_PrefabInstance: {fileID: 1228034287}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1232470041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7588740865915844228, guid: 180cb248a74bc40598e4d4aef0cdf5f1, type: 3}
+  m_PrefabInstance: {fileID: 1263109422}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1232470044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232470041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75fbe23669e5842bea345699bf8dbae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rankSprites: []
+  suffixSprites: []
 --- !u!1001 &1234888558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8493,8 +8512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc367a3bcecc432bb0634ce45362b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownSE: {fileID: 8300000, guid: 56a3b81f213a84c9bb5dc35a2a8db203, type: 3}
-  goalSE: {fileID: 8300000, guid: 571f6101c935947c098ed5c97c07ee99, type: 3}
+  countdownSe: {fileID: 8300000, guid: 56a3b81f213a84c9bb5dc35a2a8db203, type: 3}
+  goalSe: {fileID: 8300000, guid: 571f6101c935947c098ed5c97c07ee99, type: 3}
   bgm: {fileID: 8300000, guid: 94cb8dbaa0f24494fb4b8c2fdbcb813d, type: 3}
   countdownUI: {fileID: 22810609}
   resultUI: {fileID: 820226112}

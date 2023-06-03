@@ -71,8 +71,7 @@ public class PlayerControl : Racer
 	
 	private void FixedUpdate()
     {
-		if(_gameManagerCtrl.GetGameState() == 0) return;
-		//レースがスタートしていなければ処理しない
+		if(_gameManagerCtrl.GetGameState() == GameState.Idle) return;
 
 		if (_isStopped)
 		{

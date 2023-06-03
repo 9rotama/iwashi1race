@@ -47,7 +47,7 @@ public class CPUplayerControl : Racer
 		// }
 		//アイテム使用
 
-		if(_gameManagerCtrl.GetGameState() == 0 || transform.position.x > target.position.x + 10) return;
+		if(_gameManagerCtrl.GetGameState() == GameState.Idle || transform.position.x > target.position.x + 10) return;
 		
 		if (_isStopped)
 		{
