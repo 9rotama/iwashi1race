@@ -6,13 +6,12 @@ using Pathfinding;
 
 public class CPUplayerControl : MonoBehaviour
 {
-	[SerializeField] private float moveSpeed = 1000f;
 	[SerializeField] private float nextWaypointDistance;
 	[SerializeField] public float scatterFac = 0.1f;
 
-	
-    private const float MaxRateOfBoostByMagicOrb = 20f;
-    private const int MaxMagicOrb = 50;
+	private const float MoveSpeed = 180f;
+	private const int MaxMagicOrb = 50;
+	private const float MaxRateOfBoostByMagicOrb = 0.5f;
     
     public Transform target; //targetに向かってCPUが動く
 
@@ -131,7 +130,7 @@ public class CPUplayerControl : MonoBehaviour
     }
 
 
-	private void Update()
+	private void FixedUpdate()
     {
 		if(_gameManagerCtrl.GetGameState() == 0 || transform.position.x > target.position.x + 10) return;
 		
@@ -159,9 +158,9 @@ public class CPUplayerControl : MonoBehaviour
         var direction = ((Vector2) _path.vectorPath[_currentWaypoint] - _rb2D.position + scatterVec * scatterFac).normalized;
         
         var orbNum = (float) _magicOrbNum;
-        var orbBoost = (orbNum / MaxMagicOrb) * moveSpeed / MaxRateOfBoostByMagicOrb;
+        var orbBoost = orbNum * MoveSpeed * MaxRateOfBoostByMagicOrb / MaxMagicOrb;
         
-        var force = direction * (moveSpeed * Time.deltaTime * 16 + orbBoost);
+        var force = direction * (MoveSpeed + orbBoost);
         _rb2D.AddForce(force);
         
         var distance = Vector2.Distance(_rb2D.position, _path.vectorPath[_currentWaypoint]);
@@ -170,5 +169,6 @@ public class CPUplayerControl : MonoBehaviour
         _currentWaypoint++;
         _scX = UnityEngine.Random.value - 0.5f;
         _scY = UnityEngine.Random.value - 0.5f;
+
     }
 }

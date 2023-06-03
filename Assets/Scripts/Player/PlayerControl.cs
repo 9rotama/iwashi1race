@@ -6,12 +6,12 @@ using UnityEngine.Serialization;
 
 public class PlayerControl : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 1000f;
     [SerializeField] private GameObject itemOrbSePrefab;
     [SerializeField] private GameObject magicOrbSePrefab;
 	
+    private const float MoveSpeed = 180f;
     private const int MaxMagicOrb = 50;
-    private const float MaxRateOfBoostByMagicOrb = 20f;
+    private const float MaxRateOfBoostByMagicOrb = 0.5f;
 
     private static Vector3 ForwardVec => new Vector3(1.0f, 0f, 0f);
 
@@ -20,10 +20,10 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D _rb2D;
     private GameObject _goal; 
 	private bool _isInGoal;
-	private bool _isStopped = false;
+	private bool _isStopped;
 	private Vector3 _prevPosition;
     private Vector2 _velocityVec2;
-    private float _velocity = 0f;
+    private float _velocity;
     
     private MagicOrbMeterControl _magicOrbMeterControl;
     private int _magicOrbNum;
@@ -132,8 +132,8 @@ public class PlayerControl : MonoBehaviour
 		_magicOrbMeterControl = magicOrbMeter.GetComponent<MagicOrbMeterControl>();
 
     }
-
-	private void Update()
+	
+	private void FixedUpdate()
     {
 		if(_gameManagerCtrl.GetGameState() == 0) return;
 		//レースがスタートしていなければ処理しない
@@ -151,29 +151,29 @@ public class PlayerControl : MonoBehaviour
         // 移動速度計算
 
         var orbNum = (float) _magicOrbNum;
-        var orbBoost = (orbNum / MaxMagicOrb) * moveSpeed / MaxRateOfBoostByMagicOrb;
+        var orbBoost = orbNum * MoveSpeed * MaxRateOfBoostByMagicOrb / MaxMagicOrb;
 
         if (Input.GetKey(KeyCode.D))
         {
-            _rb2D.AddForce(ForwardVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            _rb2D.AddForce(ForwardVec * (MoveSpeed + orbBoost)); 
         }
         //アクセル
         
         if (Input.GetKey(KeyCode.A))
         {
-            _rb2D.AddForce(-ForwardVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            _rb2D.AddForce(-ForwardVec * (MoveSpeed + orbBoost)); 
         }
         //ブレーキ
         
         if (Input.GetKey(KeyCode.W))
         {
-            _rb2D.AddForce(UpVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            _rb2D.AddForce(UpVec * (MoveSpeed + orbBoost)); 
         }
         //上向き
         
         if (Input.GetKey(KeyCode.S))
         {
-            _rb2D.AddForce(-UpVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            _rb2D.AddForce(-UpVec * (MoveSpeed + orbBoost)); 
         }
         //下向き
         
