@@ -26,7 +26,6 @@ public abstract class Racer : MonoBehaviour
     protected Vector2 _velocityVec2;
     protected float _velocity = 0f;
     protected Rigidbody2D _rb2D;
-    protected static Vector3 ForwardVec = Vector3.right;
     protected const float MaxRateOfBoostByMagicOrb = 0.5f;
     protected Vector3 _prevPosition;
     protected GameManagerControl _gameManagerCtrl;
@@ -79,6 +78,19 @@ public abstract class Racer : MonoBehaviour
 		_rb2D.AddForce(vector * multiplier); 
 	}
 
+    protected void StopRb()
+    {
+	    _rb2D.velocity = new Vector2(0, 0);
+    }
+
+    protected void CalcVelocity()
+    {
+	    var position = transform.position;
+	    _velocityVec2 = (position - _prevPosition) / Time.deltaTime;
+	    _velocity = (float)Math.Sqrt(Math.Pow(_velocityVec2.x,2)+Math.Pow(_velocityVec2.y,2));
+	    _prevPosition = position;	
+    }
+
     /// <summary>
 	/// 障害物にぶつかったときにレーサーをスタン状態にし、マジックオーブを没収する
 	/// </summary>
@@ -97,7 +109,7 @@ public abstract class Racer : MonoBehaviour
 	/// 指定された時間レーサーをスタン状態にする
 	/// </summary>
 	/// <param name="duration">スタン状態の長さ</param>
-	protected IEnumerator StopperBump(float duration)
+	private IEnumerator StopperBump(float duration)
 	{
 		_isStopped = true;
 		yield return new WaitForSeconds(duration);

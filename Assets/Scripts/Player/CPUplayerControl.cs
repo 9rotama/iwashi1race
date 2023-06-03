@@ -49,18 +49,14 @@ public class CPUplayerControl : Racer
 
 		if(_gameManagerCtrl.GetGameState() == GameState.Idle || transform.position.x > target.position.x + 10) return;
 		
+		CalcVelocity();
+
 		if (_isStopped)
 		{
-			_rb2D.velocity /= 5;
+			StopRb();
 			return;
 		}
-
-		var position = transform.position;
-		_velocityVec2 = (position - _prevPosition) / Time.deltaTime;
-        _velocity = (float)Math.Sqrt(Math.Pow(_velocityVec2.x,2)+Math.Pow(_velocityVec2.y,2));
-        _prevPosition = position;		
-
-
+		
         if (_path == null) return;
 
         if (_currentWaypoint >= _path.vectorPath.Count)

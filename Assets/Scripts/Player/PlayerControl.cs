@@ -73,17 +73,15 @@ public class PlayerControl : Racer
     {
 		if(_gameManagerCtrl.GetGameState() == GameState.Idle) return;
 
+		CalcVelocity();
+
+		
 		if (_isStopped)
 		{
-			_rb2D.velocity /= 5;
+			StopRb();
 			return;
 		}
-
-		var position = transform.position;
-		_velocityVec2 = (position - _prevPosition) / Time.deltaTime;
-        _velocity = (float)Math.Sqrt(Math.Pow(_velocityVec2.x,2)+Math.Pow(_velocityVec2.y,2));
-        _prevPosition = position;
-        // 移動速度計算
+		
 
         var orbNum = (float) _magicOrbNum;
         var orbBoost = orbNum * MoveSpeed * MaxRateOfBoostByMagicOrb / MaxMagicOrb;
