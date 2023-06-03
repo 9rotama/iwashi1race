@@ -8,24 +8,20 @@ public class PlayerControl : Racer
 {
     [SerializeField] private GameObject itemOrbSePrefab;
     [SerializeField] private GameObject magicOrbSePrefab;
-
-    private static Vector3 UpVec => new Vector3(0f, 1.0f, 0f);
+    
     private GameObject _goal; 
 	private bool _isInGoal;
+	
     private MagicOrbMeterControl _magicOrbMeterControl;
 	private AudioSource _audioSource;
 	
-	
-
 	/// <summary>
 	/// 魔法オーブの取得数をゲージに反映
 	/// </summary>
 	private void SetMagicOrbMeter(){
 		_magicOrbMeterControl.SetMeter(_magicOrbNum);
 	}
-
-
-
+	
 	/// <summary>
 	/// プレイヤーのマジックオーブの所持量を増やす
 	/// ゲージに反映する
@@ -40,6 +36,13 @@ public class PlayerControl : Racer
 		var endTime = sound.GetComponent<AudioSource>().clip.length;
 		Destroy(sound, endTime);
 	}
+
+	/// <summary>
+	/// 障害物にぶつかったときにレーサーをスタン状態にし、マジックオーブを没収する
+	/// ぶつかった際のSEを再生する
+	/// </summary>
+	/// <param name="duration">スタン状態の長さ</param>
+	/// <param name="lostMagicOrbNum">没収するマジックオーブの数</param>
 
 	public override void StopperEnter(float duration, int lostMagicOrbNum)
 	{
@@ -65,8 +68,8 @@ public class PlayerControl : Racer
 		_magicOrbMeterControl = magicOrbMeter.GetComponent<MagicOrbMeterControl>();
 
     }
-
-	private void Update()
+	
+	private void FixedUpdate()
     {
 		if(_gameManagerCtrl.GetGameState() == 0) return;
 		//レースがスタートしていなければ処理しない
@@ -84,29 +87,29 @@ public class PlayerControl : Racer
         // 移動速度計算
 
         var orbNum = (float) _magicOrbNum;
-        var orbBoost = (orbNum / MaxMagicOrb) * moveSpeed / MaxRateOfBoostByMagicOrb;
+        var orbBoost = orbNum * MoveSpeed * MaxRateOfBoostByMagicOrb / MaxMagicOrb;
 
         if (Input.GetKey(KeyCode.D))
         {
-            _rb2D.AddForce(ForwardVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            AddForce( MoveSpeed + orbBoost, Vector3.right); 
         }
         //アクセル
         
         if (Input.GetKey(KeyCode.A))
         {
-            _rb2D.AddForce(-ForwardVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            AddForce( MoveSpeed + orbBoost, -Vector3.right); 
         }
         //ブレーキ
         
         if (Input.GetKey(KeyCode.W))
         {
-            _rb2D.AddForce(UpVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            AddForce( MoveSpeed + orbBoost, Vector3.up); 
         }
         //上向き
         
         if (Input.GetKey(KeyCode.S))
         {
-            _rb2D.AddForce(-UpVec * (moveSpeed * Time.deltaTime * 16 + orbBoost)); 
+            AddForce( MoveSpeed + orbBoost, -Vector3.up); 
         }
         //下向き
 

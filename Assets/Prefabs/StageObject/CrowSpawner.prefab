@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e53e1f8f8a4b441b8226b41f8d1a166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabCrow: {fileID: 8669272449521133221, guid: 883d96c12273347f4a89567ee1ceaf33, type: 3}
+  prefabCrow: {fileID: 6265291692936988109, guid: 883d96c12273347f4a89567ee1ceaf33, type: 3}
   stageHeight: 270
+  moveSpeed: 250
   spawnSpan: 1

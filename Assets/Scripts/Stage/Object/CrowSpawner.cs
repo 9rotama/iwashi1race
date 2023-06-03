@@ -8,9 +8,9 @@ using UnityEngine;
 public class CrowSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject prefabCrow;
-    [SerializeField] private const float StageHeight = 270f;
-    [SerializeField] private const float MoveSpeed = 10.0f;
-    [SerializeField] private const float SpawnSpan = 1.0f;
+    [SerializeField] private float stageHeight = 270f;
+    [SerializeField] private float moveSpeed = 10.0f;
+    [SerializeField] private float spawnSpan = 1.0f;
 
     private bool _isCoroutineStarted;
     private GameObject _gameManager;
@@ -21,9 +21,9 @@ public class CrowSpawner : MonoBehaviour
     /// </summary>
     private IEnumerator CrowSpawn(){
         while (true) {
-            yield return new WaitForSeconds (SpawnSpan);
+            yield return new WaitForSeconds (spawnSpan);
             var position = transform.position;
-            var spawnPosHeight = position.y + (Random.value - 0.5f) * StageHeight;
+            var spawnPosHeight = position.y + (Random.value - 0.5f) * stageHeight;
             var spawnPos = new Vector3(position.x, spawnPosHeight, position.z);
             Instantiate(prefabCrow, spawnPos, Quaternion.identity);
         }
@@ -52,7 +52,7 @@ public class CrowSpawner : MonoBehaviour
 
         var transform1 = transform;
         var position = transform1.position;
-        position = new Vector3(position.x + MoveSpeed * Time.deltaTime, position.y, position.z);
+        position = new Vector3(position.x + moveSpeed * Time.deltaTime, position.y, position.z);
         transform1.position = position;
         //スポナーを動かす
     }
