@@ -27,7 +27,7 @@ public class DarkCreator : MonoBehaviour, IItemInitializer
             darkBodyInstance.initialize(targets[i], i+1, destroyTime);
 
             //プレイヤー用のエフェクトを適用
-            if(targets[i].CompareTag("Player")){
+            if(targets[i] is PlayerControl){
                 Instantiate(darkEffect).initialize(destroyTime);
             }
 

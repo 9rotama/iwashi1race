@@ -1,7 +1,5 @@
-   // public bool IsPhysicalDamageable(Racer racer) {
-   //    return true;
-   // }
-
 public interface IPhysicalDamageable {
-    private bool IsPhysicalDamageable(Racer racer);
+    //Unityのバージョンを上げてpublicからprotectedにしたい
+    //デフォルト実装もしたい
+    public bool IsPhysicalDamageable(Racer racer);
 }

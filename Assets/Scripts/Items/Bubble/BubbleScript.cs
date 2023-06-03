@@ -10,14 +10,13 @@ public class BubbleScript : MonoBehaviour, IItemInitializer
     {
         transform.parent = racer.transform;
         parentRacer = racer.GetComponent<Racer>();
-        parentRacer.isInvincible = true;
 
-        // レーサーオブジェクトの子オブジェクトにすでにBubbleがある場合破棄する
-        for(int i=0; i<racer.transform.childCount; i++){
-            if(racer.transform.GetChild(i).gameObject.name.Contains("Bubble")){
-                Destroy(gameObject);
-            };
+        // isInvincibleが真のときbubbleをすでに持っているから破棄
+        if(parentRacer.isInvincible) {
+            Destroy(gameObject);
         }
+
+        parentRacer.isInvincible = true;
     }
 
     void Update()

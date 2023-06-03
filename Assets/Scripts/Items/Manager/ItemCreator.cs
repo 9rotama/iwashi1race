@@ -36,7 +36,7 @@ public class ItemCreator : MonoBehaviour
     public void CreateItemGameObject(Racer racer) { 
 
         // デバッグ
-        racer.havingItem = Items.Freeze;
+        racer.havingItem = Items.Orb;
         Debug.Log(racer.havingItem);
 
         if(racer.havingItem == Items.Nothing) {
@@ -58,13 +58,6 @@ public class ItemCreator : MonoBehaviour
             //何もしない
         }
 
-
-        if(racer.havingItem == Items.Bubble) {
-            itemObj.transform.SetParent(racer.transform);
-        } 
-        else {
-            // 何もしない
-        }
 
         // 所持アイテムをなくす
         racer.havingItem = Items.Nothing;

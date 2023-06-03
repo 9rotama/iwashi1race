@@ -27,7 +27,6 @@ public class FreezeCondition : MonoBehaviour
     {
         transform.SetParent(racer.transform);
         _target = racer;
-        racer.StopperEnter(0, 10);
         StartCoroutine(RacerTryDestroyFreeze());
     }
 

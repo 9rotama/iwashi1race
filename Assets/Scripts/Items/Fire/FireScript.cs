@@ -52,7 +52,7 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
         rb.velocity = shotForward * speed;
     }
 
-    private bool IsPhysicalDamageable(Racer racer)
+    public bool IsPhysicalDamageable(Racer racer)
     {
         if(racer.id == birtherId) {
             return false;

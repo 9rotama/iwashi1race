@@ -39,11 +39,12 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
     public void OnTriggerEnterRacer(Racer racer) 
     {
         if(!IsPhysicalDamageable(racer)) return;
+        racer.StopperEnter(0, 10);
         Instantiate(freezeCondition, racer.transform.position, Quaternion.identity).Initialize(racer);
         Destroy(gameObject);
     }
 
-    private bool IsPhysicalDamageable(Racer racer)
+    public bool IsPhysicalDamageable(Racer racer)
     {
         if(racer.id == birtherId) {
             return false;
