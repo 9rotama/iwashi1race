@@ -378,7 +378,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 7
 --- !u!50 &3653764231064802362
 Rigidbody2D:
   serializedVersion: 4
@@ -412,9 +412,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6c267f3ec754f139adbfc74e266a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  nextWaypointDistance: 10
+  nextWaypointDistance: 1
   scatterFac: 10
+  target: {fileID: 0}
 --- !u!1 &3653764231190195906
 GameObject:
   m_ObjectHideFlags: 0
