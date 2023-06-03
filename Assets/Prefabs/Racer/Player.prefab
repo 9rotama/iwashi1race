@@ -391,6 +391,7 @@ GameObject:
   - component: {fileID: 4148986014203615283}
   - component: {fileID: 4148986014203615284}
   - component: {fileID: 4148986014203615285}
+  - component: {fileID: -5552312008913398386}
   - component: {fileID: 4148986014203615286}
   m_Layer: 8
   m_Name: Player
@@ -471,6 +472,21 @@ MonoBehaviour:
   itemCreator: {fileID: 0}
   itemOrbSePrefab: {fileID: 482917955309039379, guid: 2662230eaad3b4ec392fef1a3e439252, type: 3}
   magicOrbSePrefab: {fileID: 2562034221193356283, guid: 5434597eba19442c48a839e493eb76e9, type: 3}
+--- !u!114 &-5552312008913398386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4148986014203615287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5787240f80da840b0809531616862c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hairSprite: {fileID: 4148986014717854851}
+  clothesSprite: {fileID: 4148986013354350245}
+  shoesSprite: {fileID: 4148986013860132118}
 --- !u!82 &4148986014203615286
 AudioSource:
   m_ObjectHideFlags: 0
