@@ -103,7 +103,7 @@ public class PlayerControl : Racer
         
         if (Input.GetKey(KeyCode.W))
         {
-            AddForce( MoveSpeed + orbBoost, -Vector3.up); 
+            AddForce( MoveSpeed + orbBoost, Vector3.up); 
         }
         //上向き
         
