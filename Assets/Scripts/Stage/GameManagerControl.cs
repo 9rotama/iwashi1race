@@ -31,8 +31,8 @@ public class GameManagerControl : MonoBehaviour
     public void PlayerGoal()
     {
         resultUI.SetActive(true); 
-        var ranking = rankingControl.GetRanking();
-        rText.text = "position: " + ranking.ToString()
+        var rank = RankManager.Instance.GetRank(0);
+        rText.text = "position: " + rank.ToString()
                                   + "\ntime: "+ totalTime.ToString();
 
         audioSource.clip = goalSE;
