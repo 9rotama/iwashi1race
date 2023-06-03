@@ -8,7 +8,7 @@ public class FreezeCondition : MonoBehaviour
     int _clickedCount = 0;
     [SerializeField] private int requiredClickNumber = 100;
 
-    //テクスチャ
+    //画像
     [SerializeField] private Sprite[] IceCrackSprites;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -66,7 +66,7 @@ public class FreezeCondition : MonoBehaviour
 
         // クリック回数に応じてスプライトを変更する
         int length = IceCrackSprites.Length;
-        spriteRenderer.sprite = IceCrackSprites[Mathf.FloorToInt(((float)_clickedCount / (float)requiredClickNumber * length) % length)];
+        spriteRenderer.sprite = IceCrackSprites[Mathf.FloorToInt((float)_clickedCount / (float)requiredClickNumber * length) % length];
 
     }
 

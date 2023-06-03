@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 /// スポーンしたカラスの挙動を担当するクラス
 /// カラスのPrefab及びインスタンスにアタッチされる
 /// </summary>
-public class CrowControl : MonoBehaviour, IRacerCollisionEnterer
+public class CrowControl : MonoBehaviour, IRacerCollisionEnterer, IPhysicalDamageable
 {
     [SerializeField] private float destroyPosX;
     [SerializeField] private float moveSpeed = 100f;
@@ -23,8 +23,20 @@ public class CrowControl : MonoBehaviour, IRacerCollisionEnterer
     /// <param name="cpuPlayer">レーサーのクラス</param>
     public void OnTriggerEnterRacer(Racer racer)
     {
+        if(!IsPhysicalDamageable(racer)) return;
+        
         racer.StopperEnter(playerStopDur, lostMagicOrbNum);
         Destroy(this.gameObject);
+    }
+
+    private bool IsPhysicalDamageable(Racer racer)
+    {
+        if(racer.isInvincible == true) {
+            return false;
+        }
+
+        racer.isInvincible = false;
+        return true;
     }
 
 

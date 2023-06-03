@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEnterer
+public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEnterer, IPhysicalDamageable
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip fireSe;
@@ -37,13 +37,8 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
 
     public void OnTriggerEnterRacer(Racer racer)
     {
-        if(racer.id == birtherId) {
-            return;
-        }
-        if(racer.isInvincible == true) {
-            racer.isInvincible = false;
-            return;
-        }
+        if(!IsPhysicalDamageable(racer)) return;
+
         racer.StopperEnter(playerStopDur, lostMagicOrbNum);
         audioSource.PlayOneShot(damageSe);
         Destroy(this.gameObject);
@@ -55,5 +50,19 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
     private void FixedUpdate()
     {
         rb.velocity = shotForward * speed;
+    }
+
+    private bool IsPhysicalDamageable(Racer racer)
+    {
+        if(racer.id == birtherId) {
+            return false;
+        }
+
+        if(racer.isInvincible == true) {
+            return false;
+        }
+
+        racer.isInvincible = false;
+        return true;
     }
 }

@@ -96,7 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1b7571f68184ec8bfc319571dfe3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
+  requiredClickNumber: 100
+  IceCrackSprites:
   - {fileID: 21300000, guid: d248576d6a2b841ac8b83ed4abde14b5, type: 3}
   - {fileID: 21300000, guid: 77723d2820bb64d12aa2cab10d4976fb, type: 3}
   - {fileID: 21300000, guid: a170ee34e98094219ace9878a0f782d2, type: 3}

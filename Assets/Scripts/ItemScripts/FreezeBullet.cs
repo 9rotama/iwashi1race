@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnterer
+public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnterer, IPhysicalDamageable
 {
     [SerializeField] private Rigidbody2D rb;
     Vector3 shotForward;
@@ -38,15 +38,23 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
 
     public void OnTriggerEnterRacer(Racer racer) 
     {
-        if(racer.id == birtherId) {
-            return;
-        }
-        if(racer.isInvincible == true) {
-            racer.isInvincible = false;
-            return;
-        }
+        if(!IsPhysicalDamageable(racer)) return;
         Instantiate(freezeCondition, racer.transform.position, Quaternion.identity).Initialize(racer);
         Destroy(gameObject);
+    }
+
+    private bool IsPhysicalDamageable(Racer racer)
+    {
+        if(racer.id == birtherId) {
+            return false;
+        }
+
+        if(racer.isInvincible == true) {
+            return false;
+        }
+
+        racer.isInvincible = false;
+        return true;
     }
 
 }
