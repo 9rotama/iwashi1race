@@ -5,28 +5,30 @@ using UnityEngine.UI;
 
 public class StageBackgroundScroll : MonoBehaviour
 {
-    [SerializeField] private float xSpeed = 1.0f;
-    [SerializeField] private float ySpeed = 1.0f;
+    [SerializeField] private float xSpeed;
+    [SerializeField] private float ySpeed;
     
-    private GameObject player;
-    private PlayerControl playerControl;
+    private const float XReducer = 0.0001f;
+    private const float YReducer = 0.00002f;
     
-    private Rigidbody2D rb2D;
-    private Material material;
+    private PlayerControl _playerControl;
+    private Material _material;
+    private Vector2 _offset;
 
-    private Vector2 offset;
-    void Start()
+    private void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerControl = player.GetComponent<PlayerControl>();
-        material = GetComponent<Image>().material;
-        offset = new Vector2(0, 0);
+        var player = GameObject.FindGameObjectWithTag("Player");
+        _playerControl = player.GetComponent<PlayerControl>();
+        _material = GetComponent<Image>().material;
+        _offset = new Vector2(0, 0);
     }
 
-    void Update()
+    private void Update()
     {
-        offset = new Vector2(offset.x + playerControl.GetVelocityVec2().x * (xSpeed * Time.deltaTime * 16 * 0.00001f), offset.y + playerControl.GetVelocityVec2().y * (ySpeed * Time.deltaTime * 16 * 0.000001f));
+        var x = _offset.x + _playerControl.GetVelocityVec2().x * (xSpeed * XReducer * Time.deltaTime );
+        var y = _offset.y + _playerControl.GetVelocityVec2().y * (ySpeed * YReducer * Time.deltaTime);
+        _offset = new Vector2(x,y);
 
-        material.mainTextureOffset = offset;
+        _material.mainTextureOffset = _offset;
     }
 }
