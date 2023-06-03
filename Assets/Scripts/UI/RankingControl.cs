@@ -28,6 +28,7 @@ public class RankingControl : MonoBehaviour
     private void Update()
     {
         var rank = RankManager.Instance.GetRank(0);
+        Debug.Log(rank);
         
         if (rank <= 8)
         {
