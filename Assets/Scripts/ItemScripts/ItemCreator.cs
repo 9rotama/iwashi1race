@@ -36,7 +36,7 @@ public class ItemCreator : MonoBehaviour
     public void CreateItemGameObject(Racer racer) { 
 
         // デバッグ
-        racer.havingItem = Items.Dark;
+        racer.havingItem = Items.Freeze;
         Debug.Log(racer.havingItem);
 
         if(racer.havingItem == Items.Nothing) {

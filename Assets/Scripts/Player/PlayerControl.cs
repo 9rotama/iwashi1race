@@ -45,7 +45,7 @@ public class PlayerControl : Racer
 	{
 		base.StopperEnter(duration, lostMagicOrbNum);
 		SetMagicOrbMeter();
-		_audioSource.Play();
+		// _audioSource.Play();
 	}
 
 
