@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// レース中のプレイヤーの順位表示の画像を操作するクラス
+/// </summary>
 public class RankingControl : MonoBehaviour
 {
     [SerializeField] private Sprite[] rankSprites;
-    [SerializeField] private Sprite[] suffixSprites;
+    [SerializeField] private Sprite[] suffixSprites; //"〇〇th", "〇〇st"...
     
     private Image _rankImageUI;
     private Image _suffixImageUI;
     private GameObject _player;
     private GameObject[] _cpuPlayer;
-    private int _ranking;
-    
-    public int GetRanking()
-    {
-        return _ranking;
-    }
 
-    void Awake()
+
+    private void Awake()
     {
         _rankImageUI = this.GetComponent<Image>();
         _suffixImageUI = this.transform.GetChild(0).GetComponent<Image>();
@@ -27,34 +24,25 @@ public class RankingControl : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _cpuPlayer = GameObject.FindGameObjectsWithTag("Enemy");
     }
-    
-    void Update()
+
+    private void Update()
     {
-        _ranking = 1;
-        foreach (var t in _cpuPlayer)
+        var rank = RankManager.Instance.GetRank(0);
+        Debug.Log(rank);
+        
+        if (rank <= 8)
         {
-            if (_player.transform.position.x < t.transform.position.x)
-            {
-                _ranking++;
-            }
+            _rankImageUI.sprite = rankSprites[rank - 1];
         }
+ 
 
-        if (_ranking <= 8)
+        if (rank <= 3)
         {
-            _rankImageUI.sprite = rankSprites[_ranking - 1];
-        }
-
-        if (_ranking <= 3)
-        {
-            _suffixImageUI.sprite = suffixSprites[_ranking - 1];
+            _suffixImageUI.sprite = suffixSprites[rank - 1];
         }
         else
         {
             _suffixImageUI.sprite = suffixSprites[3];
         }
-
-        
-
-        
     }
 }
