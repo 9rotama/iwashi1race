@@ -28,9 +28,7 @@ public class RacerSpriteController : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
         
         
-        var racerObj = transform.parent.gameObject;
-        _racer = racerObj.GetComponent<Racer>();
-        StartCoroutine(nameof(ChangeBySpeed));
+        
        
     }
 
@@ -59,6 +57,8 @@ public class RacerSpriteController : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = spriteSpeed0;
-        StartCoroutine(nameof(AfterStart));
+        var racerObj = transform.parent.gameObject;
+        _racer = racerObj.GetComponent<Racer>();
+        StartCoroutine(nameof(ChangeBySpeed));
     }
 }
