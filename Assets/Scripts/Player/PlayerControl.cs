@@ -12,14 +12,14 @@ public class PlayerControl : Racer
     private GameObject _goal; 
 	private bool _isInGoal;
 	
-    private MagicOrbMeterControl _magicOrbMeterControl;
+    [SerializeField] private MagicOrbMeterControl magicOrbMeterControl;
 	private AudioSource _audioSource;
 	
 	/// <summary>
 	/// 魔法オーブの取得数をゲージに反映
 	/// </summary>
 	private void SetMagicOrbMeter(){
-		_magicOrbMeterControl.SetMeter(_magicOrbNum);
+		magicOrbMeterControl.SetMeter(_magicOrbNum);
 	}
 	
 	/// <summary>
@@ -64,9 +64,6 @@ public class PlayerControl : Racer
 
 		var gameManager = GameObject.FindGameObjectWithTag("GameManager");
 		_gameManagerCtrl = gameManager.GetComponent<GameManagerControl>();
-		var magicOrbMeter = GameObject.Find("MagicOrbMeter");
-		_magicOrbMeterControl = magicOrbMeter.GetComponent<MagicOrbMeterControl>();
-
     }
 	
 	private void FixedUpdate()
