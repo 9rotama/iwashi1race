@@ -5,17 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-public enum GameState
-{
-    Idle,
-    Race,
-    Goal
-}
+
 
 public class GameManagerControl : MonoBehaviour
 {
-    
-    
     private GameState _gameState; //0...カウントダウン中 1...プレイ中 2...ゴール
 
     [SerializeField] private AudioClip countdownSe, goalSe,bgm;

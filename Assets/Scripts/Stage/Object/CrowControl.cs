@@ -20,18 +20,18 @@ public class CrowControl : MonoBehaviour, IRacerCollisionEnterer, IPhysicalDamag
     /// カラスがレーサーと衝突したときレーサー側を止まらせる処理を行う
     /// 自身は削除される
     /// </summary>
-    /// <param name="cpuPlayer">レーサーのクラス</param>
+    /// <param name="racer">レーサーのクラス</param>
     public void OnTriggerEnterRacer(Racer racer)
     {
         if(!IsPhysicalDamageable(racer)) return;
 
         racer.StopperEnter(playerStopDur, lostMagicOrbNum);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     public bool IsPhysicalDamageable(Racer racer)
     {
-        if(racer.isInvincible == true) {
+        if(racer.isInvincible) {
             return false;
         }
 
@@ -40,7 +40,6 @@ public class CrowControl : MonoBehaviour, IRacerCollisionEnterer, IPhysicalDamag
     }
 
 
-    // Update is called once per frame
     private void Update()
     {
         var transform1 = transform;

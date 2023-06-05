@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class SkinSettingsController : MonoBehaviour
+public class SkinSettingsScreen : MonoBehaviour
 {
-
+    [SerializeField] private Button returnButton;
     [SerializeField] private Slider hairSlider;
     [SerializeField] private Slider clothesSlider;
     [SerializeField] private Slider shoesSlider;
@@ -33,8 +33,17 @@ public class SkinSettingsController : MonoBehaviour
         shoesSlider.value = PlayerPrefs.GetFloat("shoesHue", 0);
     }
 
+    private void ReturnTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
     private void Start()
     {
         SetSliderValueFromPrefs();
+        returnButton.onClick.AddListener(() =>
+        {
+            Invoke(nameof(ReturnTitle), 0.5f);
+        });
     }
 }

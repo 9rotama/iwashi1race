@@ -473,8 +473,8 @@ GameObject:
   - component: {fileID: 631201595}
   - component: {fileID: 631201594}
   - component: {fileID: 631201599}
-  - component: {fileID: 631201597}
   - component: {fileID: 631201598}
+  - component: {fileID: 631201597}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -604,13 +604,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 631201592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 674fe1936df6b4523812f514bcbee287, type: 3}
+  m_Script: {fileID: 11500000, guid: 86eab153ed9a4be41b70e84d89b01dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image:
-  - {fileID: 21300000, guid: f940f2904dcfe492589c3b28d16aca73, type: 3}
-  - {fileID: 21300000, guid: bebf4cd56ef454cfa9c18b05b49f3717, type: 3}
-  - {fileID: 21300000, guid: 280a02b5ce61048c9b80f88d5505cae2, type: 3}
+  mouseExitSprite: {fileID: 21300000, guid: f940f2904dcfe492589c3b28d16aca73, type: 3}
+  mouseEnterSprite: {fileID: 21300000, guid: bebf4cd56ef454cfa9c18b05b49f3717, type: 3}
+  mouseDownSprite: {fileID: 21300000, guid: 280a02b5ce61048c9b80f88d5505cae2, type: 3}
 --- !u!82 &631201598
 AudioSource:
   m_ObjectHideFlags: 0
@@ -723,51 +722,15 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 631201597}
-          m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-          m_MethodName: MouseOver
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 1
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 631201597}
-          m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-          m_MethodName: MouseExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 2
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 631201597}
-          m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-          m_MethodName: OnClick
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!1 &794396095
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,8 +744,8 @@ GameObject:
   - component: {fileID: 794396100}
   - component: {fileID: 794396099}
   - component: {fileID: 794396098}
-  - component: {fileID: 794396097}
   - component: {fileID: 794396102}
+  - component: {fileID: 794396097}
   m_Layer: 5
   m_Name: RuleButton
   m_TagString: Untagged
@@ -802,7 +765,7 @@ RectTransform:
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1202794881}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -818,13 +781,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 794396095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 674fe1936df6b4523812f514bcbee287, type: 3}
+  m_Script: {fileID: 11500000, guid: 86eab153ed9a4be41b70e84d89b01dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image:
-  - {fileID: 21300000, guid: e36e7ef16b3964da39fba83fd3d2e8b4, type: 3}
-  - {fileID: 21300000, guid: 4c7ec23f6d6aa413689e3f73b888b392, type: 3}
-  - {fileID: 21300000, guid: 9715ca0d7daf44845b46f864c9e1333b, type: 3}
+  mouseExitSprite: {fileID: 21300000, guid: e36e7ef16b3964da39fba83fd3d2e8b4, type: 3}
+  mouseEnterSprite: {fileID: 21300000, guid: 4c7ec23f6d6aa413689e3f73b888b392, type: 3}
+  mouseDownSprite: {fileID: 21300000, guid: 9715ca0d7daf44845b46f864c9e1333b, type: 3}
 --- !u!114 &794396098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,51 +803,15 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 794396097}
-          m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-          m_MethodName: MouseOver
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 1
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 794396097}
-          m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-          m_MethodName: MouseExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 2
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 794396097}
-          m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-          m_MethodName: OnClick
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!114 &794396099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,8 +841,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: bebf4cd56ef454cfa9c18b05b49f3717, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 280a02b5ce61048c9b80f88d5505cae2, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: 4c7ec23f6d6aa413689e3f73b888b392, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 9715ca0d7daf44845b46f864c9e1333b, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -1286,10 +1212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674fe1936df6b4523812f514bcbee287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image:
-  - {fileID: 21300000, guid: 575a415bf16ac48e391acdfa4ec00ddc, type: 3}
-  - {fileID: 21300000, guid: 626b941ac06c64d6ea5f32e589a80900, type: 3}
-  - {fileID: 21300000, guid: 52298da8832674821937eb8c1af257c3, type: 3}
+  mouseExitSprite: {fileID: 0}
+  mouseEnterSprite: {fileID: 0}
+  mouseDownSprite: {fileID: 0}
+  stage: 0
 --- !u!114 &1112634065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,6 +1385,7 @@ GameObject:
   - component: {fileID: 1202794880}
   - component: {fileID: 1202794879}
   - component: {fileID: 1202794878}
+  - component: {fileID: 1202794882}
   m_Layer: 5
   m_Name: TitleUI
   m_TagString: Untagged
@@ -1539,8 +1466,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 631201593}
-  - {fileID: 794396096}
   - {fileID: 2032804373}
+  - {fileID: 794396096}
   - {fileID: 906113073}
   - {fileID: 1112634060}
   m_Father: {fileID: 0}
@@ -1551,6 +1478,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1202794882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202794877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d6ea6b531d8d9469cad0ba561a9799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 631201594}
+  skinButton: {fileID: 2032804376}
+  ruleButton: {fileID: 794396099}
 --- !u!1001 &1439132006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1937,8 +1879,8 @@ GameObject:
   - component: {fileID: 2032804377}
   - component: {fileID: 2032804376}
   - component: {fileID: 2032804375}
-  - component: {fileID: 2032804374}
   - component: {fileID: 2032804379}
+  - component: {fileID: 2032804374}
   m_Layer: 5
   m_Name: SkinButton
   m_TagString: Untagged
@@ -1958,7 +1900,7 @@ RectTransform:
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1202794881}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1974,13 +1916,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2032804372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 674fe1936df6b4523812f514bcbee287, type: 3}
+  m_Script: {fileID: 11500000, guid: 86eab153ed9a4be41b70e84d89b01dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image:
-  - {fileID: 21300000, guid: d36883a31f9774282a65ffbb67769843, type: 3}
-  - {fileID: 21300000, guid: 03b05e4dc2ae042efadfb2382242b24c, type: 3}
-  - {fileID: 21300000, guid: 6426a93e9fe3c400a991937518376ed5, type: 3}
+  mouseExitSprite: {fileID: 21300000, guid: d36883a31f9774282a65ffbb67769843, type: 3}
+  mouseEnterSprite: {fileID: 21300000, guid: 03b05e4dc2ae042efadfb2382242b24c, type: 3}
+  mouseDownSprite: {fileID: 21300000, guid: 6426a93e9fe3c400a991937518376ed5, type: 3}
 --- !u!114 &2032804375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1997,51 +1938,15 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2032804374}
-          m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-          m_MethodName: MouseOver
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 1
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2032804374}
-          m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-          m_MethodName: MouseExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 2
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2032804374}
-          m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-          m_MethodName: OnClick
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!114 &2032804376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2071,8 +1976,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: bebf4cd56ef454cfa9c18b05b49f3717, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 280a02b5ce61048c9b80f88d5505cae2, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: 03b05e4dc2ae042efadfb2382242b24c, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 6426a93e9fe3c400a991937518376ed5, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:

@@ -15,16 +15,16 @@ public class StageMagicOrbControl : MonoBehaviour, IRacerCollisionEnterer
     /// マジックオーブがレーサーと衝突したときレーサー側のマジックオーブゲージを増やす関数を実行
     /// 自身は削除される
     /// </summary>
-    /// <param name="cpuPlayer">レーサーのクラス</param>
+    /// <param name="racer">レーサーのクラス</param>
     public void OnTriggerEnterRacer(Racer racer)
     {
         racer.MagicOrbEnter(increaseNum);
         _parentOrbSpawner.OrbDestroyed();
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _parentOrbSpawner = transform.parent.GetComponent<OrbSpawner>();
     }

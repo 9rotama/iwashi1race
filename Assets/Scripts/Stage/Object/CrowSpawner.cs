@@ -37,7 +37,6 @@ public class CrowSpawner : MonoBehaviour
         _gameManagerCtrl = _gameManager.GetComponent<GameManagerControl>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if(_gameManagerCtrl.GetGameState() == GameState.Idle) return;
@@ -48,7 +47,6 @@ public class CrowSpawner : MonoBehaviour
             _isCoroutineStarted = true;
         }
         //CrowSpawnのコルーチンを一度だけ実行
-        //TODO: わざわざUpdateに書いている理由を突き止める
 
         var transform1 = transform;
         var position = transform1.position;

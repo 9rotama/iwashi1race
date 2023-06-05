@@ -12,17 +12,11 @@ public class RankingControl : MonoBehaviour
     
     private Image _rankImageUI;
     private Image _suffixImageUI;
-    private GameObject _player;
-    private GameObject[] _cpuPlayer;
-
-
+    
     private void Awake()
     {
-        _rankImageUI = this.GetComponent<Image>();
-        _suffixImageUI = this.transform.GetChild(0).GetComponent<Image>();
-
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _cpuPlayer = GameObject.FindGameObjectsWithTag("Enemy");
+        _rankImageUI = GetComponent<Image>();
+        _suffixImageUI = transform.GetChild(0).GetComponent<Image>();
     }
 
     private void Update()

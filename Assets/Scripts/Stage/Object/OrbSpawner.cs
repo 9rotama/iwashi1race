@@ -28,8 +28,6 @@ public class OrbSpawner : MonoBehaviour
         childObj.transform.parent = this.transform;
     }
 
-
-    // Start is called before the first frame update
     private void Start()
     {
         //最初にオーブ生成
