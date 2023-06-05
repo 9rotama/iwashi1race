@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class PageManager : MonoBehaviour
+
+public class RuleScreen : MonoBehaviour
 {
+    [SerializeField] private Button returnButton;
     [SerializeField] private GameObject[] pages;
+    [SerializeField] private Button nextButton;
+    [SerializeField] private Button prevButton;
 
     private int _currentPage;
     
-    public void NextPage()
+    private void NextPage()
     {
         pages[_currentPage].SetActive(false);
         
@@ -18,7 +24,7 @@ public class PageManager : MonoBehaviour
         pages[_currentPage].SetActive(true);
     }
 
-    public void PrevPage() 
+    private void PrevPage() 
     {
         pages[_currentPage].SetActive(false);
         
@@ -26,6 +32,11 @@ public class PageManager : MonoBehaviour
         if (_currentPage < 0) _currentPage = pages.Length - 1;
         
         pages[_currentPage].SetActive(true);
+    }
+    
+    private void ReturnTitle()
+    {
+        SceneManager.LoadScene("Title");
     }
     
     // Start is called before the first frame update
@@ -37,5 +48,13 @@ public class PageManager : MonoBehaviour
         {
             pages[i].SetActive(false);
         }
+
+        nextButton.onClick.AddListener(NextPage);
+        prevButton.onClick.AddListener(PrevPage);
+        
+        returnButton.onClick.AddListener(() =>
+        {
+            Invoke(nameof(ReturnTitle), 0.5f);
+        });
     }
 }
