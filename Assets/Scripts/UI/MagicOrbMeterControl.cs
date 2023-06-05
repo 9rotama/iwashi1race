@@ -12,16 +12,9 @@ public class MagicOrbMeterControl : MonoBehaviour
         _rectMask2D.padding = new Vector4(0, 0, 50.5f - (float)magicOrbNum, 0);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _rectMask2D = GetComponent<RectMask2D>();
         _rectMask2D.padding = new Vector4(0, 0, 50.5f, 0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

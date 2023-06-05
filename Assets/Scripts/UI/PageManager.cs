@@ -29,19 +29,13 @@ public class PageManager : MonoBehaviour
     }
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _currentPage = 0;
         pages[_currentPage].SetActive(true);
-        for (int i = 1; i < pages.Length; i++)
+        for (var i = 1; i < pages.Length; i++)
         {
             pages[i].SetActive(false);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
