@@ -19,7 +19,7 @@ public class ThunderSpriteScript : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.color -= new Color(0, 0, 0, 1);
@@ -30,14 +30,14 @@ public class ThunderSpriteScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         time += Time.deltaTime;
         transform.position = new Vector3(targetObj.transform.position.x, targetObj.transform.position.y + 25f, 0);
         spriteRenderer.color += new Color(0,0,0,0.01f);
         if(spriteRenderer.color.a >= 1f && !once){
-            for(int i=0; i< sprites.Length; i++){
-                Invoke("ChangeSprite",0.05f*i);
+            for(var i=0; i< sprites.Length; i++){
+                Invoke(nameof(ChangeSprite),0.05f * i);
             }
             once = true;
         }

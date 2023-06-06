@@ -1,14 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <Summary>
+/// UI中のボタンの見た目変更、押下音再生を操作するクラス
+/// すべてのボタンに共通でアタッチされる
+/// </Summary>
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(Button))]
 [RequireComponent(typeof(AudioSource))]
-
 public class ButtonController : 
     MonoBehaviour, 
     IPointerExitHandler, 

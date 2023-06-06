@@ -6,10 +6,10 @@ public class DarkEffect : MonoBehaviour
 {
     private float _elapsedTime;
     private float _destroyTime;
-    [SerializeField] Image effectImage;
-    [SerializeField] float alphaChangeSpeed = 2;
+    [SerializeField] private Image effectImage;
+    [SerializeField] private float alphaChangeSpeed = 2;
 
-    public void initialize(float destroyTime)
+    public void Initialize(float destroyTime)
     {
         _destroyTime = destroyTime;
 

@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 
-
+/// <summary>
+/// ゲームの状態（スタート前、レース中、ゴール）やそれに応じたUI・音の操作を担当するクラス
+/// </summary>
 public class GameManagerControl : MonoBehaviour
 {
     private GameState _gameState; //0...カウントダウン中 1...プレイ中 2...ゴール
@@ -15,13 +16,10 @@ public class GameManagerControl : MonoBehaviour
 
     public GameObject countdownUI;
     public GameObject resultUI;
-    public GameObject rankingUI;
 
     private Text _rText;
     private CountdownControl _countdownControl;
-    private RankingControl _rankingControl;
     private AudioSource _audioSource;
-    // Start is called before the first frame update
 
     private float _totalTime;
 
@@ -53,7 +51,6 @@ public class GameManagerControl : MonoBehaviour
         _audioSource = gameObject.GetComponent<AudioSource>();
 
         _countdownControl = countdownUI.GetComponent<CountdownControl>();
-        _rankingControl = rankingUI.GetComponent<RankingControl>();
         _rText = resultUI.transform.GetChild(0).GetComponent<Text>();
 
         _totalTime = 0;
@@ -72,6 +69,10 @@ public class GameManagerControl : MonoBehaviour
             case GameState.Goal when Input.GetMouseButtonDown (0):
                 SceneManager.LoadScene ("Title");
                 break;
+            case GameState.Idle:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 

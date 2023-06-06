@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class BubbleScript : MonoBehaviour, IItemInitializer
 {
-    private Racer parentRacer;
+    private Racer _parentRacer;
 
     public void ItemInitialize(Racer racer) 
     {
         transform.parent = racer.transform;
-        parentRacer = racer.GetComponent<Racer>();
+        _parentRacer = racer.GetComponent<Racer>();
 
         // isInvincibleが真のときbubbleをすでに持っているから破棄
-        if(parentRacer.isInvincible) {
+        if(_parentRacer.isInvincible) {
             Destroy(gameObject);
         }
 
-        parentRacer.isInvincible = true;
+        _parentRacer.isInvincible = true;
     }
 
-    void Update()
+    private void Update()
     {
-        if(parentRacer != null && !parentRacer.isInvincible) {
+        if(_parentRacer != null && !_parentRacer.isInvincible) {
             Destroy(gameObject);
         }
     }

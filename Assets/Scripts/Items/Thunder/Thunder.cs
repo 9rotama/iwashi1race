@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(ThunderDraw))]
 public class Thunder : MonoBehaviour, IPhysicalDamageable
 {
-    int birtherId;
+    private int _birtherId;
 
     [SerializeField] private AudioSource audioSource;
 
@@ -69,7 +69,7 @@ public class Thunder : MonoBehaviour, IPhysicalDamageable
 
     public bool IsPhysicalDamageable(Racer racer)
     {
-        if(racer.id == birtherId) {
+        if(racer.id == _birtherId) {
             return false;
         }
 

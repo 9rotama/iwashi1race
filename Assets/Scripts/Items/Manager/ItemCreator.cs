@@ -50,9 +50,9 @@ public class ItemCreator : MonoBehaviour
             );
 
         // アイテムの初期化
-        var ItemInitializer = itemObj.GetComponent<IItemInitializer>();
-        if(ItemInitializer != null) {
-            ItemInitializer.ItemInitialize(racer);
+        var itemInitializer = itemObj.GetComponent<IItemInitializer>();
+        if(itemInitializer != null) {
+            itemInitializer.ItemInitialize(racer);
         }
         else {
             //何もしない
@@ -66,10 +66,5 @@ public class ItemCreator : MonoBehaviour
         // randomItemUI.SetActive(false);
 
     }
-
-
-
-
-
-
 }
+
