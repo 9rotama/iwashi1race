@@ -6,18 +6,19 @@ using UnityEngine.UI;
 public class TitleBackgroundScroll : MonoBehaviour
 {
     [SerializeField] private float speed = 1f;
-    private Material material;
-    private Vector2 offset;
-    void Start()
+    private Material _material;
+    private Vector2 _offset;
+
+    private void Start()
     {
-        material = GetComponent<Image>().material;
-        offset = new Vector2(0, 0);
+        _material = GetComponent<Image>().material;
+        _offset = new Vector2(0, 0);
     }
 
-    void Update()
+    private void Update()
     {
-        offset = new Vector2(offset.x + speed * Time.deltaTime * 0.5f, 0);
+        _offset = new Vector2(_offset.x + speed * Time.deltaTime * 0.5f, 0);
 
-        material.mainTextureOffset = offset;
+        _material.mainTextureOffset = _offset;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// PlayerPrefsから設定をロードし、プレイヤーのスキンを適用するクラス
+/// プレイヤーにアタッチされる
 /// </summary>
 public class PlayerSkinApplier : MonoBehaviour
 {

@@ -12,7 +12,7 @@ public class DarkBody : MonoBehaviour
     
     [SerializeField] private float baseAddedForce = 1000;
 
-    public void initialize(Racer target, int rank, float destroyTime)
+    public void Initialize(Racer target, int rank, float destroyTime)
     {
         _targetRacer = target;
         _targetRank = rank;

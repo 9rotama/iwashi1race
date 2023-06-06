@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemOrbControl : MonoBehaviour, IRacerCollisionEnterer
 {
-    [SerializeField] ItemDecider itemDecider;
+    [SerializeField] private ItemDecider itemDecider;
 
     public void OnTriggerEnterRacer(Racer racer)
     {

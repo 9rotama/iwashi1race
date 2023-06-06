@@ -3,32 +3,32 @@ using System;
 
 public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour{
 
-    private static T instance;
+    private static T _instance;
     public static T Instance
     {
         get{
-            if (instance == null) {
+            if (_instance == null) {
                 Type t = typeof(T);
 
-                instance = (T)FindObjectOfType (t);
-                if (instance == null) {
+                _instance = (T)FindObjectOfType (t);
+                if (_instance == null) {
                     Debug.LogError (t + " をアタッチしているGameObjectはありません");
                 }
             }
 
-            return instance;
+            return _instance;
         }
     }
 
-    virtual protected void Awake(){
+    protected virtual void Awake(){
         // 他のゲームオブジェクトにアタッチされているか調べる
         // アタッチされている場合は破棄する。
         CheckInstance();
     }
 
     protected bool CheckInstance(){
-        if (instance == null) {
-            instance = this as T;
+        if (_instance == null) {
+            _instance = this as T;
             return true;
         } else if (Instance == this) {
             return true;

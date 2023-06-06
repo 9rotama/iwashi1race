@@ -5,10 +5,10 @@ using UnityEngine;
 public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnterer, IPhysicalDamageable
 {
     [SerializeField] private Rigidbody2D rb;
-    Vector3 shotForward;
-    int birtherId;
-    const float speed = 500.0f;
-    [SerializeField] FreezeCondition freezeCondition;
+    private Vector3 _shotForward;
+    private int _birtherId;
+    private const float Speed = 500.0f;
+    [SerializeField] private FreezeCondition freezeCondition;
     [SerializeField] private AudioSource audioSource;
 
     public void ItemInitialize(Racer racer) 
@@ -16,24 +16,24 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
         // AudioSource.PlayClipAtPoint(audioSource.clip, new Vector3(transform.position.x + 100, transform.position.y, -10));
         audioSource.Play();
 
-        birtherId = racer.id;
+        _birtherId = racer.id;
 
-        Vector3 targetPos = Vector3.zero;
+        var targetPos = Vector3.zero;
         if(racer is PlayerControl) {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         else if(racer is CPUplayerControl) {
             targetPos = RankManager.Instance.GetOneRankHigherRacer(racer.id).transform.position;
         }
-        shotForward = Vector3.Scale((targetPos - racer.transform.position), new Vector3(1, 1, 0)).normalized;
+        _shotForward = Vector3.Scale((targetPos - racer.transform.position), new Vector3(1, 1, 0)).normalized;
 
         Destroy(gameObject, 3);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        rb.velocity = shotForward * speed;
+        rb.velocity = _shotForward * Speed;
     }
 
     public void OnTriggerEnterRacer(Racer racer) 
@@ -46,7 +46,7 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
 
     public bool IsPhysicalDamageable(Racer racer)
     {
-        if(racer.id == birtherId) {
+        if(racer.id == _birtherId) {
             return false;
         }
 

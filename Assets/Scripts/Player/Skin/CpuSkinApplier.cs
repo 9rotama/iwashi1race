@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 /// <summary>
 /// CPUのスキンをランダムに適用するクラス
+/// 各CPUに付きアタッチされる
 /// </summary>
 public class CpuSkinApplier : MonoBehaviour
 {

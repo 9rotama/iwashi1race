@@ -28337,6 +28337,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: 4148986014203615285, guid: e717946af6f7c467e883b97d7320fb75, type: 3}
+      propertyPath: magicOrbMeterControl
+      value: 
+      objectReference: {fileID: 462147220}
     - target: {fileID: 4148986014203615287, guid: e717946af6f7c467e883b97d7320fb75, type: 3}
       propertyPath: m_Name
       value: Player

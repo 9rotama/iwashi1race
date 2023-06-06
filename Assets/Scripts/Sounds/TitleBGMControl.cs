@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TitleBGMControl : MonoBehaviour
 {
-	void Awake() {
+	private void Awake() {
 		var numMusicPlayers = GameObject.FindGameObjectsWithTag("BGM").Length;
    	 	if (numMusicPlayers > 1)
    		{
@@ -15,16 +15,4 @@ public class TitleBGMControl : MonoBehaviour
      		DontDestroyOnLoad(gameObject);
     	}
 	}
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

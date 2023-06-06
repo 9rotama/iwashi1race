@@ -12,8 +12,13 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
     [SerializeField] private float playerStopDur = 1.0f;
     [SerializeField] private int lostMagicOrbNum = 10;
     [SerializeField] private float speed = 500.0f;
-    private Vector3 shotForward;
-    private int birtherId;
+    private Vector3 _shotForward;
+    private readonly int _birtherId;
+
+    public FireScript(int birtherId)
+    {
+        this._birtherId = birtherId;
+    }
 
     // public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) 
     // {
@@ -29,7 +34,7 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
     {
         AudioSource.PlayClipAtPoint(fireSe, transform.position);
         Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        shotForward = Vector3.Scale((targetPos - racer.transform.position), new Vector3(1, 1, 0)).normalized;
+        _shotForward = Vector3.Scale((targetPos - racer.transform.position), new Vector3(1, 1, 0)).normalized;
 
         // 三秒後に消える
         Destroy(this.gameObject, 3.0f);
@@ -49,12 +54,12 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
     // Update is called once per frame
     private void FixedUpdate()
     {
-        rb.velocity = shotForward * speed;
+        rb.velocity = _shotForward * speed;
     }
 
     public bool IsPhysicalDamageable(Racer racer)
     {
-        if(racer.id == birtherId) {
+        if(racer.id == _birtherId) {
             return false;
         }
 

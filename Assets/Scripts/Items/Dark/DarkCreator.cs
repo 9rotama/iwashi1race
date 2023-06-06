@@ -11,7 +11,7 @@ public class DarkCreator : MonoBehaviour, IItemInitializer
     public void ItemInitialize(Racer racer) {
         var targets = RankManager.Instance.GetSortedRacers();
         
-        for(int i=0; i<targets.Length; i++){
+        for(var i=0; i<targets.Length; i++){
 
             if(targets[i].id == racer.id) {
                 continue;
@@ -24,11 +24,11 @@ public class DarkCreator : MonoBehaviour, IItemInitializer
                 targets[i].transform.position,
                 Quaternion.identity
             );
-            darkBodyInstance.initialize(targets[i], i+1, destroyTime);
+            darkBodyInstance.Initialize(targets[i], i+1, destroyTime);
 
             //プレイヤー用のエフェクトを適用
             if(targets[i] is PlayerControl){
-                Instantiate(darkEffect).initialize(destroyTime);
+                Instantiate(darkEffect).Initialize(destroyTime);
             }
 
         }

@@ -13,19 +13,19 @@ public class ThunderCreator : MonoBehaviour, IItemInitializer
     /// <param name="racer"></param>
     public void ItemInitialize(Racer racer) {
         var targets = RankManager.Instance.GetSortedRacers();
-        Debug.Log(targets);
 
-        for(int i=0; i<targets.Length; i++){
-            if(racer.id != targets[i].id){
+        foreach (var t in targets)
+        {
+            if(racer.id != t.id){
                 Instantiate(
                     thunder, 
-                    targets[i].transform.position + Vector3.up * 25,  
+                    t.transform.position + Vector3.up * 25,  
                     Quaternion.identity
-                ).Initialize(targets[i]);
+                ).Initialize(t);
             }
         }
 
-         Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 
     

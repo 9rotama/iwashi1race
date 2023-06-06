@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Serialization;
 
 public class FreezeCondition : MonoBehaviour
 {
@@ -9,13 +10,13 @@ public class FreezeCondition : MonoBehaviour
     [SerializeField] private int requiredClickNumber = 100;
 
     //画像
-    [SerializeField] private Sprite[] IceCrackSprites;
+    [FormerlySerializedAs("IceCrackSprites")] [SerializeField] private Sprite[] iceCrackSprites;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     //音声
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip crackSE;
-    [SerializeField] private AudioClip brokenSE;
+    [FormerlySerializedAs("crackSE")] [SerializeField] private AudioClip crackSe;
+    [FormerlySerializedAs("brokenSE")] [SerializeField] private AudioClip brokenSe;
 
     Racer _target;
 
@@ -46,7 +47,7 @@ public class FreezeCondition : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
             }
             
-            audioSource.PlayOneShot(crackSE);
+            audioSource.PlayOneShot(crackSe);
             _clickedCount++;
         }
     }
@@ -58,14 +59,14 @@ public class FreezeCondition : MonoBehaviour
         // 条件がなりつ立つ時。破壊音を出してこのオブジェクトを破棄する
         if(_clickedCount == requiredClickNumber){
             Vector3 cameraPos = Camera.main.gameObject.transform.position;
-            AudioSource.PlayClipAtPoint(brokenSE, cameraPos - Vector3.back*5f);
+            AudioSource.PlayClipAtPoint(brokenSe, cameraPos - Vector3.back*5f);
             // AudioSource.PlayClipAtPoint(brokenSE, transform.position + new Vector3(100, 0, -10));
             Destroy(this.gameObject);
         }
 
         // クリック回数に応じてスプライトを変更する
-        int length = IceCrackSprites.Length;
-        spriteRenderer.sprite = IceCrackSprites[Mathf.FloorToInt((float)_clickedCount / (float)requiredClickNumber * length) % length];
+        int length = iceCrackSprites.Length;
+        spriteRenderer.sprite = iceCrackSprites[Mathf.FloorToInt((float)_clickedCount / (float)requiredClickNumber * length) % length];
 
     }
 

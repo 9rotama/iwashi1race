@@ -119,17 +119,13 @@ public abstract class Racer : MonoBehaviour
 	protected void OnTriggerEnter2D(Collider2D other)
 	{
 		var racerCollision = other.gameObject.GetComponent<IRacerCollisionEnterer>();
-        if(racerCollision != null) {
-            racerCollision.OnTriggerEnterRacer(this);
-        }
+		racerCollision?.OnTriggerEnterRacer(this);
 	}
 
 	protected void OnTriggerStay2D(Collider2D other) 
 	{
         var racerCollision = other.gameObject.GetComponent<IRacerCollisionStayer>();
-        if(racerCollision != null) {
-            racerCollision.OnTriggerStayRacer(this);
-        }
+        racerCollision?.OnTriggerStayRacer(this);
 	}
 
 }

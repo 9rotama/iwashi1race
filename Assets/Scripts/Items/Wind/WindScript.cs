@@ -6,18 +6,18 @@ using UnityEngine;
 public class WindScript : MonoBehaviour, IItemInitializer
 {
   
-    [SerializeField] float addSpeed;
-    [SerializeField] float addForceTime;
-    private Racer parentRacer;
+    [SerializeField] private float addSpeed;
+    [SerializeField] private float addForceTime;
+    private Racer _parentRacer;
 
     public void ItemInitialize(Racer racer) {
         transform.SetParent(racer.transform);
-        parentRacer = racer.GetComponent<Racer>();
+        _parentRacer = racer.GetComponent<Racer>();
         Destroy(gameObject, addForceTime);
     }
 
     private void FixedUpdate() {
-        parentRacer.AddForce(addSpeed, Vector3.right);
+        _parentRacer.AddForce(addSpeed, Vector3.right);
     }
 
 }
