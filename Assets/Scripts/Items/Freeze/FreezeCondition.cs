@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 
 public class FreezeCondition : MonoBehaviour
 {
-    int _clickedCount = 0;
     [SerializeField] private int requiredClickNumber = 100;
 
     //画像
@@ -17,8 +16,9 @@ public class FreezeCondition : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [FormerlySerializedAs("crackSE")] [SerializeField] private AudioClip crackSe;
     [FormerlySerializedAs("brokenSE")] [SerializeField] private AudioClip brokenSe;
-
-    Racer _target;
+    
+    private int _clickedCount = 0;
+    private Racer _target;
 
     
     /// <summary>
@@ -37,13 +37,13 @@ public class FreezeCondition : MonoBehaviour
     private IEnumerator RacerTryDestroyFreeze()
     {
         while(true) {
-            if(_target is PlayerControl) {
+            if(_target is PlayerController) {
                 yield return new WaitUntil(() => 
                     Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || 
                     Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)
                 );
             }
-            else if(_target is CPUplayerControl) {
+            else if(_target is CpuController) {
                 yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
             }
             

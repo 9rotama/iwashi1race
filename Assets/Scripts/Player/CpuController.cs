@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class CPUplayerControl : Racer
+public class CpuController : Racer
 {
 	[SerializeField] private float nextWaypointDistance;
 	[SerializeField] public float scatterFac = 0.1f;

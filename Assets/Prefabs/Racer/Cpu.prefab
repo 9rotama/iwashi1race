@@ -333,8 +333,8 @@ GameObject:
   - component: {fileID: 3653764231064802361}
   - component: {fileID: 2459857437134358883}
   m_Layer: 7
-  m_Name: CPUPlayer
-  m_TagString: CPUPlayer
+  m_Name: Cpu
+  m_TagString: CPU
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerControl : Racer
+public class PlayerController : Racer
 {
     [SerializeField] private GameObject itemOrbSePrefab;
     [SerializeField] private GameObject magicOrbSePrefab;
