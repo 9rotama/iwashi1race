@@ -36,7 +36,7 @@ public class ItemCreator : MonoBehaviour
     public void CreateItemGameObject(Racer racer) { 
 
         // デバッグ
-        racer.havingItem = Items.Orb;
+        racer.havingItem = Items.Wind;
         Debug.Log(racer.havingItem);
 
         if(racer.havingItem == Items.Nothing) {
@@ -51,12 +51,8 @@ public class ItemCreator : MonoBehaviour
 
         // アイテムの初期化
         var itemInitializer = itemObj.GetComponent<IItemInitializer>();
-        if(itemInitializer != null) {
-            itemInitializer.ItemInitialize(racer);
-        }
-        else {
-            //何もしない
-        }
+        itemInitializer?.ItemInitialize(racer);
+
 
 
         // 所持アイテムをなくす

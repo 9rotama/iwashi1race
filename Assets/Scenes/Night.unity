@@ -5229,6 +5229,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4881628792390933251, guid: 5d7f7bc8e6c8b4cbbbfa37a9dcdfc9b8, type: 3}
   m_PrefabInstance: {fileID: 565786047}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &582856421 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4163793374222356189, guid: 8c2ecece1e87c4d81b931f85d3208be0, type: 3}
+  m_PrefabInstance: {fileID: 1336361121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4297e17819284fd8a5e3b1838e094fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &590063689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5708,7 +5719,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8902327593242734464, guid: cd1ea48d644bcae4cba7e1660495a5c6, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 8902327593242734464, guid: cd1ea48d644bcae4cba7e1660495a5c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8074,6 +8085,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
+      propertyPath: itemCreator
+      value: 
+      objectReference: {fileID: 582856421}
+    - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: <id>k__BackingField
       value: 6
       objectReference: {fileID: 0}
@@ -10362,7 +10377,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 858443521573673050, guid: 8c2ecece1e87c4d81b931f85d3208be0, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 858443521573673050, guid: 8c2ecece1e87c4d81b931f85d3208be0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25695,6 +25710,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
+      propertyPath: itemCreator
+      value: 
+      objectReference: {fileID: 582856421}
+    - target: {fileID: 3653764231064802361, guid: 2364e029d94f742deb05c74b31f30e05, type: 3}
       propertyPath: <id>k__BackingField
       value: 1
       objectReference: {fileID: 0}
@@ -28337,6 +28356,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: 4148986014203615285, guid: e717946af6f7c467e883b97d7320fb75, type: 3}
+      propertyPath: itemCreator
+      value: 
+      objectReference: {fileID: 582856421}
     - target: {fileID: 4148986014203615285, guid: e717946af6f7c467e883b97d7320fb75, type: 3}
       propertyPath: magicOrbMeterControl
       value: 
