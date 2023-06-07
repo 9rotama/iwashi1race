@@ -451,7 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <id>k__BackingField: 0
   itemCreator: {fileID: 0}
-  nextWaypointDistance: 1
+  nextWaypointDistance: 10
   scatterFac: 10
   target: {fileID: 0}
 --- !u!114 &2459857437134358883
