@@ -4,10 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-/// <summary>
-/// CPUのスキンをランダムに適用するクラス
-/// 各CPUに付きアタッチされる
-/// </summary>
 public class CpuSkinApplier : MonoBehaviour
 {
     [SerializeField] private GameObject hairSprite;
@@ -16,14 +12,14 @@ public class CpuSkinApplier : MonoBehaviour
     
     private void Start()
     {
-        var spriteCtrl = hairSprite.GetComponent<RacerSpriteController>();
-        spriteCtrl.SetMaterialHue(Random.value);
+        var spriteColCtrl = hairSprite.GetComponent<RacerSpriteColorController>();
+        spriteColCtrl.SetMaterialHue(Random.value);
 
-        spriteCtrl = clothesSprite.GetComponent<RacerSpriteController>();
-        spriteCtrl.SetMaterialHue(Random.value);
+        spriteColCtrl = clothesSprite.GetComponent<RacerSpriteColorController>();
+        spriteColCtrl.SetMaterialHue(Random.value);
 
-        spriteCtrl = shoesSprite.GetComponent<RacerSpriteController>();
-        spriteCtrl.SetMaterialHue(Random.value);
+        spriteColCtrl = shoesSprite.GetComponent<RacerSpriteColorController>();
+        spriteColCtrl.SetMaterialHue(Random.value);
 
     }
 }

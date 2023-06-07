@@ -14,13 +14,13 @@ public class PlayerSkinApplier : MonoBehaviour
     
     private void Start()
     {
-        var spriteCtrl = hairSprite.GetComponent<RacerSpriteController>();
-        spriteCtrl.SetMaterialHue(PlayerPrefs.GetFloat("hairHue", 0));
+        var spriteColCtrl = hairSprite.GetComponent<RacerSpriteColorController>();
+        spriteColCtrl.SetMaterialHue(PlayerPrefs.GetFloat("hairHue", 0));
         
-        spriteCtrl = clothesSprite.GetComponent<RacerSpriteController>();
-        spriteCtrl.SetMaterialHue(PlayerPrefs.GetFloat("clothesHue",0));
+        spriteColCtrl = clothesSprite.GetComponent<RacerSpriteColorController>();
+        spriteColCtrl.SetMaterialHue(PlayerPrefs.GetFloat("clothesHue",0));
         
-        spriteCtrl = shoesSprite.GetComponent<RacerSpriteController>();
-        spriteCtrl.SetMaterialHue(PlayerPrefs.GetFloat("shoesHue", 0));
+        spriteColCtrl = shoesSprite.GetComponent<RacerSpriteColorController>();
+        spriteColCtrl.SetMaterialHue(PlayerPrefs.GetFloat("shoesHue", 0));
     }
 }
