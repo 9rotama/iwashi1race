@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 public class CrowControl : MonoBehaviour, IRacerCollisionEnterer, IPhysicalDamageable
 {
     [SerializeField] private float destroyPosX;
-    [SerializeField] private float moveSpeed = 100f;
+    [SerializeField] public float moveSpeed = 100f;
     [SerializeField] private float playerStopDur = 1.0f;
     [SerializeField] private int lostMagicOrbNum = 10;
 
