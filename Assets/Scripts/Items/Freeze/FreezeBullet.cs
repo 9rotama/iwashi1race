@@ -19,10 +19,10 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
         _birtherId = racer.id;
 
         var targetPos = Vector3.zero;
-        if(racer is PlayerControl) {
+        if(racer is PlayerController) {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-        else if(racer is CPUplayerControl) {
+        else if(racer is CpuController) {
             targetPos = RankManager.Instance.GetOneRankHigherRacer(racer.id).transform.position;
         }
         _shotForward = Vector3.Scale((targetPos - racer.transform.position), new Vector3(1, 1, 0)).normalized;

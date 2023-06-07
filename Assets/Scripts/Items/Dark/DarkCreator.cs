@@ -27,7 +27,7 @@ public class DarkCreator : MonoBehaviour, IItemInitializer
             darkBodyInstance.Initialize(targets[i], i+1, destroyTime);
 
             //プレイヤー用のエフェクトを適用
-            if(targets[i] is PlayerControl){
+            if(targets[i] is PlayerController){
                 Instantiate(darkEffect).Initialize(destroyTime);
             }
 

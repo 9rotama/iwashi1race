@@ -11,14 +11,14 @@ public class StageBackgroundScroll : MonoBehaviour
     private const float XReducer = 0.0001f;
     private const float YReducer = 0.00002f;
     
-    private PlayerControl _playerControl;
+    private PlayerController _playerControl;
     private Material _material;
     private Vector2 _offset;
 
     private void Start()
     {
         var player = GameObject.FindGameObjectWithTag("Player");
-        _playerControl = player.GetComponent<PlayerControl>();
+        _playerControl = player.GetComponent<PlayerController>();
         _material = GetComponent<Image>().material;
         _offset = new Vector2(0, 0);
     }

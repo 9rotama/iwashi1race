@@ -71,8 +71,6 @@ public class GameManagerControl : MonoBehaviour
                 break;
             case GameState.Idle:
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
     }
 
