@@ -691,6 +691,10 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6979947960754844141, guid: 1c5a93cfb169d472896be5519b0dbe02, type: 3}
+      propertyPath: spawnSpan
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979947960754844141, guid: 1c5a93cfb169d472896be5519b0dbe02, type: 3}
       propertyPath: prefabCrow
       value: 
       objectReference: {fileID: 6265291692936988109, guid: 883d96c12273347f4a89567ee1ceaf33, type: 3}
