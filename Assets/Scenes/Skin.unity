@@ -720,10 +720,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 536724853}
-        m_TargetAssemblyTypeName: PlayerSpriteChange, Assembly-CSharp
+      - m_Target: {fileID: 536724855}
+        m_TargetAssemblyTypeName: RacerSpriteColorController, Assembly-CSharp
         m_MethodName: SetMaterialHue
-        m_Mode: 0
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -992,6 +992,7 @@ GameObject:
   - component: {fileID: 536724852}
   - component: {fileID: 536724854}
   - component: {fileID: 536724853}
+  - component: {fileID: 536724855}
   m_Layer: 8
   m_Name: Hair
   m_TagString: Untagged
@@ -1079,6 +1080,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &536724855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536724851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cecd4211dfcd4c04d85fd9450852c95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &538377509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,6 +1948,7 @@ GameObject:
   - component: {fileID: 1019147160}
   - component: {fileID: 1019147162}
   - component: {fileID: 1019147161}
+  - component: {fileID: 1019147163}
   m_Layer: 8
   m_Name: Clothes
   m_TagString: Untagged
@@ -2022,6 +2036,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1019147163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019147159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cecd4211dfcd4c04d85fd9450852c95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1029018865
 GameObject:
   m_ObjectHideFlags: 0
@@ -3079,6 +3105,7 @@ GameObject:
   - component: {fileID: 1620948770}
   - component: {fileID: 1620948772}
   - component: {fileID: 1620948771}
+  - component: {fileID: 1620948773}
   m_Layer: 8
   m_Name: Shoes
   m_TagString: Untagged
@@ -3166,6 +3193,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1620948773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620948769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cecd4211dfcd4c04d85fd9450852c95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1700229541
 GameObject:
   m_ObjectHideFlags: 0
@@ -3456,6 +3495,9 @@ MonoBehaviour:
   hairSlider: {fileID: 432471288}
   clothesSlider: {fileID: 1323272034}
   shoesSlider: {fileID: 1738982574}
+  hair: {fileID: 536724855}
+  clothes: {fileID: 1019147163}
+  shoes: {fileID: 1620948773}
 --- !u!4 &1784230737
 Transform:
   m_ObjectHideFlags: 0
