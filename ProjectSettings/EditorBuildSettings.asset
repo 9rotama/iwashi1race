@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: 8309cfcdbfb654537a9530822ec0b1e8
   - enabled: 1
-    path: Assets/Scenes/Meadow.unity
+    path: Assets/Scenes/Stage/Meadow.unity
     guid: 8fe05e4d83eeb499dbeb733a4e5ee505
   - enabled: 1
     path: Assets/Scenes/Rule.unity
@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Stage.unity
     guid: 638f93271f8f84f91adae4b227b9f8ff
   - enabled: 1
-    path: Assets/Scenes/Night.unity
+    path: Assets/Scenes/Stage/Night.unity
     guid: 4ef5b585b58244115bab77f11b37c203
   m_configObjects: {}
