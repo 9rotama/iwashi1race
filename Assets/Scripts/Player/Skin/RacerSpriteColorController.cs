@@ -17,7 +17,7 @@ public class RacerSpriteColorController : MonoBehaviour
         _spriteRenderer.material.SetFloat(_hue, h);
     }
 
-    private void Start()
+    private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }

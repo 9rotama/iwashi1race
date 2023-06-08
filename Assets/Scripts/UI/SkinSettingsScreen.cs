@@ -8,9 +8,8 @@ using UnityEngine.SceneManagement;
 public class SkinSettingsScreen : MonoBehaviour
 {
     [SerializeField] private Button returnButton;
-    [SerializeField] private Slider hairSlider;
-    [SerializeField] private Slider clothesSlider;
-    [SerializeField] private Slider shoesSlider;
+    [SerializeField] private Slider hairSlider, clothesSlider, shoesSlider;
+    [SerializeField] private RacerSpriteColorController hair, clothes, shoes;
 
 
     /// <summary>
@@ -33,6 +32,21 @@ public class SkinSettingsScreen : MonoBehaviour
         shoesSlider.value = PlayerPrefs.GetFloat("shoesHue", 0);
     }
 
+    private void SetHairPreviewFromSliderValue(float value)
+    {
+        hair.SetMaterialHue(hairSlider.value);
+    }
+    
+    private void SetClothesPreviewFromSliderValue(float value)
+    {
+        clothes.SetMaterialHue(clothesSlider.value);
+    }
+    
+    private void SetShoesPreviewFromSliderValue(float value)
+    {
+        shoes.SetMaterialHue(shoesSlider.value);
+    }
+
     private void ReturnTitle()
     {
         SceneManager.LoadScene("Title");
@@ -40,10 +54,14 @@ public class SkinSettingsScreen : MonoBehaviour
 
     private void Start()
     {
+        hairSlider.onValueChanged.AddListener(SetHairPreviewFromSliderValue);
+        clothesSlider.onValueChanged.AddListener(SetClothesPreviewFromSliderValue);
+        shoesSlider.onValueChanged.AddListener(SetShoesPreviewFromSliderValue);
         SetSliderValueFromPrefs();
         returnButton.onClick.AddListener(() =>
         {
             Invoke(nameof(ReturnTitle), 0.5f);
         });
+        
     }
 }
