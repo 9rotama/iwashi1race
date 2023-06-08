@@ -30,7 +30,7 @@ public class RacerSpriteSpeedController : MonoBehaviour
         }
     }
     
-    private void Start()
+    private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = spriteSpeed0;
