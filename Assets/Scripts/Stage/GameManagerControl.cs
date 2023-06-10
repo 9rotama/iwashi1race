@@ -62,6 +62,7 @@ public class GameManagerControl : MonoBehaviour
                 _totalTime += Time.deltaTime;
                 break;
             case GameState.Goal when Input.GetMouseButtonDown (0):
+                SEManager.Instance.Stop();
                 SceneManager.LoadScene ("Title");
                 break;
             case GameState.Idle:
