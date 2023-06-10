@@ -73,7 +73,7 @@ public class PlayerController : Racer
 		CalcVelocity();
 
 		
-		if (_isStopped)
+		if (isStopped)
 		{
 			StopRb();
 			return;

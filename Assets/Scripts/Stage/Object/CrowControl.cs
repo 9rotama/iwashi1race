@@ -23,22 +23,14 @@ public class CrowControl : MonoBehaviour, IRacerCollisionEnterer, IPhysicalDamag
     /// <param name="racer">レーサーのクラス</param>
     public void OnTriggerEnterRacer(Racer racer)
     {
-        if(!IsPhysicalDamageable(racer)) return;
-
+        if(!IPhysicalDamageable.IsPhysicalDamageable(racer)) {
+            Destroy(this.gameObject);
+            return;
+        }
+        
         racer.StopperEnter(playerStopDur, lostMagicOrbNum);
         Destroy(gameObject);
     }
-
-    public bool IsPhysicalDamageable(Racer racer)
-    {
-        if(racer.isInvincible) {
-            return false;
-        }
-
-        racer.isInvincible = false;
-        return true;
-    }
-
 
     private void Update()
     {
