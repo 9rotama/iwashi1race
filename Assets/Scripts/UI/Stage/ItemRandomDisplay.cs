@@ -1,44 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using KanKikuchi.AudioManager;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ItemRandomDisplay : MonoBehaviour
 {
-    [SerializeField] Sprite[] sprites; 
-    Image image;
-    float changeTime;
-    float time;
-    int spriteNum;
-    public int determinItem;
+    [SerializeField] Sprite[] sprites;
+    private Image _image;
+    private float _changeTime;
+    private float _time;
+    private int _spriteNum;
+    [FormerlySerializedAs("determinItem")] public int determineItem;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        image = GetComponent<Image>();
+        _image = GetComponent<Image>();
         OnEnable();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
-        GetComponent<ItemRandomAudio>().PlayItemSound();
-        time = 0;
-        changeTime = 0;
+        SEManager.Instance.Play(SEPath.ITEM_ORB);
+        _time = 0;
+        _changeTime = 0;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        time += Time.deltaTime;
-        changeTime += Time.deltaTime;
-        if(time < 2.07f){
-            if(changeTime > 0.08f ){
-            changeTime = 0;
-            image.sprite = sprites[spriteNum++%sprites.Length];
-            }
+        _time += Time.deltaTime;
+        _changeTime += Time.deltaTime;
+        if(_time < 2.07f)
+        {
+            if (!(_changeTime > 0.08f)) return;
+            _changeTime = 0;
+            _image.sprite = sprites[_spriteNum++%sprites.Length];
         }
         else{
-            if(determinItem == -1) time = 0;
-            image.sprite = sprites[determinItem];
+            if(determineItem == -1) _time = 0;
+            _image.sprite = sprites[determineItem];
         }
 
         

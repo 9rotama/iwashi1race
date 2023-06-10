@@ -37,7 +37,7 @@ public class CrowSpawner : MonoBehaviour
             var position = transform.position;
             var spawnPosHeight = position.y + (UnityEngine.Random.value - 0.5f) * stageHeight;
             var spawnPos = new Vector3(position.x, spawnPosHeight, position.z);
-            var crow = Instantiate(prefabCrow, spawnPos, Quaternion.identity);
+            Instantiate(prefabCrow, spawnPos, Quaternion.identity);
             yield return new WaitForSeconds (spawnSpan / Mathf.Abs(-_velocity * Time.deltaTime - _crowMoveSpeed * Time.deltaTime));
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using KanKikuchi.AudioManager;
 using UnityEngine.Serialization;
 
 /// <summary>
@@ -16,11 +17,6 @@ public class FreezeCondition : MonoBehaviour
     [FormerlySerializedAs("IceCrackSprites")] [SerializeField] private Sprite[] iceCrackSprites;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    //音声
-    [SerializeField] private AudioSource audioSource;
-    [FormerlySerializedAs("crackSE")] [SerializeField] private AudioClip crackSe;
-    [FormerlySerializedAs("brokenSE")] [SerializeField] private AudioClip brokenSe;
-    
     private int _clickedCount = 0;
     private Racer _target;
 
@@ -41,17 +37,20 @@ public class FreezeCondition : MonoBehaviour
     private IEnumerator RacerTryDestroyFreeze()
     {
         while(true) {
-            if(_target is PlayerController) {
-                yield return new WaitUntil(() => 
-                    Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || 
-                    Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)
-                );
-            }
-            else if(_target is CpuController) {
-                yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
+            switch (_target)
+            {
+                case PlayerController:
+                    yield return new WaitUntil(() => 
+                        Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || 
+                        Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)
+                    );
+                    break;
+                case CpuController:
+                    yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
+                    break;
             }
             
-            audioSource.PlayOneShot(crackSe);
+            SEManager.Instance.Play(SEPath.FREEZE_CRACK);
             _clickedCount++;
         }
     }
@@ -62,9 +61,9 @@ public class FreezeCondition : MonoBehaviour
     {
         // 条件がなりつ立つ時。破壊音を出してこのオブジェクトを破棄する
         if(_clickedCount == requiredClickNumber){
-            Vector3 cameraPos = Camera.main.gameObject.transform.position;
-            AudioSource.PlayClipAtPoint(brokenSe, cameraPos - Vector3.back*5f);
-            // AudioSource.PlayClipAtPoint(brokenSE, transform.position + new Vector3(100, 0, -10));
+            /*Vector3 cameraPos = Camera.main.gameObject.transform.position;
+            AudioSource.PlayClipAtPoint(brokenSe, cameraPos - Vector3.back*5f);*/
+            SEManager.Instance.Play(SEPath.FREEZE_BROKEN);
             Destroy(this.gameObject);
         }
 

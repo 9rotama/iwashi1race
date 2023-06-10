@@ -7,14 +7,10 @@ using KanKikuchi.AudioManager;
 
 public class PlayerController : Racer
 {
-    [SerializeField] private GameObject itemOrbSePrefab;
-    [SerializeField] private GameObject magicOrbSePrefab;
-    
-    private GameObject _goal; 
+	private GameObject _goal; 
 	private bool _isInGoal;
 	
     [SerializeField] private MagicOrbMeterControl magicOrbMeterControl;
-	private AudioSource _audioSource;
 	
 	/// <summary>
 	/// 魔法オーブの取得数をゲージに反映
@@ -32,10 +28,7 @@ public class PlayerController : Racer
 		base.MagicOrbEnter(num);
 		SetMagicOrbMeter();
 		
-		//音のプレハブを作成して再生後削除する
-		var sound = Instantiate(magicOrbSePrefab);
-		var endTime = sound.GetComponent<AudioSource>().clip.length;
-		Destroy(sound, endTime);
+		SEManager.Instance.Play(SEPath.MAGIC_ORB);
 	}
 
 	/// <summary>
@@ -54,8 +47,7 @@ public class PlayerController : Racer
 
 	private void Start()
     {
-        _rb2D = this.GetComponent<Rigidbody2D>();
-		_audioSource = GetComponent<AudioSource>();
+        _rb2D = GetComponent<Rigidbody2D>();
 		
 		_prevPosition = transform.position;
 
