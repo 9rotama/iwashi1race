@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using KanKikuchi.AudioManager;
 
 public class PlayerController : Racer
 {
@@ -48,7 +49,6 @@ public class PlayerController : Racer
 	{
 		base.StopperEnter(duration, lostMagicOrbNum);
 		SetMagicOrbMeter();
-		// _audioSource.Play();
 	}
 
 
