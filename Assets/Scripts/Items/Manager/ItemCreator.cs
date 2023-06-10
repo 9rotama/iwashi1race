@@ -22,9 +22,9 @@ public class ItemCreator : MonoBehaviour
     public void CreateItemGameObject(Racer racer) { 
 
         // デバッグ
-        racer.havingItem = Items.Fire;
-        
+        racer.havingItem = Items.Freeze;
         Debug.Log(racer.havingItem);
+        //
 
         if(racer.havingItem == Items.Nothing) {
             return;
