@@ -6,10 +6,8 @@ using Random = UnityEngine.Random;
 
 public class CpuSkinApplier : MonoBehaviour
 {
-    [SerializeField] private GameObject hairSprite;
-    [SerializeField] private GameObject clothesSprite;
-    [SerializeField] private GameObject shoesSprite;
-    
+    [SerializeField] private GameObject hairSprite, clothesSprite, shoesSprite;
+
     private void Start()
     {
         var spriteColCtrl = hairSprite.GetComponent<RacerSpriteColorController>();
@@ -20,6 +18,5 @@ public class CpuSkinApplier : MonoBehaviour
 
         spriteColCtrl = shoesSprite.GetComponent<RacerSpriteColorController>();
         spriteColCtrl.SetMaterialHue(Random.value);
-
     }
 }

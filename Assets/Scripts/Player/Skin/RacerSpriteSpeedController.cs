@@ -15,22 +15,16 @@ public class RacerSpriteSpeedController : MonoBehaviour
     
     private void Update()
     {
-        var velocity = _racer.GetVelocity();
-        if(velocity >= 0 && velocity < 100f)
+        var velocity = _racer.GetVelocityVec2();
+        _spriteRenderer.sprite = velocity.x switch
         {
-            _spriteRenderer.sprite = spriteSpeed0;
-        }
-        else if (velocity >= 100f && velocity < 200f)
-        {
-            _spriteRenderer.sprite = spriteSpeed1;
-        }
-        else
-        {
-            _spriteRenderer.sprite = spriteSpeed2;
-        }
+            < 100f => spriteSpeed0,
+            >= 100f and < 200f => spriteSpeed1,
+            _ => spriteSpeed2
+        };
     }
     
-    private void Awake()
+    private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = spriteSpeed0;
