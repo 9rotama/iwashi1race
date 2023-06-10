@@ -8,10 +8,8 @@ using UnityEngine;
 /// </summary>
 public class PlayerSkinApplier : MonoBehaviour
 {
-    [SerializeField] private GameObject hairSprite;
-    [SerializeField] private GameObject clothesSprite;
-    [SerializeField] private GameObject shoesSprite;
-    
+    [SerializeField] private GameObject hairSprite, clothesSprite, shoesSprite;
+
     private void Start()
     {
         var spriteColCtrl = hairSprite.GetComponent<RacerSpriteColorController>();
