@@ -109,8 +109,8 @@ public class ItemDecider : MonoBehaviour
         // 0から配列の確率の合計値までの範囲でランダムな数値を生成する
         int randNumber = Random.Range(0,itemProbabilities.Sum());
 
-        // アイテムを選定する。Itemsの項目数の大きさ-1でfor文を回す
-        for(int i=0, probability=0; i<itemProbabilities.Length-1; i++){
+        // アイテムを選定する。Nothingを除いたItemsの項目数でfor文を回す
+        for(int i=0, probability=0; i<itemProbabilities.Length; i++){
 
             probability += itemProbabilities[i];
             

@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// 等速に進むファイアのクラス
+/// </summary>
 public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEnterer, IPhysicalDamageable
 {
     [SerializeField] private AudioSource audioSource;
@@ -13,29 +15,22 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
     [SerializeField] private int lostMagicOrbNum = 10;
     [SerializeField] private float speed = 500.0f;
     private Vector3 _shotForward;
-    private readonly int _birtherId;
-
-    public FireScript(int birtherId)
-    {
-        this._birtherId = birtherId;
-    }
-
-    // public void ItemInitializeOfCPUPlayer(int id, Vector3 birtherPos, GameObject racer) 
-    // {
-
-    //     Vector3 targetPos = RankManager.Instance.GetOneRankHigherRacer(id).transform.position;
-    //     shotForward = Vector3.Scale((targetPos - birtherPos), new Vector3(1, 1, 0)).normalized;
-        
-    //     // 三秒後に消える
-    //     Destroy(this.gameObject, 3.0f);
-    // }
+    private int _birtherId;
 
     public void ItemInitialize(Racer racer)
     {
-        AudioSource.PlayClipAtPoint(fireSe, transform.position);
-        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        _shotForward = Vector3.Scale((targetPos - racer.transform.position), new Vector3(1, 1, 0)).normalized;
-
+        
+        var targetPos = Vector3.zero;
+        if(racer is PlayerController) {
+            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+             AudioSource.PlayClipAtPoint(fireSe, transform.position);
+        }
+        else if(racer is CpuController) {
+            targetPos = RankManager.Instance.GetOneRankHigherRacer(racer.id).transform.position;
+        }
+        _birtherId = racer.id;
+        _shotForward = Vector3.Scale((targetPos - racer.transform.position), Vector2.one).normalized;
+    
         // 三秒後に消える
         Destroy(this.gameObject, 3.0f);
     }
