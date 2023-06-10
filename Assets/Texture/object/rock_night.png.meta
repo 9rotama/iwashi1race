@@ -72,6 +72,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -496,6 +497,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      rock_night_0: -4802204416434381608
+      rock_night_8: 1723694307786588185
+      rock_night_4: -921598324770926068
+      rock_night_12: -2281919608831629199
+      rock_night_11: -794019520302562921
+      rock_night_15: 2730747172643771049
+      rock_night_3: -8380900627082345256
+      rock_night_13: -105074395572077313
+      rock_night_1: 5860923281300577259
+      rock_night_5: 1075856750094641145
+      rock_night_14: -4457111773173369993
+      rock_night_2: 864666166412280272
+      rock_night_9: 5563977853377486942
+      rock_night_6: -2370252819590212015
+      rock_night_7: -6547551583846157995
+      rock_night_10: -3102221554386667110
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
