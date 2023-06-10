@@ -9,7 +9,6 @@ using UnityEngine.UI;
 /// </Summary>
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(Button))]
-[RequireComponent(typeof(AudioSource))]
 public class ButtonController : 
     MonoBehaviour, 
     IPointerExitHandler, 
@@ -20,6 +19,7 @@ public class ButtonController :
     [SerializeField] private Sprite mouseExitSprite;
     [SerializeField] private Sprite mouseEnterSprite;
     [SerializeField] private Sprite mouseDownSprite;
+    [SerializeField] private ButtonSound pressedSound;
     private Image _img;
     private Button _btn;
     
@@ -45,7 +45,17 @@ public class ButtonController :
 
     private void PlayPressedSound()
     {
-       SEManager.Instance.Play(SEPath.SELECT);
+        switch (pressedSound)
+        {
+            case ButtonSound.Normal:
+                SEManager.Instance.Play(SEPath.SELECT);
+                break;
+            case ButtonSound.Return:
+                SEManager.Instance.Play(SEPath.BACK);
+                break;
+            default:
+                break;
+        }
     }
 
     private void Start()
