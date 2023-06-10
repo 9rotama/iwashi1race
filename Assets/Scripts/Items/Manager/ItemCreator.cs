@@ -4,20 +4,6 @@ using UnityEngine;
 
 
 /// <summary>
-/// レーサーが使うアイテムの列挙型
-/// </summary>
-public enum Items {
-    Wind,
-    Dark,
-    Thunder,
-    Fire,
-    Bubble,
-    Orb,
-    Freeze,
-    Nothing,
-};
-
-/// <summary>
 /// アイテムを生成するクラス
 /// </summary>
 public class ItemCreator : MonoBehaviour
@@ -36,7 +22,8 @@ public class ItemCreator : MonoBehaviour
     public void CreateItemGameObject(Racer racer) { 
 
         // デバッグ
-        racer.havingItem = Items.Wind;
+        racer.havingItem = Items.Fire;
+        
         Debug.Log(racer.havingItem);
 
         if(racer.havingItem == Items.Nothing) {

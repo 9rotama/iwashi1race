@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// レーサーを一定時間スタンさせるサンダーのクラス
+/// </summary>
 [RequireComponent(typeof(ThunderDraw))]
 public class Thunder : MonoBehaviour, IPhysicalDamageable
 {

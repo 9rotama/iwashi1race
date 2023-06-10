@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// サンダーを描画を管理するクラス
+/// </summary>
 [RequireComponent(typeof(Thunder))]
 public class ThunderDraw : MonoBehaviour
 {

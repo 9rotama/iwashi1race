@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// DarkCreatorから作られるアイテムダークの本体
+/// レーサーにランダムに力を加え操作を難しくする
+/// </summary>
 public class DarkBody : MonoBehaviour
 {
     private int _targetRank;

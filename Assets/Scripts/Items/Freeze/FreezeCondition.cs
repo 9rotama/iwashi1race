@@ -4,6 +4,10 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Serialization;
 
+/// <summary>
+/// レーサーを氷状態にする
+/// クリックされることで氷にヒビが入り割れる
+/// </summary>
 public class FreezeCondition : MonoBehaviour
 {
     [SerializeField] private int requiredClickNumber = 100;
@@ -69,6 +73,7 @@ public class FreezeCondition : MonoBehaviour
         spriteRenderer.sprite = iceCrackSprites[Mathf.FloorToInt((float)_clickedCount / (float)requiredClickNumber * length) % length];
 
     }
+
 
     private void FixedUpdate() 
     {

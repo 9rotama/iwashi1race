@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 物理攻撃をするアイテムから身を守る
+/// バブルを管理するクラス
+/// </summary>
 public class BubbleScript : MonoBehaviour, IItemInitializer
 {
     private Racer _parentRacer;
