@@ -8,8 +8,6 @@ using UnityEngine;
 [RequireComponent(typeof(ThunderDraw))]
 public class Thunder : MonoBehaviour, IPhysicalDamageable
 {
-    private int _birtherId;
-    
     private Racer _target;
 
     // 雷が落ちるまでの時間
@@ -46,8 +44,9 @@ public class Thunder : MonoBehaviour, IPhysicalDamageable
     private IEnumerator StrikeThunder() {
         yield return new WaitUntil(() => GetStrikeTimeRatio() > 1);
 
-        if(!IsPhysicalDamageable(_target)) {
+        if(!IPhysicalDamageable.IsPhysicalDamageable(_target)) {
             Destroy(gameObject);
+            yield break;
         }
 
         _target.StopperEnter(_stanTime, 10);
@@ -67,20 +66,5 @@ public class Thunder : MonoBehaviour, IPhysicalDamageable
     public float GetCloudTimeRatio() {
         return _cloudTimer / requiredCloudTime;
     }
-
-    public bool IsPhysicalDamageable(Racer racer)
-    {
-        if(racer.id == _birtherId) {
-            return false;
-        }
-
-        if(racer.isInvincible == true) {
-            return false;
-        }
-
-        racer.isInvincible = false;
-        return true;
-    }
-
 
 }

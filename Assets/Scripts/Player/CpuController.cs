@@ -51,7 +51,7 @@ public class CpuController : Racer
 		
 		CalcVelocity();
 
-		if (_isStopped)
+		if (isStopped)
 		{
 			StopRb();
 			return;

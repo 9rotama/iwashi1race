@@ -19,7 +19,7 @@ public abstract class Racer : MonoBehaviour
     [System.NonSerialized] public bool isInvincible = false;
 
     [SerializeField] private ItemCreator itemCreator;
-    protected bool _isStopped = false;
+    public bool isStopped {get; private set;} = false;
     protected const float MoveSpeed = 180f;
     protected int _magicOrbNum;
     protected const int MaxMagicOrb = 50;
@@ -36,6 +36,7 @@ public abstract class Racer : MonoBehaviour
     
     protected void UseItem()
     {
+		if(isStopped) return;
         itemCreator.CreateItemGameObject(this);
     }
 
@@ -111,9 +112,9 @@ public abstract class Racer : MonoBehaviour
 	/// <param name="duration">スタン状態の長さ</param>
 	private IEnumerator StopperBump(float duration)
 	{
-		_isStopped = true;
+		isStopped = true;
 		yield return new WaitForSeconds(duration);
-		_isStopped = false;
+		isStopped = false;
 	}
 
 	protected void OnTriggerEnter2D(Collider2D other)
