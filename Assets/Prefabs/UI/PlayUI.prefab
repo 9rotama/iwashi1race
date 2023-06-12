@@ -522,7 +522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6250334783774913471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d66a5c4700e4e869590d7f5ce5d06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
+  itemSprites:
   - {fileID: 21300000, guid: 548b4c971456c43829d4d974a6242d29, type: 3}
   - {fileID: 21300000, guid: e63e4ee98a45f451689dc64033fa8c2a, type: 3}
   - {fileID: 21300000, guid: cbb9aba58aa38420a9632888b347595b, type: 3}
@@ -602,6 +602,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9fc10b575f42140c9a34483cff4aa0bd, type: 3}
   - {fileID: 21300000, guid: 1ef69c5cb1b0e46e184d96623421d3fd, type: 3}
   determineItem: 0
+  audioClip: {fileID: 8300000, guid: 055e1a54d5daa441d8867c1897f3a63a, type: 3}
 --- !u!1 &6250334783787800446
 GameObject:
   m_ObjectHideFlags: 0

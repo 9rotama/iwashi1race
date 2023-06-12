@@ -11,9 +11,6 @@ public class ItemCreator : MonoBehaviour
     // 生成するアイテム保持する配列
     [SerializeField] private GameObject[] itemObjects;
 
-    //!Playerクラスに移行するかどうか
-    // [SerializeField] GameObject randomItemUI;
-
     /// <summary>
     /// 与えた座標にアイテムを生成する
     /// </summary>
@@ -22,8 +19,8 @@ public class ItemCreator : MonoBehaviour
     public void CreateItemGameObject(Racer racer) { 
 
         // デバッグ
-        racer.havingItem = Items.Freeze;
-        Debug.Log(racer.havingItem);
+        // racer.havingItem = Items.Freeze;
+        // Debug.Log(racer.havingItem);
         //
 
         if(racer.havingItem == Items.Nothing) {
@@ -44,9 +41,6 @@ public class ItemCreator : MonoBehaviour
 
         // 所持アイテムをなくす
         racer.havingItem = Items.Nothing;
-
-        //!Playerクラスに移行するかどうか↓
-        // randomItemUI.SetActive(false);
 
     }
 }

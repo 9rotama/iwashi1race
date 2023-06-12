@@ -11,12 +11,21 @@ public class PlayerController : Racer
 	private bool _isInGoal;
 	
     [SerializeField] private MagicOrbMeterControl magicOrbMeterControl;
+
+    [SerializeField] private ItemRandomDisplay itemRandomDisplay;
+
 	
 	/// <summary>
 	/// 魔法オーブの取得数をゲージに反映
 	/// </summary>
 	private void SetMagicOrbMeter(){
 		magicOrbMeterControl.SetMeter(_magicOrbNum);
+	}
+
+	protected override void UseItem(){
+		if(!itemRandomDisplay.isItemUsable) return;
+		base.UseItem();
+		itemRandomDisplay.enabled = false;
 	}
 	
 	/// <summary>

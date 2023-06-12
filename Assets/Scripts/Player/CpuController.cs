@@ -42,9 +42,9 @@ public class CpuController : Racer
 
 	private void FixedUpdate()
     {
-		// if(UnityEngine.Random.Range(0,100) == 0) {
-		// 	UseItem();
-		// }
+		if(UnityEngine.Random.Range(0,100) == 0) {
+			UseItem();
+		}
 		//アイテム使用
 
 		if(_gameManagerCtrl.GetGameState() == GameState.Idle || transform.position.x > target.position.x + 10) return;
