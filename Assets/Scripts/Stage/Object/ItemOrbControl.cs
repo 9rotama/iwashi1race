@@ -7,22 +7,27 @@ using UnityEngine;
 /// </summary>
 public class ItemOrbControl : MonoBehaviour, IRacerCollisionEnterer
 {
+
     private static ItemDecider itemDecider;
-
-    private void Start() 
-    {
-        if(itemDecider != null) return;
-
-        var obj = GameObject.Find("ItemManager");
-        if(obj == null) return; 
-
-        itemDecider = obj.GetComponent<ItemDecider>();
-    }
+    private OrbSpawner _parentOrbSpawner;
 
     public void OnTriggerEnterRacer(Racer racer)
     {
         itemDecider?.DecideItem(racer);
+        _parentOrbSpawner.OrbDestroyed();
         Destroy(this.gameObject);
+    }
+    
+    private void Start() 
+    {
+        _parentOrbSpawner = transform.parent.GetComponent<OrbSpawner>();
+
+        if(itemDecider != null) return;
+        
+        var obj = GameObject.Find("ItemManager");
+        if(obj == null) return; 
+
+        itemDecider = obj.GetComponent<ItemDecider>();
     }
 
 }
