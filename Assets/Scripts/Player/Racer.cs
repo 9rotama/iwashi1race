@@ -34,7 +34,7 @@ public abstract class Racer : MonoBehaviour
     /// レーサーがアイテムを使用するための手続き
     /// </summary>
     
-    protected void UseItem()
+    protected virtual void UseItem()
     {
 		if(isStopped) return;
         itemCreator.CreateItemGameObject(this);
