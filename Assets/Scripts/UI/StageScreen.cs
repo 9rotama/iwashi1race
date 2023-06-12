@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using KanKikuchi.AudioManager;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -33,8 +34,7 @@ public class StageScreen : MonoBehaviour
         {
             stageSelect.button.onClick.AddListener(() =>
             {
-                var bgm = GameObject.FindGameObjectsWithTag("BGM")[0];
-                Destroy(bgm, 0);
+                BGMManager.Instance.Stop();
                 StartCoroutine(MoveScene(stageSelect.name));
             });
         }

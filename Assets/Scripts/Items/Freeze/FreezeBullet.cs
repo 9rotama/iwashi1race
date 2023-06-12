@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using KanKikuchi.AudioManager;
+/// <summary>
+/// 等速に進むフリーズのクラス
+/// レーサーに当たると氷状態にする
+/// </summary>
 public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnterer, IPhysicalDamageable
 {
     [SerializeField] private Rigidbody2D rb;
@@ -9,21 +13,22 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
     private int _birtherId;
     private const float Speed = 500.0f;
     [SerializeField] private FreezeCondition freezeCondition;
-    [SerializeField] private AudioSource audioSource;
 
     public void ItemInitialize(Racer racer) 
     {
-        // AudioSource.PlayClipAtPoint(audioSource.clip, new Vector3(transform.position.x + 100, transform.position.y, -10));
-        audioSource.Play();
-
+        SEManager.Instance.Play(SEPath.FREEZE);
+        
         _birtherId = racer.id;
 
         var targetPos = Vector3.zero;
-        if(racer is PlayerController) {
-            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
-        else if(racer is CpuController) {
-            targetPos = RankManager.Instance.GetOneRankHigherRacer(racer.id).transform.position;
+        switch (racer)
+        {
+            case PlayerController:
+                targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                break;
+            case CpuController:
+                targetPos = RankManager.Instance.GetOneRankHigherRacer(racer.id).transform.position;
+                break;
         }
         _shotForward = Vector3.Scale((targetPos - racer.transform.position), new Vector3(1, 1, 0)).normalized;
 
@@ -38,24 +43,19 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
 
     public void OnTriggerEnterRacer(Racer racer) 
     {
-        if(!IsPhysicalDamageable(racer)) return;
+                // アイテムを出したレーサーとIDが同じか
+        if(racer.id == _birtherId) {
+            return;
+        }
+
+        if(!IPhysicalDamageable.IsPhysicalDamageable(racer)) {
+            Destroy(gameObject);
+            return;
+        }
+        
         racer.StopperEnter(0, 10);
         Instantiate(freezeCondition, racer.transform.position, Quaternion.identity).Initialize(racer);
         Destroy(gameObject);
-    }
-
-    public bool IsPhysicalDamageable(Racer racer)
-    {
-        if(racer.id == _birtherId) {
-            return false;
-        }
-
-        if(racer.isInvincible == true) {
-            return false;
-        }
-
-        racer.isInvincible = false;
-        return true;
     }
 
 }

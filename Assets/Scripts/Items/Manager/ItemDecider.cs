@@ -8,7 +8,7 @@ using System.Linq;
 /// </summary>
 public class ItemDecider : MonoBehaviour
 {
-    // [SerializeField] private GameObject randomItemUI;
+    [SerializeField] private ItemRandomDisplay itemRandomDisplay;
 
     /// <summary>
     /// レーサーのアイテムを決める関数
@@ -19,12 +19,6 @@ public class ItemDecider : MonoBehaviour
         if(racer.havingItem != Items.Nothing) {
             return;
         }
-
-        //!他のクラスアイテムオーブかなに移行するかどうか、上の変数も
-        // if(transform.parent.tag == "Player"){
-        //     randomItemUI.SetActive(true);
-        //     randomItemUI.GetComponent<ItemRandomDisplay>().determinItem = (int)determinItem; 
-        // }
 
         // 列挙型のItemsの項目数の大きさ-1で初期化する。Items.Nothingがあるため。
         int[] itemProbabilities = new int[System.Enum.GetNames(typeof(Items)).Length-1];
@@ -109,17 +103,25 @@ public class ItemDecider : MonoBehaviour
         // 0から配列の確率の合計値までの範囲でランダムな数値を生成する
         int randNumber = Random.Range(0,itemProbabilities.Sum());
 
-        // アイテムを選定する。Itemsの項目数の大きさ-1でfor文を回す
-        for(int i=0, probability=0; i<itemProbabilities.Length-1; i++){
+        // アイテムを選定する。Nothingを除いたItemsの項目数でfor文を回す
+        racer.havingItem = 0;
+        for(int i=0, probability=0; i<itemProbabilities.Length; i++){
 
             probability += itemProbabilities[i];
             
             if(randNumber < probability){
                 racer.havingItem =  (Items)i;
-                return;
+                break;
             }
         }
-        racer.havingItem = 0;
+        
+        // レーサーがプレイヤーのときアイテムUIを表示する
+        if(racer is PlayerController) {
+            itemRandomDisplay.enabled = true;
+            itemRandomDisplay.playerHavingItem = racer.havingItem;
+        }
+
+
 
     }
 }

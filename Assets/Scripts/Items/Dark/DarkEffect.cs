@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/// <summary>
+/// プレイヤーにだけ適用するダークのエフェクト
+/// </summary>
 public class DarkEffect : MonoBehaviour
 {
     private float _elapsedTime;

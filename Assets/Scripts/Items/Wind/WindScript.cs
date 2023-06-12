@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// レーサーを加速させるクラス
+/// </summary>
 public class WindScript : MonoBehaviour, IItemInitializer
 {
   
@@ -12,7 +14,7 @@ public class WindScript : MonoBehaviour, IItemInitializer
 
     public void ItemInitialize(Racer racer) {
         transform.SetParent(racer.transform);
-        _parentRacer = racer.GetComponent<Racer>();
+        _parentRacer = racer;
         Destroy(gameObject, addForceTime);
     }
 

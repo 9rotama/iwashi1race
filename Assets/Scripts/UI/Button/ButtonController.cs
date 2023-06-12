@@ -1,3 +1,4 @@
+using KanKikuchi.AudioManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,7 +9,6 @@ using UnityEngine.UI;
 /// </Summary>
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(Button))]
-[RequireComponent(typeof(AudioSource))]
 public class ButtonController : 
     MonoBehaviour, 
     IPointerExitHandler, 
@@ -19,9 +19,9 @@ public class ButtonController :
     [SerializeField] private Sprite mouseExitSprite;
     [SerializeField] private Sprite mouseEnterSprite;
     [SerializeField] private Sprite mouseDownSprite;
+    [SerializeField] private ButtonSound pressedSound;
     private Image _img;
     private Button _btn;
-    private AudioSource _pressedSound;
     
     public void OnPointerDown(PointerEventData data)
     {
@@ -45,7 +45,17 @@ public class ButtonController :
 
     private void PlayPressedSound()
     {
-        _pressedSound.Play();
+        switch (pressedSound)
+        {
+            case ButtonSound.Normal:
+                SEManager.Instance.Play(SEPath.SELECT);
+                break;
+            case ButtonSound.Return:
+                SEManager.Instance.Play(SEPath.BACK);
+                break;
+            default:
+                break;
+        }
     }
 
     private void Start()
@@ -53,8 +63,6 @@ public class ButtonController :
         _img = GetComponent<Image>();
         _img.sprite = mouseExitSprite;
         
-        _pressedSound = GetComponent<AudioSource>();
-
         _btn = GetComponent<Button>();
         _btn.onClick.AddListener(PlayPressedSound);
 

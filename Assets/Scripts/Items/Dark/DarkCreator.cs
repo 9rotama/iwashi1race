@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 呼び出したレーサー以外にDarkBodyを作るクラス
+/// </summary>
 public class DarkCreator : MonoBehaviour, IItemInitializer
 {
     [SerializeField] private DarkBody darkBody;

@@ -1,46 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
+using KanKikuchi.AudioManager;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// アイテムUIの表示を管理するクラス
+/// </summary>
 public class ItemRandomDisplay : MonoBehaviour
 {
-    [SerializeField] Sprite[] sprites; 
-    Image image;
-    float changeTime;
-    float time;
-    int spriteNum;
-    public int determinItem;
+    [SerializeField] private Sprite[] itemSprites;
+    [SerializeField] private Image image;
+    [SerializeField] private Sprite nothing;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        image = GetComponent<Image>();
-        OnEnable();
-    }
+    // アイテムをゲットした時に流れるSEの音が鳴り終わる時間
+    private const float AudioItemOrbLength = 2.4f;
 
-    void OnEnable()
-    {
-        GetComponent<ItemRandomAudio>().PlayItemSound();
-        time = 0;
-        changeTime = 0;
-    }
+    // アイテムのスプライトを変化させる回数
+    private const int ChangeSpriteNum = 25;
 
-    void FixedUpdate()
+    // アイテムのスプライトを変化させた回数を保持するカウンター
+    private int change_sprite_cnt = 0;
+
+    public Items playerHavingItem;
+
+    public bool isItemUsable { get; private set;}
+
+    private void OnEnable()
     {
-        time += Time.deltaTime;
-        changeTime += Time.deltaTime;
-        if(time < 2.07f){
-            if(changeTime > 0.08f ){
-            changeTime = 0;
-            image.sprite = sprites[spriteNum++%sprites.Length];
+        SEManager.Instance.Play(SEPath.ITEM_ORB);
+
+        isItemUsable = false;
+
+        //アイテムのUIを切り替える
+        for(int i=0; i<ChangeSpriteNum; i++){
+            float change_time = AudioItemOrbLength / ChangeSpriteNum * i;
+
+            if(i == ChangeSpriteNum-1){
+                Invoke(nameof(SetPlayerHavingItemSprite), change_time);
+            }
+            else{
+                Invoke(nameof(ChangeSprite), change_time);
             }
         }
-        else{
-            if(determinItem == -1) time = 0;
-            image.sprite = sprites[determinItem];
-        }
+    }
+    
+    private void OnDisable() 
+    {
+        image.sprite = nothing;
+    }
 
-        
+    /// <summary>
+    /// アイテムのスプライト順番にを変化させる
+    /// </summary>
+    private void ChangeSprite()
+    {
+        image.sprite = itemSprites[change_sprite_cnt++ % itemSprites.Length];
+    }
+
+    /// <summary>
+    /// アイテムのスプライトをプレイヤーが保持しているものにする
+    /// </summary>
+    private void SetPlayerHavingItemSprite()
+    {
+        image.sprite = itemSprites[(int)playerHavingItem];
+        isItemUsable = true;
     }
 }

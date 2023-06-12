@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// アイテムのサンダーを作るクラス
+/// </summary>
 public class ThunderCreator : MonoBehaviour, IItemInitializer
 {
     [SerializeField] private Thunder thunder;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="racer"></param>
     public void ItemInitialize(Racer racer) {
         var targets = RankManager.Instance.GetSortedRacers();
 
