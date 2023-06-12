@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using KanKikuchi.AudioManager;
 /// <summary>
 /// 等速に進むフリーズのクラス
 /// レーサーに当たると氷状態にする
@@ -13,21 +13,22 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
     private int _birtherId;
     private const float Speed = 500.0f;
     [SerializeField] private FreezeCondition freezeCondition;
-    [SerializeField] private AudioSource audioSource;
 
     public void ItemInitialize(Racer racer) 
     {
-        // AudioSource.PlayClipAtPoint(audioSource.clip, new Vector3(transform.position.x + 100, transform.position.y, -10));
-        audioSource.Play();
-
+        SEManager.Instance.Play(SEPath.FREEZE);
+        
         _birtherId = racer.id;
 
         var targetPos = Vector3.zero;
-        if(racer is PlayerController) {
-            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
-        else if(racer is CpuController) {
-            targetPos = RankManager.Instance.GetOneRankHigherRacer(racer.id).transform.position;
+        switch (racer)
+        {
+            case PlayerController:
+                targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                break;
+            case CpuController:
+                targetPos = RankManager.Instance.GetOneRankHigherRacer(racer.id).transform.position;
+                break;
         }
         _shotForward = Vector3.Scale((targetPos - racer.transform.position), new Vector3(1, 1, 0)).normalized;
 

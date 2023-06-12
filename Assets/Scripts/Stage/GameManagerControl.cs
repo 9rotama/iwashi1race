@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using KanKikuchi.AudioManager;
 
 
 /// <summary>
@@ -11,15 +12,12 @@ using UnityEngine.SceneManagement;
 public class GameManagerControl : MonoBehaviour
 {
     private GameState _gameState; //0...カウントダウン中 1...プレイ中 2...ゴール
-
-    [SerializeField] private AudioClip countdownSe, goalSe,bgm;
-
+    
     public GameObject countdownUI;
     public GameObject resultUI;
 
     private Text _rText;
     private CountdownControl _countdownControl;
-    private AudioSource _audioSource;
 
     private float _totalTime;
 
@@ -39,17 +37,14 @@ public class GameManagerControl : MonoBehaviour
         var rank = RankManager.Instance.GetRank(0);
         _rText.text = "position: " + rank + "\ntime: "+ _totalTime;
 
-        _audioSource.clip = goalSe;
-        _audioSource.loop = false;
-        _audioSource.Play();
+        BGMManager.Instance.Stop();
+        SEManager.Instance.Play(SEPath.GOAL);
         
        SetGameState(GameState.Goal);
     }
 
     private void Start()
     {
-        _audioSource = gameObject.GetComponent<AudioSource>();
-
         _countdownControl = countdownUI.GetComponent<CountdownControl>();
         _rText = resultUI.transform.GetChild(0).GetComponent<Text>();
 
@@ -67,6 +62,7 @@ public class GameManagerControl : MonoBehaviour
                 _totalTime += Time.deltaTime;
                 break;
             case GameState.Goal when Input.GetMouseButtonDown (0):
+                SEManager.Instance.Stop();
                 SceneManager.LoadScene ("Title");
                 break;
             case GameState.Idle:
@@ -84,8 +80,7 @@ public class GameManagerControl : MonoBehaviour
             yield return new WaitForSeconds(3);
             
             _countdownControl.SetSprite(3);
-            _audioSource.clip = countdownSe;
-            _audioSource.Play();
+            SEManager.Instance.Play(SEPath.COUNTDOWN);
             
             yield return new WaitForSeconds(1);
             
@@ -102,9 +97,7 @@ public class GameManagerControl : MonoBehaviour
             
             yield return new WaitForSeconds(0.5f);
             
-            _audioSource.clip = bgm;
-            _audioSource.Play();
-            _audioSource.loop = true;
+            BGMManager.Instance.Play(BGMPath.STAGE_MEADOW);
             
             _countdownControl.SetSprite(0);
 

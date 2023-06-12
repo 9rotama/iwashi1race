@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using KanKikuchi.AudioManager;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -40,5 +41,6 @@ public class TitleScreen : MonoBehaviour
         {
             Invoke(nameof(MoveRule), 0.5f);
         });
+        BGMManager.Instance.Play(BGMPath.TITLE);
     }
 }

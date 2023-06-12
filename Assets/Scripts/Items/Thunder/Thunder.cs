@@ -8,9 +8,6 @@ using UnityEngine;
 [RequireComponent(typeof(ThunderDraw))]
 public class Thunder : MonoBehaviour, IPhysicalDamageable
 {
-
-    [SerializeField] private AudioSource audioSource;
-
     private Racer _target;
 
     // 雷が落ちるまでの時間
@@ -44,7 +41,7 @@ public class Thunder : MonoBehaviour, IPhysicalDamageable
     }
 
 
-    IEnumerator StrikeThunder() {
+    private IEnumerator StrikeThunder() {
         yield return new WaitUntil(() => GetStrikeTimeRatio() > 1);
 
         if(!IPhysicalDamageable.IsPhysicalDamageable(_target)) {

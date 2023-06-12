@@ -5,7 +5,6 @@ using UnityEngine;
 public class PositionIndicatorControl : MonoBehaviour
 {
     private GameObject _player,_start,_goal;
-    private Transform _t;
 
     private const int LineSize = 82;
 
@@ -15,7 +14,6 @@ public class PositionIndicatorControl : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _start = GameObject.FindGameObjectWithTag("Start");
         _goal = GameObject.FindGameObjectWithTag("Goal");
-        _t = this.transform;
     }
 
     // Update is called once per frame
