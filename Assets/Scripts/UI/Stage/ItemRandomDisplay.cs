@@ -28,7 +28,7 @@ public class ItemRandomDisplay : MonoBehaviour
 
     private void OnEnable()
     {
-        SEManager.Instance.Play(SEPath.ITEM_ORB);
+        SEManager.Instance.Play(SEPath.ITEM_ORB, 0.5f);
 
         isItemUsable = false;
 

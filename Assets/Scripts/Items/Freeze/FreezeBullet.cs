@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using KanKikuchi.AudioManager;
+
 /// <summary>
 /// 等速に進むフリーズのクラス
 /// レーサーに当たると氷状態にする
@@ -43,7 +44,7 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
 
     public void OnTriggerEnterRacer(Racer racer) 
     {
-                // アイテムを出したレーサーとIDが同じか
+        // アイテムを出したレーサーとIDが同じか
         if(racer.id == _birtherId) {
             return;
         }
@@ -53,7 +54,6 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
             return;
         }
         
-        racer.StopperEnter(0, 10);
         Instantiate(freezeCondition, racer.transform.position, Quaternion.identity).Initialize(racer);
         Destroy(gameObject);
     }

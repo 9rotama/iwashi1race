@@ -11,7 +11,7 @@ public interface IPhysicalDamageable {
     protected static bool IsPhysicalDamageable(Racer racer)
     {   
 
-        // レーサー停止が停止状態か
+        // レーサーが停止状態か
         if(racer.isStopped) {
             return false;
         }

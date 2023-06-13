@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 /// レーサーを氷状態にする
 /// クリックされることで氷にヒビが入り割れる
 /// </summary>
-public class FreezeCondition : MonoBehaviour
+public class FreezeCondition : MonoBehaviour,  IPhysicalDamageable
 {
     [SerializeField] private int requiredClickNumber = 100;
 
@@ -28,6 +28,7 @@ public class FreezeCondition : MonoBehaviour
     {
         transform.SetParent(racer.transform);
         _target = racer;
+        _target.isStopped = true;
         StartCoroutine(RacerTryDestroyFreeze());
     }
 
@@ -59,8 +60,8 @@ public class FreezeCondition : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // 条件がなりつ立つ時。破壊音を出してこのオブジェクトを破棄する
-        if(_clickedCount == requiredClickNumber){
+        // 現時点のクリック回数が必要クリック数以上のとき、破壊音を出してこのオブジェクトを破棄する
+        if(_clickedCount >= requiredClickNumber){
             /*Vector3 cameraPos = Camera.main.gameObject.transform.position;
             AudioSource.PlayClipAtPoint(brokenSe, cameraPos - Vector3.back*5f);*/
             SEManager.Instance.Play(SEPath.FREEZE_BROKEN);
@@ -73,10 +74,9 @@ public class FreezeCondition : MonoBehaviour
 
     }
 
-
-    private void FixedUpdate() 
+    private void OnDestroy() 
     {
-        _target.StopperEnter(0, 0);
+        _target.isStopped = false;
     }
 
 

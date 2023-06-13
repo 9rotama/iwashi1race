@@ -50,6 +50,7 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
 
         racer.StopperEnter(playerStopDur, lostMagicOrbNum);
         SEManager.Instance.Play(SEPath.DAMAGE);
+        Destroy(gameObject);
     }
     
 

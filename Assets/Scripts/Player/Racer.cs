@@ -18,8 +18,11 @@ public abstract class Racer : MonoBehaviour
     /// <summary> 無敵状態か否か保持する </summary>
     [System.NonSerialized] public bool isInvincible = false;
 
+	/// <summary> 停止状態か否か保持する </summary>
+	[System.NonSerialized] public bool isStopped  = false;
+	
     [SerializeField] private ItemCreator itemCreator;
-    public bool isStopped {get; private set;} = false;
+   
     protected const float MoveSpeed = 180f;
     protected int _magicOrbNum;
     protected const int MaxMagicOrb = 50;

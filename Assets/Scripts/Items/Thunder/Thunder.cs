@@ -5,66 +5,47 @@ using UnityEngine;
 /// <summary>
 /// レーサーを一定時間スタンさせるサンダーのクラス
 /// </summary>
-[RequireComponent(typeof(ThunderDraw))]
 public class Thunder : MonoBehaviour, IPhysicalDamageable
 {
+    [SerializeField] private float baseStanTime = 2.5f;
+    [SerializeField] private int lostMagicOrbNum = 10;
     private Racer _target;
+    
 
-    // 雷が落ちるまでの時間
-    [SerializeField] private float requiredStrikeTime = 10;
-
-    private float _strikeTimer = 0;
-
-    // 雲が完全に見えるまでの時間
-    [SerializeField] private float requiredCloudTime = 10;
-
-    private float _cloudTimer = 0;
-
-    // 雷に打たれたときにスタンする時間
-    private float _stanTime;
-
-    public void Initialize(Racer racer) {
+    public void Initialize(Racer racer, int racerRank, float timeUntilStrike) 
+    {
         _target = racer;
         transform.SetParent(racer.transform);
-        _stanTime = 2.5f / Mathf.Sqrt(RankManager.Instance.GetRank(racer.id));
-        StartCoroutine(StrikeThunder());
+
+        float stanTime = baseStanTime / Mathf.Sqrt(racerRank);
+
+        StartCoroutine(TryStrikeThunder(timeUntilStrike, stanTime));
     }
 
-
-    private void Update() {
-        _cloudTimer += Time.deltaTime;
-
-        if(GetCloudTimeRatio() < 1) return;
-
-        _strikeTimer += Time.deltaTime;
-        
-    }
-
-
-    private IEnumerator StrikeThunder() {
-        yield return new WaitUntil(() => GetStrikeTimeRatio() > 1);
+    /// <summary>
+    /// レーサーに落雷のダメージを与えようとする
+    /// </summary>
+    /// <param name="timeUntilStrike">落雷までの時間</param>
+    /// <param name="stanTime">レーサーがとどまる時間</param>
+    private IEnumerator TryStrikeThunder(float timeUntilStrike, float stanTime) 
+    {
+        // 落雷までの時間が経ったら、レーサーにダメージを与えられるか確認する
+        yield return new WaitForSeconds(timeUntilStrike);
 
         if(!IPhysicalDamageable.IsPhysicalDamageable(_target)) {
             Destroy(gameObject);
             yield break;
         }
 
-        _target.StopperEnter(_stanTime, 10);
+        _target.StopperEnter(stanTime, lostMagicOrbNum);
 
-        // 雷に打たれたレーサー子プレハブをアクティブにして、レーサーの前で描画する
+        // 雷に打たれたレーサー子プレハブをアクティブにして、レーサーの前でスタン時間中描画する
         transform.GetChild(0).gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(_stanTime);
+        yield return new WaitForSeconds(stanTime);
 
         Destroy(gameObject);
     }
 
-    public float GetStrikeTimeRatio() {
-        return _strikeTimer / requiredStrikeTime;
-    }
-
-    public float GetCloudTimeRatio() {
-        return _cloudTimer / requiredCloudTime;
-    }
 
 }

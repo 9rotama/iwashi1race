@@ -10,6 +10,7 @@ public class ThunderShockRacer : MonoBehaviour
     private const float XRange = 6f;
     private const float YAbove= -3f;
     private const float YBelow = 4f;
+    private const float MovingInterval = 0.15f;
 
     private void OnEnable() {
         StartCoroutine(TinglyMove());
@@ -21,7 +22,7 @@ public class ThunderShockRacer : MonoBehaviour
     private IEnumerator TinglyMove() 
     {
         while(true) {
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(MovingInterval);
             transform.localPosition = new Vector2(Random.Range(-XRange, XRange), 
                                                   Random.Range(YAbove, YBelow));
         }
