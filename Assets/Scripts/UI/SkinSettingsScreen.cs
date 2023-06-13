@@ -61,6 +61,7 @@ public class SkinSettingsScreen : MonoBehaviour
         returnButton.onClick.AddListener(() =>
         {
             Invoke(nameof(ReturnTitle), 0.5f);
+            SetPrefsFromSliderValue();
         });
         
     }
