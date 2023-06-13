@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using KanKikuchi.AudioManager;
@@ -41,6 +42,7 @@ public class TitleScreen : MonoBehaviour
         {
             Invoke(nameof(MoveRule), 0.5f);
         });
-        BGMManager.Instance.Play(BGMPath.TITLE);
+        var currentBGMNames = BGMManager.Instance.GetCurrentAudioNames();
+        if(!currentBGMNames.Contains("title")) BGMManager.Instance.Play(BGMPath.TITLE);
     }
 }
