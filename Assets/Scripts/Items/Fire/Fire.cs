@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 等速に進むファイアのクラス
 /// </summary>
-public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEnterer, IPhysicalDamageable
+public class Fire : FirstItemCreated, IRacerCollisionEnterer, IPhysicalDamageable
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float playerStopDur = 1.0f;
@@ -15,7 +15,7 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
     private Vector3 _shotForward;
     private int _birtherId;
 
-    public void ItemInitialize(Racer racer)
+    public override void ItemInitialize(Racer racer)
     {
         
         var targetPos = Vector3.zero;
@@ -23,7 +23,6 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
         {
             case PlayerController:
                 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                SEManager.Instance.Play(SEPath.FIRE);
                 break;
             case CpuController:
                 targetPos = RankManager.Instance.GetOneRankHigherRacer(racer.id).transform.position;
@@ -31,6 +30,7 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
         }
         _birtherId = racer.id;
         _shotForward = Vector3.Scale((targetPos - racer.transform.position), Vector2.one).normalized;
+        StageSEManager.Play(racer, SEPath.FIRE);
     
         // 三秒後に消える
         Destroy(this.gameObject, 3.0f);
@@ -49,7 +49,7 @@ public class FireScript : MonoBehaviour, IItemInitializer, IRacerCollisionEntere
         }
 
         racer.StopperEnter(playerStopDur, lostMagicOrbNum);
-        SEManager.Instance.Play(SEPath.DAMAGE);
+        StageSEManager.Play(racer, SEPath.DAMAGE);
         Destroy(gameObject);
     }
     

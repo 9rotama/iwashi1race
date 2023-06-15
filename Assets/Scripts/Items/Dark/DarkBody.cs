@@ -13,7 +13,8 @@ public class DarkBody : MonoBehaviour
 
     private Racer _targetRacer;
     
-    [SerializeField] private float baseAddedForce = 1000;
+    [SerializeField] private Vector2 baseForce = new Vector2(1000, 1500);
+
 
     public void Initialize(Racer target, int rank, float destroyTime)
     {
@@ -26,8 +27,10 @@ public class DarkBody : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        float AddedForce = Random.Range(-baseAddedForce, baseAddedForce) / ((float)_targetRank);
-        _targetRacer.AddForce(AddedForce, new Vector3(1,1,0));
+        Vector2 force;
+        force.x = Random.Range(-baseForce.x, baseForce.x) / ((float)_targetRank);
+        force.y = Random.Range(-baseForce.y, baseForce.y) / ((float)_targetRank);
+        _targetRacer.AddForce(force);
     }
 
  

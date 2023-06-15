@@ -6,11 +6,11 @@ using UnityEngine;
 /// 物理攻撃をするアイテムから身を守る
 /// バブルを管理するクラス
 /// </summary>
-public class BubbleScript : MonoBehaviour, IItemInitializer
+public class Bubble : FirstItemCreated
 {
     private Racer _parentRacer;
 
-    public void ItemInitialize(Racer racer) 
+    public override void ItemInitialize(Racer racer) 
     {
         transform.parent = racer.transform;
         _parentRacer = racer.GetComponent<Racer>();

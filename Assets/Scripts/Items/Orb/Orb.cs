@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class OrbScript : MonoBehaviour, IItemInitializer
+public class Orb : FirstItemCreated
 {
 
     private float _theta;
@@ -14,7 +14,7 @@ public class OrbScript : MonoBehaviour, IItemInitializer
     [SerializeField] private float _movingWidth = 15f;
 
 
-    public void ItemInitialize(Racer racer)
+    public override void ItemInitialize(Racer racer)
     {
         transform.SetParent(racer.transform);
 

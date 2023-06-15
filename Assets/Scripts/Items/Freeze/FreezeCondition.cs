@@ -51,7 +51,7 @@ public class FreezeCondition : MonoBehaviour,  IPhysicalDamageable
                     break;
             }
             
-            SEManager.Instance.Play(SEPath.FREEZE_CRACK);
+            StageSEManager.Play(_target,SEPath.FREEZE_CRACK);
             _clickedCount++;
         }
     }
@@ -62,9 +62,8 @@ public class FreezeCondition : MonoBehaviour,  IPhysicalDamageable
     {
         // 現時点のクリック回数が必要クリック数以上のとき、破壊音を出してこのオブジェクトを破棄する
         if(_clickedCount >= requiredClickNumber){
-            /*Vector3 cameraPos = Camera.main.gameObject.transform.position;
-            AudioSource.PlayClipAtPoint(brokenSe, cameraPos - Vector3.back*5f);*/
-            SEManager.Instance.Play(SEPath.FREEZE_BROKEN);
+
+            StageSEManager.Play(_target, SEPath.FREEZE_BROKEN);
             Destroy(this.gameObject);
         }
 
