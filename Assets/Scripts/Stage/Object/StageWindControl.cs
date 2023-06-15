@@ -13,7 +13,7 @@ public class StageWindControl : MonoBehaviour, IRacerCollisionStayer
     /// <param name="racer">レーサーのクラス</param>
     public void OnTriggerStayRacer(Racer racer)
     {
-        racer.AddForce(strength, Vector3.right);
+        racer.AddForce(strength * Vector2.right);
     }
 
 }

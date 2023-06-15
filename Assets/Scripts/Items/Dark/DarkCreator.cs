@@ -5,13 +5,13 @@ using UnityEngine;
 /// <summary>
 /// 呼び出したレーサー以外にDarkBodyを作るクラス
 /// </summary>
-public class DarkCreator : MonoBehaviour, IItemInitializer
+public class DarkCreator : FirstItemCreated
 {
     [SerializeField] private DarkBody darkBody;
     [SerializeField] private DarkEffect darkEffect;
     [SerializeField] private float baseBodyDestroyTime = 5;
 
-    public void ItemInitialize(Racer racer) {
+    public override void ItemInitialize(Racer racer) {
         var targets = RankManager.Instance.GetSortedRacers();
         
         for(var i=0; i<targets.Length; i++){
@@ -20,7 +20,7 @@ public class DarkCreator : MonoBehaviour, IItemInitializer
                 continue;
             }
 
-            var destroyTime = baseBodyDestroyTime / Mathf.Sqrt(i+1);
+            var destroyTime = baseBodyDestroyTime / (i+1);
 
             var darkBodyInstance = Instantiate(
                 darkBody,

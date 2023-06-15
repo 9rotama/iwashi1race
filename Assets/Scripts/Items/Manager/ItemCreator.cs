@@ -9,7 +9,7 @@ using UnityEngine;
 public class ItemCreator : MonoBehaviour
 {
     // 生成するアイテム保持する配列
-    [SerializeField] private GameObject[] itemObjects;
+    [SerializeField] private FirstItemCreated[] firstItemsCreated;
 
     /// <summary>
     /// 与えた座標にアイテムを生成する
@@ -29,17 +29,12 @@ public class ItemCreator : MonoBehaviour
             return;
         }
 
-        GameObject itemObj = (GameObject)Instantiate(
-                itemObjects[(int)racer.havingItem], 
-                racer.transform.position,
-                Quaternion.identity
-            );
-
-        // アイテムの初期化
-        var itemInitializer = itemObj.GetComponent<IItemInitializer>();
-        itemInitializer?.ItemInitialize(racer);
-
-
+        // アイテムの生成と初期化
+        Instantiate(
+            firstItemsCreated[(int)racer.havingItem], 
+            racer.transform.position,
+            Quaternion.identity
+        ).ItemInitialize(racer);
 
         // 所持アイテムをなくす
         racer.havingItem = Items.Nothing;

@@ -76,10 +76,9 @@ public abstract class Racer : MonoBehaviour
     /// <summary>
 	/// レーサーにベクトルの方向に力を加える
 	/// </summary>
-	/// <param name="multiplier">力の強さの係数</param>
-	/// <param name="vector">力の方向</param>
-    public void AddForce(float multiplier, Vector3 vector){
-		_rb2D.AddForce(vector * multiplier); 
+	/// <param name="force">力</param>
+    public void AddForce(Vector2 force){
+		_rb2D.AddForce(force); 
 	}
 
     protected void StopRb()

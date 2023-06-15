@@ -71,7 +71,7 @@ public class CpuController : Racer
         var orbNum = (float) _magicOrbNum;
         var orbBoost = orbNum * MoveSpeed * MaxRateOfBoostByMagicOrb / MaxMagicOrb;
         
-        AddForce(MoveSpeed + orbBoost, direction);
+        AddForce((MoveSpeed + orbBoost) * direction);
         
         var distance = Vector2.Distance(_rb2D.position, _path.vectorPath[_currentWaypoint]);
 

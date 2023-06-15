@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using KanKikuchi.AudioManager;
+
 /// <summary>
 /// スポーンしたカラスの挙動を担当するクラス
 /// カラスのPrefab及びインスタンスにアタッチされる
@@ -29,7 +30,7 @@ public class CrowControl : MonoBehaviour, IRacerCollisionEnterer, IPhysicalDamag
         }
         
         racer.StopperEnter(playerStopDur, lostMagicOrbNum);
-        SEManager.Instance.Play(SEPath.DAMAGE);
+        StageSEManager.Play(racer, SEPath.DAMAGE);
 
         Destroy(gameObject);
     }

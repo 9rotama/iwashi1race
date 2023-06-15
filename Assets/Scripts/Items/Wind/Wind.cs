@@ -5,21 +5,21 @@ using UnityEngine;
 /// <summary>
 /// レーサーを加速させるクラス
 /// </summary>
-public class WindScript : MonoBehaviour, IItemInitializer
+public class Wind : FirstItemCreated
 {
   
     [SerializeField] private float addSpeed;
     [SerializeField] private float addForceTime;
     private Racer _parentRacer;
 
-    public void ItemInitialize(Racer racer) {
+    public override void ItemInitialize(Racer racer) {
         transform.SetParent(racer.transform);
         _parentRacer = racer;
         Destroy(gameObject, addForceTime);
     }
 
     private void FixedUpdate() {
-        _parentRacer.AddForce(addSpeed, Vector3.right);
+        _parentRacer.AddForce(addSpeed * Vector3.right);
     }
 
 }

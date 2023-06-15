@@ -6,12 +6,12 @@ using KanKikuchi.AudioManager;
 /// <summary>
 /// アイテムのサンダーを作るクラス
 /// </summary>
-public class ThunderCreator : MonoBehaviour, IItemInitializer
+public class ThunderCreator : FirstItemCreated
 {
     [SerializeField] private Thunder thunder;
     [SerializeField] private Animator thunderAnimator;
 
-    public void ItemInitialize(Racer racer) {
+    public override void ItemInitialize(Racer racer) {
 
         // サンダーの落雷するまでのアニメーションの時間を取得する
         float timeUntilStrike = 0;
@@ -32,7 +32,7 @@ public class ThunderCreator : MonoBehaviour, IItemInitializer
             }
         }
 
-        SEManager.Instance.Play(audioPath: SEPath.SHOCK, volumeRate: 0.1f, delay: timeUntilStrike);
+        SEManager.Instance.Play(audioPath: SEPath.SHOCK, volumeRate: 0.5f, delay: timeUntilStrike);
 
         Destroy(this.gameObject);
     }

@@ -86,33 +86,27 @@ public class PlayerController : Racer
 
         if (Input.GetKey(KeyCode.D))
         {
-            AddForce( MoveSpeed + orbBoost, Vector3.right); 
+            AddForce( (MoveSpeed + orbBoost) * Vector3.right); 
         }
         //アクセル
         
         if (Input.GetKey(KeyCode.A))
         {
-            AddForce( MoveSpeed + orbBoost, -Vector3.right); 
+            AddForce( (MoveSpeed + orbBoost) * -Vector3.right); 
         }
         //ブレーキ
         
         if (Input.GetKey(KeyCode.W))
         {
-            AddForce( MoveSpeed + orbBoost, Vector3.up); 
+            AddForce( (MoveSpeed + orbBoost) * Vector3.up); 
         }
         //上向き
         
         if (Input.GetKey(KeyCode.S))
         {
-            AddForce( MoveSpeed + orbBoost, -Vector3.up); 
+            AddForce( (MoveSpeed + orbBoost) * -Vector3.up); 
         }
         //下向き
-
-		if (Input.GetMouseButtonDown(0))
-		{
-			UseItem();
-		}
-		//アイテムを使う
         
 
         if (!(this.transform.position.x >= _goal.transform.position.x) || _isInGoal) return;
@@ -121,4 +115,13 @@ public class PlayerController : Racer
 		_isInGoal = true;
 
     }
+
+	private void Update() 
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			UseItem();
+		}
+		//アイテムを使う
+	}
 }

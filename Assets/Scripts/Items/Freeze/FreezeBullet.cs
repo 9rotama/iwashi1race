@@ -7,7 +7,7 @@ using KanKikuchi.AudioManager;
 /// 等速に進むフリーズのクラス
 /// レーサーに当たると氷状態にする
 /// </summary>
-public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnterer, IPhysicalDamageable
+public class FreezeBullet: FirstItemCreated, IRacerCollisionEnterer, IPhysicalDamageable
 {
     [SerializeField] private Rigidbody2D rb;
     private Vector3 _shotForward;
@@ -15,9 +15,9 @@ public class FreezeBullet: MonoBehaviour, IItemInitializer, IRacerCollisionEnter
     private const float Speed = 500.0f;
     [SerializeField] private FreezeCondition freezeCondition;
 
-    public void ItemInitialize(Racer racer) 
+    public override void ItemInitialize(Racer racer) 
     {
-        SEManager.Instance.Play(SEPath.FREEZE);
+        StageSEManager.Play(racer, SEPath.FREEZE);
         
         _birtherId = racer.id;
 
