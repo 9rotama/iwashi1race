@@ -19,7 +19,7 @@ public class ItemCreator : MonoBehaviour
     public void CreateItemGameObject(Racer racer) { 
 
         // デバッグ
-        // if(racer.CompareTag("CPU")){
+        // if(racer.CompareTag(Tag.CPU)){
         //     racer.havingItem = Items.Freeze;
         //     Debug.Log(racer.havingItem);
         // }

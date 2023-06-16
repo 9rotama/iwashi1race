@@ -17,7 +17,7 @@ public class StageBackgroundScroll : MonoBehaviour
 
     private void Start()
     {
-        var player = GameObject.FindGameObjectWithTag("Player");
+        var player = GameObject.FindGameObjectWithTag(Tag.Player);
         _playerControl = player.GetComponent<PlayerController>();
         _material = GetComponent<Image>().material;
         _offset = new Vector2(0, 0);

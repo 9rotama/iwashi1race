@@ -13,7 +13,7 @@ public class DarkBody : MonoBehaviour
 
     private Racer _targetRacer;
     
-    [SerializeField] private Vector2 baseForce = new Vector2(1000, 1500);
+    [SerializeField] private Vector2 baseForce = new Vector2(500, 2000);
 
 
     public void Initialize(Racer target, int rank, float destroyTime)

@@ -35,7 +35,7 @@ public class CpuController : Racer
 
 		_prevPosition = transform.position;
 
-		var gameManager = GameObject.FindGameObjectWithTag("GameManager");
+		var gameManager = GameObject.FindGameObjectWithTag(Tag.GameManager);
 		_gameManagerCtrl = gameManager.GetComponent<GameManagerControl>();
     }
 
