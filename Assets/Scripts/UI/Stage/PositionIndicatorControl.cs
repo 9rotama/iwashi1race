@@ -11,9 +11,9 @@ public class PositionIndicatorControl : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _start = GameObject.FindGameObjectWithTag("Start");
-        _goal = GameObject.FindGameObjectWithTag("Goal");
+        _player = GameObject.FindGameObjectWithTag(Tag.Player);
+        _start = GameObject.FindGameObjectWithTag(Tag.Start);
+        _goal = GameObject.FindGameObjectWithTag(Tag.Goal);
     }
 
     // Update is called once per frame

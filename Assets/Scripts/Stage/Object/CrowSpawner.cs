@@ -46,7 +46,7 @@ public class CrowSpawner : MonoBehaviour
     private void Start()
     {
         _isCoroutineStarted = false;
-        _gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        _gameManager = GameObject.FindGameObjectWithTag(Tag.GameManager);
         _gameManagerCtrl = _gameManager.GetComponent<GameManagerControl>();
         var crowCtrl = prefabCrow.GetComponent<CrowControl>();
         _crowMoveSpeed = crowCtrl.moveSpeed;

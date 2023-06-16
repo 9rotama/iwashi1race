@@ -18,7 +18,7 @@ public class StageSEManager : MonoBehaviour
     public static void Play(Racer racer, string audioPath, float baseVolumeRate = 1, float delay = 0, float pitch = 1, bool isLoop = false, Action callback = null)
     {   
         var viewX = Camera.main.WorldToViewportPoint(racer.transform.position).x;
-        var volumeTagRate = racer.CompareTag("CPU") ? cpuVolumeRate : 1;
+        var volumeTagRate = racer.CompareTag(Tag.CPU) ? cpuVolumeRate : 1;
         var volumeRangeRate = 1f;
         
         // 画面内にいるとき

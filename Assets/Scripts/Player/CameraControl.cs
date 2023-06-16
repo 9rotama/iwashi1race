@@ -12,7 +12,7 @@ public class CameraControl : MonoBehaviour
 
     private void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag(Tag.Player);
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 

@@ -60,10 +60,10 @@ public class PlayerController : Racer
 		
 		_prevPosition = transform.position;
 
-		_goal = GameObject.FindGameObjectWithTag("Goal");
+		_goal = GameObject.FindGameObjectWithTag(Tag.Goal);
 		_isInGoal = false;
 
-		var gameManager = GameObject.FindGameObjectWithTag("GameManager");
+		var gameManager = GameObject.FindGameObjectWithTag(Tag.GameManager);
 		_gameManagerCtrl = gameManager.GetComponent<GameManagerControl>();
     }
 	
