@@ -6,9 +6,7 @@ TagManager:
   tags:
   - Tailwind
   - Headwind
-  - Enemy
   - CPU
-  - Item
   - GameManager
   - Goal
   - BGM
